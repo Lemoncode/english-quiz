@@ -27,6 +27,7 @@ export const ConfigureVerbsContainer = () => {
       []
     );
 
+    localStorage.setItem('selectedVerbs', JSON.stringify(selectionKeys));
     verbsContext.setSelectedVerbs(selectionKeys);
     history.push(routes.root);
   };
