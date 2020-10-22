@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { TestVerbFormComponent } from './test-verb-forms.component';
-import { Verb, VerbQuiz } from './test-verb-forms.vm';
+import { Verb } from './test-verb-forms.vm';
 import { globalVerbsContext } from 'core/verbs';
 import { pickRandomVerb } from './test-verb-forms.business';
 import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
 import { scoreContext } from 'core/score';
 import { settingsContext } from 'core/settings';
+
+const INITIAL_ANSWERED_CORRECTLY = 0;
+const INITIAL_CURRENT_QUESTION = 0;
 
 export const TestVerbFormContainer = () => {
   const history = useHistory();
@@ -15,19 +18,23 @@ export const TestVerbFormContainer = () => {
   );
   const { setScore } = React.useContext(scoreContext);
   const { userSettings } = React.useContext(settingsContext);
-  const totalQuestions = userSettings.numberQuestions;
+  const [totalQuestions] = React.useState(userSettings.numberQuestions);
 
-  const [currentQuestion, setCurrentQuestion] = React.useState(0);
+  const [currentQuestion, setCurrentQuestion] = React.useState(
+    INITIAL_CURRENT_QUESTION
+  );
   const [currentVerb, setCurrentVerb] = React.useState<Verb>({
     infinitive: '',
     participle: '',
     past: '',
     translation: '',
   });
-  const [currentScore, setCurrentScore] = React.useState(0);
+  const [currentScore, setCurrentScore] = React.useState(
+    INITIAL_ANSWERED_CORRECTLY
+  );
 
   React.useEffect(() => {
-    setScore({ totalQuestions, answeredCorrectly: 0 });
+    setScore({ totalQuestions, answeredCorrectly: INITIAL_ANSWERED_CORRECTLY });
   }, []);
 
   React.useEffect(() => {
