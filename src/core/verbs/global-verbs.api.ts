@@ -1,5 +1,8 @@
 import { defaultFullVerbs, defaultSelectedVerbs } from './global-verbs.storage';
-import Lockr from 'lockr';
+import { storageFactory } from 'core/local-storage';
+
+export const local = storageFactory(localStorage);
+export const SELECTED_VERBS_KEY = 'selectedVerbs';
 
 export interface VerbEntityApi {
   infinitive: string;
@@ -9,26 +12,25 @@ export interface VerbEntityApi {
 }
 
 let fullVerbCollection: VerbEntityApi[] = defaultFullVerbs;
-let selectedVerbCollection: string[] = Lockr.get(
-  'selectedVerbs',
-  defaultSelectedVerbs
-);
+let selectedVerbCollection: string[] = [];
 
 // Simulating AJAX Call
 export const loadFullVerbCollection = async (): Promise<VerbEntityApi[]> =>
   Promise.resolve(fullVerbCollection);
 
 export const loadSelectedVerbCollection = async (): Promise<string[]> => {
-  selectedVerbCollection = Lockr.get('selectedVerbs', defaultSelectedVerbs);
+  const storageSelectedVerbCollection = local.getItem(SELECTED_VERBS_KEY);
+
+  selectedVerbCollection =
+    storageSelectedVerbCollection !== null
+      ? storageSelectedVerbCollection
+      : defaultSelectedVerbs;
+
   return Promise.resolve(selectedVerbCollection);
 };
-
-export const saveFullVerbCollection = async (
-  verbCollection: VerbEntityApi[]
-) => {};
 
 export const saveSelectedVerbCollection = async (
   selectedCollection: string[]
 ) => {
-  Lockr.set('selectedVerbs', selectedCollection);
+  local.setItem(SELECTED_VERBS_KEY, selectedCollection);
 };
