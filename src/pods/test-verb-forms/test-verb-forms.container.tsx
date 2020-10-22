@@ -6,9 +6,7 @@ import { pickRandomVerb } from './test-verb-forms.business';
 import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
 import { scoreContext } from 'core/score';
-
-// TODO: Move to const this could be configured maybe in profile context
-const totalQuestions = 15;
+import { settingsContext } from 'core/settings';
 
 export const TestVerbFormContainer = () => {
   const history = useHistory();
@@ -16,6 +14,9 @@ export const TestVerbFormContainer = () => {
     globalVerbsContext
   );
   const { setScore } = React.useContext(scoreContext);
+  const { userSettings } = React.useContext(settingsContext);
+  const totalQuestions = userSettings.numberQuestions;
+
   const [currentQuestion, setCurrentQuestion] = React.useState(0);
   const [currentVerb, setCurrentVerb] = React.useState<Verb>({
     infinitive: '',
