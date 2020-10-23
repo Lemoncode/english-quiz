@@ -16,7 +16,7 @@ export const TestVerbFormContainer = () => {
     globalVerbsContext
   );
   const { setScore } = React.useContext(scoreContext);
-  const [currentQuestion, setCurrentQuestion] = React.useState(0);
+  const [currentQuestion, setCurrentQuestion] = React.useState(1); // The test should starts with a question 1, not 0
   const [currentVerb, setCurrentVerb] = React.useState<Verb>({
     infinitive: '',
     participle: '',

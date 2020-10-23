@@ -16,3 +16,17 @@ export const createDefaultVerbQuiz = (): VerbQuiz => ({
   past: '',
   participle: '',
 });
+
+export interface VerbCorrect {
+  infinitive: boolean;
+  past: boolean;
+  participle: boolean;
+  all: boolean;
+}
+
+export const createDefaultVerbCorrect = (): VerbCorrect => ({
+  infinitive: false,
+  past: false,
+  participle: false,
+  all: false,
+});

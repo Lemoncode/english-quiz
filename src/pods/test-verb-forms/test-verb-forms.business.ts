@@ -1,5 +1,5 @@
 import { VerbEntityGlobal } from 'core/verbs';
-import { Verb, VerbQuiz } from './test-verb-forms.vm';
+import { Verb, VerbQuiz, VerbCorrect, createDefaultVerbCorrect } from './test-verb-forms.vm';
 
 // TODO: maybe add some defensive programming here? edge cases / errors ?
 export const pickRandomVerb = (
@@ -33,13 +33,26 @@ const quizToLower = (quiz: VerbQuiz) => ({
   infinitive: quiz.infinitive.toLowerCase(),
 });
 
-export const answerIsCorrect = (verb: Verb, quiz: VerbQuiz) => {
+export const answerIsCorrect = (verb: Verb, quiz: VerbQuiz): VerbCorrect => {
   const verbLower = verbToLower(verb);
   const quizLower = quizToLower(quiz);
 
-  return (
-    verbLower.past === quizLower.past &&
-    verbLower.participle === quizLower.participle &&
-    verbLower.infinitive === quizLower.infinitive
-  );
+  let verbCorrect = createDefaultVerbCorrect();
+  verbCorrect.infinitive = verbLower.infinitive === quizLower.infinitive;
+  verbCorrect.past = verbLower.past === quizLower.past;
+  verbCorrect.participle = verbLower.participle === quizLower.participle;
+  verbCorrect.all = verbCorrect.infinitive && verbCorrect.past && verbCorrect.participle;
+  return verbCorrect;
+};
+
+export const generateHint = (verbCorrect: VerbCorrect) => {
+  let hint = "";
+  if (!verbCorrect.infinitive) hint+="infinitive, ";
+  if (!verbCorrect.past) hint+="past, ";
+  if (!verbCorrect.participle) hint+="participle";
+
+  // Trim the last part if it ends on ", "
+  if (hint[hint.length-2] === ',') hint = hint.substring(0, hint.length-2);
+
+  return hint;
 };
