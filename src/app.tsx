@@ -4,13 +4,16 @@ import { RouterComponent } from 'core/router';
 import { ThemeProviderComponent } from 'core/theme';
 import { GlobalVerbsProvider } from 'core/verbs';
 import { ScoreProvider } from 'core/score';
+import { SettingsProvider } from 'core/settings';
 
 const App: React.FunctionComponent = () => {
   return (
     <ThemeProviderComponent>
       <ScoreProvider>
         <GlobalVerbsProvider>
-          <RouterComponent />
+          <SettingsProvider>
+            <RouterComponent />
+          </SettingsProvider>
         </GlobalVerbsProvider>
       </ScoreProvider>
     </ThemeProviderComponent>

@@ -6,6 +6,7 @@ import {
   FinalScoreScene,
   HomeScene,
   TestVerbFormsScene,
+  UserSettingsScene,
 } from 'scenes';
 
 export const RouterComponent: React.FunctionComponent = () => {
@@ -27,6 +28,11 @@ export const RouterComponent: React.FunctionComponent = () => {
           exact={true}
           path={switchRoutes.testVerbForms}
           component={TestVerbFormsScene}
+        />
+        <Route
+          exact={true}
+          path={switchRoutes.userSettings}
+          component={UserSettingsScene}
         />
       </Switch>
     </Router>
