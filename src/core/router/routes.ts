@@ -5,6 +5,7 @@ interface SwitchRoutes {
   testVerbForms: string;
   finalScore: string;
   configureVerbs: string;
+  userSettings: string;
 }
 
 export const switchRoutes: SwitchRoutes = {
@@ -12,6 +13,7 @@ export const switchRoutes: SwitchRoutes = {
   testVerbForms: '/test-forms',
   finalScore: '/final-score',
   configureVerbs: '/configure-verbs',
+  userSettings: '/user-settings',
 };
 
 interface Routes extends Omit<SwitchRoutes, 'editEmployee'> {}

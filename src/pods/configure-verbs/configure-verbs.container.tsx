@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
-import { globalVerbsContext } from 'core/verbs';
+import { globalVerbsContext, saveSelectedVerbCollection } from 'core/verbs';
 import { VerbEntity } from './configure-verbs.vm';
 import { mapFromVerbCollectionFromGlobalToVm } from './configure-verbs.mapper';
 import { ConfigureVerbsComponent } from './configure-verbs.component';
@@ -22,12 +22,14 @@ export const ConfigureVerbsContainer = () => {
   }, []);
 
   const handleSave = (verbs: VerbEntity[]) => {
-    const selectionKeys = verbs.reduce(
+    const selectionKeys: string[] = verbs.reduce(
       (acc, item) => (item.selected ? [...acc, item.verbKey] : acc),
       []
     );
 
+    saveSelectedVerbCollection(selectionKeys);
     verbsContext.setSelectedVerbs(selectionKeys);
+
     history.push(routes.root);
   };
 

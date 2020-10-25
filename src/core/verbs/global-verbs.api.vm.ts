@@ -1,5 +1,5 @@
 import * as vm from 'core/verbs';
-import * as api from './home.api';
+import * as api from './global-verbs.api';
 
 const mapVerbFromApiToVm = (
   apiEntry: api.VerbEntityApi
@@ -14,4 +14,13 @@ const mapVerbCollectionFromApiToVm = (
 export const loadFullVerbCollection = async (): Promise<vm.VerbEntityGlobal[]> => {
   const verbCollection = await api.loadFullVerbCollection();
   return mapVerbCollectionFromApiToVm(verbCollection);
+};
+
+export const loadSelectedVerbCollection = async (): Promise<string[]> => {
+  const selectedVerbCollection = await api.loadSelectedVerbCollection();
+  return selectedVerbCollection;
+};
+
+export const saveSelectedVerbCollection = async (selectedVerbs: string[]) => {
+  api.saveSelectedVerbCollection(selectedVerbs);
 };
