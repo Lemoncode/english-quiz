@@ -13,6 +13,7 @@ interface Props {
   verb: Verb;
   score: number;
   setScore: (value: number) => void;
+  hasSecondChance: boolean;
 }
 
 export const TestVerbFormComponent: React.FC<Props> = props => {
@@ -23,6 +24,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
     verb,
     score,
     setScore,
+    hasSecondChance,
   } = props;
   const [verbCorrect, setVerbCorrect] = React.useState<VerbCorrect>(
     createDefaultVerbCorrect()
@@ -34,8 +36,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
     createDefaultVerbQuiz()
   );
 
-  const handleValidateAnswer = (values: VerbQuiz) => {
-    const isCorrect = answerIsCorrect(verb, values);
+  const handleValidateAnswer = (isCorrect: VerbCorrect) => {
     if (isCorrect.all) {
       if (secondAttempt) {
         setScore(score + 0.5);
@@ -65,8 +66,17 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
       <h1>Question {`${currentQuestion} / ${totalQuestions}`}</h1>
       <Formik
         onSubmit={(values, actions) => {
-          handleValidateAnswer(values);
-          actions.resetForm({ values: createDefaultVerbQuiz() });
+          const isCorrect = answerIsCorrect(verb, values);
+          handleValidateAnswer(isCorrect);
+          if(!hasSecondChance || secondAttempt || isCorrect.all) {
+            actions.resetForm({ values: createDefaultVerbQuiz() });
+          }
+          if(hasSecondChance && !secondAttempt){
+            if(!isCorrect.infinitive) actions.setFieldError("infinitive", "Incorrect");
+            if(!isCorrect.past) actions.setFieldError("past", "Incorrect");
+            if(!isCorrect.participle) actions.setFieldError("participle", "Incorrect");
+          }
+          
         }}
         initialValues={initialQuiz}
       >
@@ -80,7 +90,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                 <TextFieldComponent name="participle" label="Participle" />
               </div>
             )}
-            {validated && (secondAttempt || verbCorrect.all) ? (
+            {validated && (!hasSecondChance || secondAttempt || verbCorrect.all) ? (
               <>
                 <ShowResults secondAttempt={true} verbCorrect={verbCorrect} verb={verb} />
 

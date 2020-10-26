@@ -46,13 +46,18 @@ export const answerIsCorrect = (verb: Verb, quiz: VerbQuiz): VerbCorrect => {
 };
 
 export const generateHint = (verbCorrect: VerbCorrect) => {
-  let hint = "";
-  if (!verbCorrect.infinitive) hint+="infinitive, ";
-  if (!verbCorrect.past) hint+="past, ";
-  if (!verbCorrect.participle) hint+="participle";
-
-  // Trim the last part if it ends on ", "
-  if (hint[hint.length-2] === ',') hint = hint.substring(0, hint.length-2);
-
-  return hint;
+  // TODO: Magic consts move to upper const file
+  const infinitive = (!verbCorrect.infinitive) ? 'infinitive'  : '';
+  const past = (!verbCorrect.past) ? 'past' : '';
+  const participle = (!verbCorrect.participle) ? 'participle': '';
+  
+  return removeBeginningAndTrailingCommaIfExists(`${infinitive}, ${past}, ${participle}`);
 };
+
+const removeBeginningAndTrailingCommaIfExists = (hint: string) => {
+  hint = hint.trim();
+  hint = hint.replace(", ,", ","); //To remove double comma
+  hint = hint[0] === ',' ? hint.substring(2, hint.length) : hint; //To remove beginning comma
+  hint = hint[hint.length-1] === ',' ? hint.substring(0, hint.length-1) : hint; //To remove trailing comma
+  return hint;
+}
