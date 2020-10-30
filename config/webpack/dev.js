@@ -2,7 +2,6 @@ const merge = require('webpack-merge');
 const Dotenv = require('dotenv-webpack');
 const base = require('./base');
 const helpers = require('./helpers');
-
 const hotReloadingEntries = ['react-hot-loader/patch'];
 
 module.exports = merge.strategy({
@@ -19,7 +18,7 @@ module.exports = merge.strategy({
     app: hotReloadingEntries,
   },
   output: {
-    path: helpers.resolveFromRootPath('dist'),
+    //path: helpers.resolveFromRootPath('dist'),
     filename: '[name].js',
   },
   devServer: {
@@ -40,7 +39,7 @@ module.exports = merge.strategy({
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: 'img/[name].[ext]',
+          name: './assets/images/[name].[ext]',
         },
       },
       {

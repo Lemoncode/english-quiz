@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const merge = require('webpack-merge');
 const helpers = require('./helpers');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = merge(
   {},
@@ -46,6 +47,10 @@ module.exports = merge(
         favicon: 'assets/favicon.ico',
         filename: 'index.html',
         template: 'index.html',
+      }),
+
+      new CopyPlugin({
+        patterns: [{ from: 'assets', to: 'assets' }],
       }),
     ],
   }
