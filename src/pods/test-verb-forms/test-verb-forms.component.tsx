@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Typography, Button } from '@material-ui/core';
-import { Verb, VerbQuiz, createDefaultVerbQuiz } from './test-verb-forms.vm';
+import { Verb, VerbQuiz, createDefaultVerbQuiz, VerbCorrect, createDefaultVerbCorrect } from './test-verb-forms.vm';
 import { Formik, Form } from 'formik';
 import { TextFieldComponent } from 'common/components';
 import { answerIsCorrect } from './test-verb-forms.business';
@@ -13,6 +13,7 @@ interface Props {
   verb: Verb;
   score: number;
   setScore: (value: number) => void;
+  hasSecondChance: boolean;
 }
 
 export const TestVerbFormComponent: React.FC<Props> = props => {
@@ -23,27 +24,41 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
     verb,
     score,
     setScore,
+    hasSecondChance,
   } = props;
-  const [isCorrect, setIsCorrect] = React.useState(false);
+  const [verbCorrect, setVerbCorrect] = React.useState<VerbCorrect>(
+    createDefaultVerbCorrect()
+  );
   const [validated, setValidated] = React.useState(false);
+  const [secondAttempt, setSecondAttempt] = React.useState(false);
 
   const [initialQuiz, setInitialQuiz] = React.useState<VerbQuiz>(
     createDefaultVerbQuiz()
   );
 
-  const handleValidateAnswer = (values: VerbQuiz) => {
-    const isCorrect = answerIsCorrect(verb, values);
-    if (isCorrect) {
-      setScore(score + 1);
+  const handleValidateAnswer = (isCorrect: VerbCorrect) => {
+    if (isCorrect.all) {
+      if (secondAttempt) {
+        setScore(score + 0.5);
+      } else {
+        setScore(score + 1);
+      }
     }
-    setIsCorrect(isCorrect);
+    setVerbCorrect(isCorrect);
     setValidated(true);
   };
 
   const internalHandleOnNextQuestion = () => {
     setInitialQuiz(createDefaultVerbQuiz());
     setValidated(false);
+    setSecondAttempt(false);
+    setVerbCorrect(createDefaultVerbCorrect());
     onNextQuestion();
+  };
+
+  const handleSecondAttempt = () => {
+    setValidated(false);
+    setSecondAttempt(true);
   };
 
   return (
@@ -51,8 +66,17 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
       <h1>Question {`${currentQuestion} / ${totalQuestions}`}</h1>
       <Formik
         onSubmit={(values, actions) => {
-          handleValidateAnswer(values);
-          actions.resetForm({ values: createDefaultVerbQuiz() });
+          const isCorrect = answerIsCorrect(verb, values);
+          handleValidateAnswer(isCorrect);
+          if(!hasSecondChance || secondAttempt || isCorrect.all) {
+            actions.resetForm({ values: createDefaultVerbQuiz() });
+          }
+          if(hasSecondChance && !secondAttempt){
+            if(!isCorrect.infinitive) actions.setFieldError("infinitive", "Incorrect");
+            if(!isCorrect.past) actions.setFieldError("past", "Incorrect");
+            if(!isCorrect.participle) actions.setFieldError("participle", "Incorrect");
+          }
+          
         }}
         initialValues={initialQuiz}
       >
@@ -66,9 +90,9 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                 <TextFieldComponent name="participle" label="Participle" />
               </div>
             )}
-            {validated ? (
+            {validated && (!hasSecondChance || secondAttempt || verbCorrect.all) ? (
               <>
-                <ShowResults succeeded={isCorrect} verb={verb} />
+                <ShowResults secondAttempt={true} verbCorrect={verbCorrect} verb={verb} />
 
                 <Button
                   onClick={internalHandleOnNextQuestion}
@@ -78,7 +102,17 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                   Next verb
                 </Button>
               </>
-            ) : (
+            ) : validated && !secondAttempt ? (
+              <>
+                <ShowResults secondAttempt={false} verbCorrect={verbCorrect} verb={verb} />
+
+                <Button
+                  onClick={handleSecondAttempt}
+                  variant="contained" color="primary">
+                  Try again
+                </Button>
+              </>
+            ): (
               <Button type="submit" variant="contained" color="primary">
                 Validate
               </Button>

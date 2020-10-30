@@ -9,7 +9,7 @@ import { scoreContext } from 'core/score';
 import { settingsContext } from 'core/settings';
 
 const INITIAL_ANSWERED_CORRECTLY = 0;
-const INITIAL_CURRENT_QUESTION = 0;
+const INITIAL_CURRENT_QUESTION = 1;
 
 export const TestVerbFormContainer = () => {
   const history = useHistory();
@@ -18,7 +18,8 @@ export const TestVerbFormContainer = () => {
   );
   const { setScore } = React.useContext(scoreContext);
   const { userSettings } = React.useContext(settingsContext);
-  const [totalQuestions] = React.useState(userSettings.numberQuestions);
+  const [ totalQuestions ] = React.useState(userSettings.numberQuestions);
+  const [ hasSecondChance ] = React.useState(userSettings.secondChance);
 
   const [currentQuestion, setCurrentQuestion] = React.useState(
     INITIAL_CURRENT_QUESTION
@@ -39,7 +40,7 @@ export const TestVerbFormContainer = () => {
 
   React.useEffect(() => {
     // TODO:: if we havent' reached the top calculate new question
-    if (currentQuestion !== totalQuestions) {
+    if (currentQuestion <= totalQuestions) {
       const randomVerb = pickRandomVerb(selectedVerbs, verbCollection);
       setCurrentVerb(randomVerb);
     }
@@ -62,6 +63,7 @@ export const TestVerbFormContainer = () => {
       verb={currentVerb}
       score={currentScore}
       setScore={setCurrentScore}
+      hasSecondChance={hasSecondChance}
     />
   );
 };
