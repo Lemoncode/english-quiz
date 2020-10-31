@@ -4,8 +4,7 @@ import { Verb, VerbQuiz, createDefaultVerbQuiz } from './test-verb-forms.vm';
 import { Formik, Form } from 'formik';
 import { TextFieldComponent } from 'common/components';
 import { answerIsCorrect } from './test-verb-forms.business';
-import { ShowResults } from './components';
-import { useSpeechSynthesis } from 'react-speech-kit';
+import { ShowResults, VerbAudio } from './components';
 
 interface Props {
   currentQuestion: number;
@@ -47,8 +46,6 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
     onNextQuestion();
   };
 
-  const { speak, voices } = useSpeechSynthesis();
-
   return (
     <div>
       <h1>Question {`${currentQuestion} / ${totalQuestions}`}</h1>
@@ -72,26 +69,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
             {validated ? (
               <>
                 <ShowResults succeeded={isCorrect} verb={verb} />
-
-                <Button
-                  onClick={() =>
-                    speak({
-                      text:
-                        verb.infinitive +
-                        ' . ' +
-                        verb.past +
-                        ' . ' +
-                        verb.participle,
-                      voice: voices[6],
-                      rate: 0.8,
-                      pitch: 0.9,
-                    })
-                  }
-                  variant="contained"
-                  color="primary"
-                >
-                  Pronunciation
-                </Button>
+                <VerbAudio verb={verb}></VerbAudio>
                 <Button
                   onClick={internalHandleOnNextQuestion}
                   variant="contained"
