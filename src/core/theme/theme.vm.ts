@@ -9,11 +9,11 @@ interface Palette extends DefaultPalette {
     row: PaletteColor;
   };
   pastelShades?: {
-    pink: PaletteColor;
-    lightPink: PaletteColor;
-    yellow: PaletteColor;
-    lightSalmon: PaletteColor;
-    lightGreen: PaletteColor;
+    pink: string;
+    lightPink: string;
+    yellow: string;
+    lightSalmon: string;
+    lightGreen: string;
   };
 }
 
