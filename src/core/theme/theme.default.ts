@@ -4,26 +4,28 @@ import { Theme } from './theme.vm';
 
 const defaultTheme = createMuiTheme();
 
-export const theme: Theme = merge(defaultTheme, {
+export const theme: Theme = merge(defaultTheme, ({
   palette: {
     primary: {
-      light: '##F19895',
-      main: '##F18C8E',
-      dark: '##BB7F87',
+      light: '#F19895',
+      main: '#F18C8E',
+      dark: '#BB7F87',
     },
     secondary: {
-      light: '#fff584',
-      main: '#d6c254',
-      dark: '#a29223',
+      light: '#FBF5FF',
+      main: '#FFE9F9',
+      dark: '#F9F9F9',
     },
     success: {
       main: '#305F72',
+      light: '#EAF9FE',
     },
     info: {
       main: '#EAF9FE',
     },
     warning: {
       main: '#F18C8E',
+      light: '#FFF1EF',
     },
     background: {
       default: '#FFFFFF',
@@ -31,6 +33,7 @@ export const theme: Theme = merge(defaultTheme, {
     },
     text: {
       primary: '#305F72',
+      secondary: '#000',
     },
     pastelShades: {
       yellow: '#FFF5E5',
@@ -40,4 +43,24 @@ export const theme: Theme = merge(defaultTheme, {
       lightGreen: '#EAF9FE',
     },
   },
-} as Theme);
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        '#root': {
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'stretch',
+          textAlign: 'center',
+        },
+      },
+    },
+    MuiButton: {
+      text: {
+        borderRadius: 50,
+        backgroundColor: '#F18C8E',
+        color: '#fff',
+      },
+    },
+  },
+} as unknown) as Theme);
