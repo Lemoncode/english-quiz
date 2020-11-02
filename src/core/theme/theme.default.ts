@@ -4,7 +4,7 @@ import { Theme } from './theme.vm';
 
 const defaultTheme = createMuiTheme();
 
-export const theme: Theme = merge(defaultTheme, ({
+export const theme: Theme = merge(defaultTheme, {
   palette: {
     primary: {
       light: '#F19895',
@@ -12,9 +12,7 @@ export const theme: Theme = merge(defaultTheme, ({
       dark: '#BB7F87',
     },
     secondary: {
-      light: '#FBF5FF',
-      main: '#FFE9F9',
-      dark: '#F9F9F9',
+      main: '#305F72',
     },
     success: {
       main: '#305F72',
@@ -52,6 +50,19 @@ export const theme: Theme = merge(defaultTheme, ({
           flexDirection: 'column',
           alignItems: 'stretch',
           textAlign: 'center',
+          padding: '1rem 0',
+        },
+        a: {
+          borderRadius: 50,
+          backgroundColor: '#F18C8E',
+          color: '#FFF',
+          textDecoration: 'none',
+          padding: '1rem 2rem',
+          boxShadow:
+            '0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
+        },
+        'a:hover': {
+          backgroundColor: '#BB7F87',
         },
       },
     },
@@ -59,8 +70,14 @@ export const theme: Theme = merge(defaultTheme, ({
       text: {
         borderRadius: 50,
         backgroundColor: '#F18C8E',
-        color: '#fff',
+        color: '#FFF',
+        padding: '1rem 2rem',
+      },
+      textSecondary: {
+        borderRadius: 10,
+        backgroundColor: '#FEF3F3',
+        color: '#F18C8E',
       },
     },
   },
-} as unknown) as Theme);
+} as Theme);
