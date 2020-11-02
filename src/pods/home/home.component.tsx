@@ -5,17 +5,15 @@ import { Link } from 'react-router-dom';
 
 export const HomeComponent = () => {
   return (
-    <div>
-      <Typography variant="h3">Irregular verbs</Typography>
-      <div>
+    <main>
+      <Typography variant="h3" component="h1">
+        Irregular verbs
+      </Typography>
+      <nav>
         <Link to={routes.testVerbForms}>Start Test + participle tenses</Link>
-      </div>
-      <div>
         <Link to={routes.configureVerbs}>Configure Verb List</Link>
-      </div>
-      <div>
         <Link to={routes.userSettings}>User Settings</Link>
-      </div>
-    </div>
+      </nav>
+    </main>
   );
 };
