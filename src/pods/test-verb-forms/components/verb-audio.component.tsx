@@ -13,8 +13,17 @@ const VOICE_PITCH = 1;
 export const VerbAudio: React.FC<Props> = props => {
   const { verb } = props;
   const { speak, voices, supported, speaking } = useSpeechSynthesis();
-  const [voiceIndex, setVoiceIndex] = React.useState('');
-  let voice = voices[voiceIndex] || null;
+  const [voiceIndex, setVoiceIndex] = React.useState('0');
+  const [englishVoicesArray, setEnglishVoicesArray] = React.useState([]);
+  let voice = englishVoicesArray[voiceIndex] || null;
+
+  React.useEffect(() => {
+    setEnglishVoicesArray(
+      voices.filter(voice => {
+        return voice.lang.substring(0, 2) === 'en';
+      })
+    );
+  }, [voices]);
 
   const handleChangeVoice = () => (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -40,21 +49,15 @@ export const VerbAudio: React.FC<Props> = props => {
             <Select
               labelId="voice-selector"
               id="voice"
-              value={voiceIndex || `none`}
+              value={voiceIndex}
               onChange={handleChangeVoice()}
-              defaultValue="none"
             >
-              <MenuItem value="none" disabled>
-                Select pronunciation
-              </MenuItem>
-              {voices.map((option, index) =>
-                option.lang.substring(0, 2) === 'en' ? (
-                  <MenuItem
-                    value={index}
-                    key={index}
-                  >{`${option.lang} - ${option.name}`}</MenuItem>
-                ) : null
-              )}
+              {englishVoicesArray.map((option, index) => (
+                <MenuItem
+                  value={index}
+                  key={index}
+                >{`${option.lang} - ${option.name}`}</MenuItem>
+              ))}
             </Select>
           </FormControl>
           <Button
