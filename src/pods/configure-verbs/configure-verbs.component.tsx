@@ -15,17 +15,59 @@ interface Props {
   onCancel: () => void;
 }
 
-export const ConfigureVerbsComponent: React.FC<Props> = props => {
-  const { verbCollection, onSave, onCancel } = props;
-  const [temporalSelection, setTemporalSelection] = React.useState(
-    verbCollection
-  );
+const useTemporalSelectionAndSelected = (verbCollection: VerbEntity[]) => {
+  const [temporalSelection, setTemporalSelection] = React.useState<VerbEntity[]>([]);
   const [temporalSelected, setTemporalSelected] = React.useState(0);
 
   React.useEffect(() => {
     setTemporalSelection(verbCollection);
     setTemporalSelected(getSelectedNumber(verbCollection));
   }, [verbCollection]);
+
+  const increaseOrDecreaseTemporalSelected = (selected: boolean) => {
+    if (selected) {
+      setTemporalSelected(temporalSelected - 1);
+    } else {
+      setTemporalSelected(temporalSelected + 1);
+    }
+  };
+
+  const updateAfterMasterCheckboxChange = () => {
+    if (temporalSelected !== verbCollection.length) {
+      setTemporalSelection(selectOrDeselectAll(temporalSelection, true));
+      setTemporalSelected(verbCollection.length)
+    } else {
+      setTemporalSelection(selectOrDeselectAll(temporalSelection, false));
+      setTemporalSelected(0);
+    }
+  };
+
+  const isMasterCheckboxIndeterminate = () => {
+    return temporalSelected !== 0 &&
+      temporalSelected !== verbCollection.length;
+  };
+
+  return {
+    temporalSelection,
+    setTemporalSelection,
+    temporalSelected,
+    increaseOrDecreaseTemporalSelected,
+    updateAfterMasterCheckboxChange,
+    isMasterCheckboxIndeterminate,
+  };
+}
+
+export const ConfigureVerbsComponent: React.FC<Props> = props => {
+  const { verbCollection, onSave, onCancel } = props;
+
+  const {
+    temporalSelection,
+    setTemporalSelection,
+    temporalSelected,
+    increaseOrDecreaseTemporalSelected,
+    updateAfterMasterCheckboxChange,
+    isMasterCheckboxIndeterminate,
+  } = useTemporalSelectionAndSelected(verbCollection);
 
   const handleCheckedChange = (verbId: string) => (
     e: React.ChangeEvent<HTMLInputElement>
@@ -34,11 +76,7 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
       const index = draft.findIndex(item => item.verbKey === verbId);
 
       if (index !== -1) {
-        if (draft[index].selected) {
-          setTemporalSelected(temporalSelected-1);
-        } else {
-          setTemporalSelected(temporalSelected+1);
-        }
+        increaseOrDecreaseTemporalSelected(draft[index].selected);
         draft[index].selected = !draft[index].selected;
       }
     });
@@ -49,13 +87,7 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
   const handleMasterCheckboxChange = () => (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    if (temporalSelected !== verbCollection.length) {
-      setTemporalSelection(selectOrDeselectAll(temporalSelection, true));
-      setTemporalSelected(verbCollection.length)
-    } else {
-      setTemporalSelection(selectOrDeselectAll(temporalSelection, false));
-      setTemporalSelected(0);
-    }
+    updateAfterMasterCheckboxChange();
   }
 
   return (
@@ -80,10 +112,7 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
                 checked={temporalSelected !== 0}
                 onChange={handleMasterCheckboxChange()}
                 color="primary"
-                indeterminate={
-                  temporalSelected !== 0 &&
-                  temporalSelected !== verbCollection.length
-                }
+                indeterminate={isMasterCheckboxIndeterminate()}
               />
             }
             label={`Total selected: ${temporalSelected}`}
