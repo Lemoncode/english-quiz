@@ -84,7 +84,12 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
           <Form>
             {!validated && (
               <div>
-                <span>{verb.translation}</span>
+                <img
+                  src={`/assets/verb-images/${verb.infinitive}.png`}
+                  height="300"
+                  width="300"
+                ></img>
+                <h2>{verb.translation}</h2>
                 <TextFieldComponent name="infinitive" label="infinitive" />
                 <TextFieldComponent name="past" label="Past" />
                 <TextFieldComponent name="participle" label="Participle" />
