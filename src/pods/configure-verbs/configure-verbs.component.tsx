@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import { VerbEntity } from './configure-verbs.vm';
 import produce, { immerable } from 'immer';
-import { getSelectedNumber, selectOrDeselectAll } from "./configure-verbs.business";
+import { getOnlySelected } from "./configure-verbs.business";
 
 interface Props {
   verbCollection: VerbEntity[];
@@ -15,79 +15,96 @@ interface Props {
   onCancel: () => void;
 }
 
-const useTemporalSelectionAndSelected = (verbCollection: VerbEntity[]) => {
-  const [temporalSelection, setTemporalSelection] = React.useState<VerbEntity[]>([]);
-  const [temporalSelected, setTemporalSelected] = React.useState(0);
+enum RootSelectionStates { all, some, none }; // Possible states of the root checkbox
+interface Selectable { selected: boolean }; // Interface created for filtering
+
+// Custom hook for handling changes in selected items' collection
+const useSelectionManager = function <T extends Selectable>(initalAllItems: T[], initialSelection: T[]) {
+  const [selection, setSelection] = React.useState<T[]>(initialSelection);
+  const [rootSelectionState, setRootSelectionState] = React.useState<RootSelectionStates>(
+    RootSelectionStates.none
+  );
+  const [allItems, setAllItems] = React.useState<T[]>(initalAllItems);
+
+  const calculateSelectionState = (allItems: T[], selection: T[]) => {
+    if (!selection || selection.length === 0) {
+      return RootSelectionStates.none;
+    } else {
+      return (selection.length === allItems.length) ? RootSelectionStates.all : RootSelectionStates.some;
+    }
+  };
 
   React.useEffect(() => {
-    setTemporalSelection(verbCollection);
-    setTemporalSelected(getSelectedNumber(verbCollection));
-  }, [verbCollection]);
+    setSelection(initialSelection);
+    setRootSelectionState(calculateSelectionState(initalAllItems, initialSelection));
+    setAllItems(initalAllItems);
+  }, [initalAllItems]);
 
-  const increaseOrDecreaseTemporalSelected = (selected: boolean) => {
-    if (selected) {
-      setTemporalSelected(temporalSelected - 1);
-    } else {
-      setTemporalSelected(temporalSelected + 1);
-    }
+  const clearAllSelectedItems = () => setAllItems(allItems.map(
+    element => {
+      return {
+        ...element,
+        selected: false
+      }
+    })
+  );
+  const selectAllItems = () => setAllItems(allItems.map(
+    element => {
+      return {
+        ...element,
+        selected: true
+      }
+    })
+  );
+  const getOnlySelected = (collection: T[]): T[] => {
+    return collection.filter(({ selected }) => selected);
   };
 
-  const updateAfterMasterCheckboxChange = () => {
-    if (temporalSelected !== verbCollection.length) {
-      setTemporalSelection(selectOrDeselectAll(temporalSelection, true));
-      setTemporalSelected(verbCollection.length)
-    } else {
-      setTemporalSelection(selectOrDeselectAll(temporalSelection, false));
-      setTemporalSelected(0);
-    }
-  };
+  React.useEffect(() => {
+    setSelection(getOnlySelected(allItems));
+  }, [allItems]);
 
-  const isMasterCheckboxIndeterminate = () => {
-    return temporalSelected !== 0 &&
-      temporalSelected !== verbCollection.length;
-  };
+  React.useEffect(() => {
+    setRootSelectionState(calculateSelectionState(allItems, selection));
+  }, [selection])
 
-  return {
-    temporalSelection,
-    setTemporalSelection,
-    temporalSelected,
-    increaseOrDecreaseTemporalSelected,
-    updateAfterMasterCheckboxChange,
-    isMasterCheckboxIndeterminate,
-  };
+  return { selection, setSelection, allItems, setAllItems, rootSelectionState, selectAllItems, clearAllSelectedItems }
 }
 
 export const ConfigureVerbsComponent: React.FC<Props> = props => {
   const { verbCollection, onSave, onCancel } = props;
 
   const {
-    temporalSelection,
-    setTemporalSelection,
-    temporalSelected,
-    increaseOrDecreaseTemporalSelected,
-    updateAfterMasterCheckboxChange,
-    isMasterCheckboxIndeterminate,
-  } = useTemporalSelectionAndSelected(verbCollection);
+    selection,
+    allItems,
+    setAllItems,
+    rootSelectionState,
+    selectAllItems,
+    clearAllSelectedItems,
+  } = useSelectionManager(verbCollection, getOnlySelected(verbCollection));
 
   const handleCheckedChange = (verbId: string) => (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const newTemporalSelection = produce(temporalSelection, draft => {
+    const newTemporalSelection = produce(allItems, draft => {
       const index = draft.findIndex(item => item.verbKey === verbId);
 
       if (index !== -1) {
-        increaseOrDecreaseTemporalSelected(draft[index].selected);
         draft[index].selected = !draft[index].selected;
       }
     });
 
-    setTemporalSelection(newTemporalSelection);
+    setAllItems(newTemporalSelection);
   };
 
-  const handleMasterCheckboxChange = () => (
+  const handleRootCheckboxChange = () => (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    updateAfterMasterCheckboxChange();
+    if (rootSelectionState !== RootSelectionStates.all) {
+      selectAllItems();
+    } else {
+      clearAllSelectedItems();
+    }
   }
 
   return (
@@ -96,7 +113,7 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
       <Button
         variant="contained"
         color="primary"
-        onClick={() => onSave(temporalSelection)}
+        onClick={() => onSave(allItems)}
       >
         Save
       </Button>
@@ -109,16 +126,16 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
           <FormControlLabel
             control={
               <Checkbox
-                checked={temporalSelected !== 0}
-                onChange={handleMasterCheckboxChange()}
+                checked={rootSelectionState !== RootSelectionStates.none}
+                onChange={handleRootCheckboxChange()}
                 color="primary"
-                indeterminate={isMasterCheckboxIndeterminate()}
+                indeterminate={rootSelectionState === RootSelectionStates.some}
               />
             }
-            label={`Total selected: ${temporalSelected}`}
+            label={`Total selected: ${selection.length}`}
           />
         </li>
-        {temporalSelection.map(verb => (
+        {allItems.map(verb => (
           <li key={verb.verbKey}>
             <FormControlLabel
               control={
