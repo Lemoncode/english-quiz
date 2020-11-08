@@ -136,20 +136,32 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
           />
         </li>
         {allItems.map(verb => (
-          <li key={verb.verbKey}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={verb.selected}
-                  onChange={handleCheckedChange(verb.verbKey)}
-                  color="primary"
-                />
-              }
-              label={verb.verbDescription}
-            />
-          </li>
+          <CheckBoxMemo verb={verb} handleCheckedChange={handleCheckedChange} />
         ))}
       </ul>
     </>
   );
 };
+
+interface PropsCheckBoxMemo {
+  verb: VerbEntity;
+  handleCheckedChange: (verbId: string) => (e, checked) => void;
+}
+
+const CheckBoxMemo = React.memo((props: PropsCheckBoxMemo) => {
+  const { verb, handleCheckedChange } = props;
+  return (
+    <li key={verb.verbKey}>
+      <FormControlLabel
+        control={
+          <Checkbox
+            checked={verb.selected}
+            onChange={handleCheckedChange(verb.verbKey)}
+            color="primary"
+          />
+        }
+        label={verb.verbDescription}
+      />
+    </li>
+  );
+});
