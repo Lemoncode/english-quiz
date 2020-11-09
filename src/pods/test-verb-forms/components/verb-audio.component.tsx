@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Select, Button, FormControl, MenuItem } from '@material-ui/core';
 import { Verb } from '../test-verb-forms.vm';
 import { useSpeechSynthesis } from 'react-speech-kit';
+import { prepareVoicesArray } from './verb-audio-business';
 
 interface Props {
   verb: Verb;
@@ -18,11 +19,7 @@ export const VerbAudio: React.FC<Props> = props => {
   let voice = englishVoicesArray[voiceIndex] || null;
 
   React.useEffect(() => {
-    setEnglishVoicesArray(
-      voices.filter(voice => {
-        return voice.lang.substring(0, 2) === 'en';
-      })
-    );
+    setEnglishVoicesArray(prepareVoicesArray(voices));
   }, [voices]);
 
   const handleChangeVoice = () => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,9 +38,13 @@ export const VerbAudio: React.FC<Props> = props => {
     }
   };
 
+  const englishVoiceAvailable = () => {
+    return englishVoicesArray.length !== 0;
+  };
+
   return (
     <>
-      {supported && (
+      {supported && englishVoiceAvailable && (
         <>
           <FormControl>
             <Select
