@@ -5,6 +5,7 @@ import {
   ConfigureVerbsScene,
   FinalScoreScene,
   HomeScene,
+  TestFillGapScene,
   TestVerbFormsScene,
   UserSettingsScene,
 } from 'scenes';
@@ -23,6 +24,11 @@ export const RouterComponent: React.FunctionComponent = () => {
           exact={true}
           path={switchRoutes.finalScore}
           component={FinalScoreScene}
+        />
+        <Route
+          exact={true}
+          path={switchRoutes.testFillGap}
+          component={TestFillGapScene}
         />
         <Route
           exact={true}

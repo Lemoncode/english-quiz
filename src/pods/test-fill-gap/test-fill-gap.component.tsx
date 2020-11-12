@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import { Verb, VerbTenses, VerbQuiz, createDefaultVerbQuiz } from "./test-fill-gap.vm";
 import { Formik, Form } from 'formik';
 import { GapComponent, ShowResultsComponent } from './components';
@@ -35,12 +36,11 @@ export const TestFillGapComponent: React.FC<Props> = props => {
     if (isCorrect) {
       setScore(score + 1);
     }
-    setIsCorrect(true);
+    setIsCorrect(isCorrect);
     setValidated(true);
   };
 
   const internalHandleOnNextQuestion = () => {
-    setInitialQuiz(createDefaultVerbQuiz());
     setValidated(false);
     onNextQuestion();
   }
@@ -52,37 +52,52 @@ export const TestFillGapComponent: React.FC<Props> = props => {
         onSubmit={(values, actions) => {
           const isCorrect = answerIsCorrect(verb, values);
           handleValidateAnswer(isCorrect);
-          actions.resetForm({ values: createDefaultVerbQuiz() })
+          const reset = createDefaultVerbQuiz();
+          actions.resetForm({ values: reset });
+          setInitialQuiz(reset);
         }}
         initialValues={initialQuiz}
       >
         {() => (
           <Form>
-            {!validated ? (
+            {!validated && (
+              <div>
+                <Typography variant="subtitle1">
+                  Translation: {verb.translation}
+                </Typography>
+                <GapComponent
+                  isGap={initialQuiz.tense === VerbTenses.infinitive}
+                  text={verb.infinitive}
+                  tense={"Infinitive"}
+                />
+                <GapComponent
+                  isGap={initialQuiz.tense === VerbTenses.past}
+                  text={verb.past}
+                  tense={"Past"}
+                />
+                <GapComponent
+                  isGap={initialQuiz.tense === VerbTenses.participle}
+                  text={verb.participle}
+                  tense={"Participle"}
+                />
+              </div>
+            )}
+            {validated ? (
               <>
-                <div>
-                  <span>{verb.translation}</span>
-                  <GapComponent isGap={initialQuiz.tense === VerbTenses.infinitive} text={verb.infinitive} />
-                  <GapComponent isGap={initialQuiz.tense === VerbTenses.past} text={verb.past} />
-                  <GapComponent isGap={initialQuiz.tense === VerbTenses.participle} text={verb.participle} />
-                </div>
+                <ShowResultsComponent isCorrect={isCorrect} verb={verb} />
 
-                <Button type="submit" variant="contained" color="primary">
-                  Validate
-              </Button>
+                <Button
+                  onClick={internalHandleOnNextQuestion}
+                  variant="contained"
+                  color="primary"
+                >
+                  Next verb
+                </Button>
               </>
             ) : (
-                <>
-                  <ShowResultsComponent isCorrect={isCorrect} verb={verb} />
-
-                  <Button
-                    onClick={internalHandleOnNextQuestion}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Next verb
+                <Button type="submit" variant="contained" color="primary">
+                  Validate
                 </Button>
-                </>
               )}
           </Form>
         )}

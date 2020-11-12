@@ -11,6 +11,9 @@ export const HomeComponent = () => {
         <Link to={routes.testVerbForms}>Start Test + participle tenses</Link>
       </div>
       <div>
+        <Link to={routes.testFillGap}>Start Test 'Fill the gap'</Link>
+      </div>
+      <div>
         <Link to={routes.configureVerbs}>Configure Verb List</Link>
       </div>
       <div>

@@ -28,8 +28,8 @@ const verbToLower = (verb: Verb): Verb => ({
 });
 
 const quizToLower = (quiz: VerbQuiz) => ({
-  response: quiz.response.toLowerCase(),
   ...quiz,
+  response: quiz.response.toLowerCase(),
 });
 
 export const answerIsCorrect = (verb: Verb, quiz: VerbQuiz): boolean => {
