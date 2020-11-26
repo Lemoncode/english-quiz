@@ -1,12 +1,17 @@
 import { Theme as DefaultTheme } from '@material-ui/core/styles';
-import {
-  Palette as DefaultPalette,
-  PaletteColor,
-} from '@material-ui/core/styles/createPalette';
+import { Palette as DefaultPalette } from '@material-ui/core/styles/createPalette';
 
 interface Palette extends DefaultPalette {
-  table: {
-    row: PaletteColor;
+  customPalette: {
+    primaryLight: string;
+    primaryDirty: string;
+    primaryMain: string;
+    primaryDark: string;
+    bgLight: string;
+    bgPink: string;
+    bgYellow: string;
+    bgBlue: string;
+    dark: string;
   };
 }
 

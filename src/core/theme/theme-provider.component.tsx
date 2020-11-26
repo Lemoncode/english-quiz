@@ -8,11 +8,11 @@ export const ThemeProviderComponent = props => {
   const { children } = props;
 
   return (
-    <StylesProvider injectFirst>
-      <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme}>
+      <StylesProvider injectFirst>
         <CssBaseline />
         {children}
-      </ThemeProvider>
-    </StylesProvider>
+      </StylesProvider>
+    </ThemeProvider>
   );
 };

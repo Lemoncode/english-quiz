@@ -6,29 +6,28 @@ const defaultTheme = createMuiTheme();
 
 export const theme: Theme = merge(defaultTheme, {
   palette: {
-    primary: {
-      light: '#4a8089',
-      main: '#1a535c',
-      dark: '#002a33',
+    background: {
+      default: '#f9f9f9',
     },
-    secondary: {
-      light: '#fff584',
-      main: '#d6c254',
-      dark: '#a29223',
-    },
-    success: {
-      main: '#43a047',
-    },
-    info: {
-      main: '#1976d2',
-    },
-    warning: {
-      main: '#ffa000',
-    },
-    table: {
-      row: {
-        main: '#ddd',
-      },
+    customPalette: {
+      primaryLight: '#fff1ef',
+      primaryDirty: '#f19895',
+      primaryMain: '#ec8689',
+      primaryDark: '#bb7f87',
+      lightWhite: '#f9f9f9',
+      lightPink: '#fbf5ff',
+      lightYellow: '#fff5e5',
+      lightBlue: '#eaf9fe',
+      dark: '#305f72',
     },
   },
-} as Theme);
+  breakpoints: {
+    values: {
+      xs: 380,
+      sm: 578,
+      md: 728,
+      lg: 1100,
+    },
+  },
+  spacing: (factor: number) => `${0.5 * factor}rem`, // 1 unit = 8px / 0.5rem
+});
