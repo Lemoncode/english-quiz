@@ -7,7 +7,6 @@ const defaultTheme = createMuiTheme();
 export const theme: Theme = merge(defaultTheme, {
   typography: {
     fontFamily: ['M PLUS Rounded 1c', 'sans-serif'].join(','),
-    // CUSTOM FONT FAMILY DOESN'T WORK
   },
   palette: {
     background: {

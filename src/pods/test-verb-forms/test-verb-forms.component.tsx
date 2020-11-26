@@ -1,10 +1,18 @@
 import * as React from 'react';
 import { Typography, Button } from '@material-ui/core';
-import { Verb, VerbQuiz, createDefaultVerbQuiz, VerbCorrect, createDefaultVerbCorrect } from './test-verb-forms.vm';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import {
+  Verb,
+  VerbQuiz,
+  createDefaultVerbQuiz,
+  VerbCorrect,
+  createDefaultVerbCorrect,
+} from './test-verb-forms.vm';
 import { Formik, Form } from 'formik';
 import { TextFieldComponent } from 'common/components';
 import { answerIsCorrect } from './test-verb-forms.business';
 import { ShowResults } from './components';
+import * as classes from './test-verb-forms.styles';
 
 interface Props {
   currentQuestion: number;
@@ -35,6 +43,8 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
   const [initialQuiz, setInitialQuiz] = React.useState<VerbQuiz>(
     createDefaultVerbQuiz()
   );
+
+  const { insideBtnContainer, nextBtn, arrowIcon } = classes;
 
   const handleValidateAnswer = (isCorrect: VerbCorrect) => {
     if (isCorrect.all) {
@@ -68,15 +78,16 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
         onSubmit={(values, actions) => {
           const isCorrect = answerIsCorrect(verb, values);
           handleValidateAnswer(isCorrect);
-          if(!hasSecondChance || secondAttempt || isCorrect.all) {
+          if (!hasSecondChance || secondAttempt || isCorrect.all) {
             actions.resetForm({ values: createDefaultVerbQuiz() });
           }
-          if(hasSecondChance && !secondAttempt){
-            if(!isCorrect.infinitive) actions.setFieldError("infinitive", "Incorrect");
-            if(!isCorrect.past) actions.setFieldError("past", "Incorrect");
-            if(!isCorrect.participle) actions.setFieldError("participle", "Incorrect");
+          if (hasSecondChance && !secondAttempt) {
+            if (!isCorrect.infinitive)
+              actions.setFieldError('infinitive', 'Incorrect');
+            if (!isCorrect.past) actions.setFieldError('past', 'Incorrect');
+            if (!isCorrect.participle)
+              actions.setFieldError('participle', 'Incorrect');
           }
-          
         }}
         initialValues={initialQuiz}
       >
@@ -95,9 +106,14 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                 <TextFieldComponent name="participle" label="Participle" />
               </div>
             )}
-            {validated && (!hasSecondChance || secondAttempt || verbCorrect.all) ? (
+            {validated &&
+            (!hasSecondChance || secondAttempt || verbCorrect.all) ? (
               <>
-                <ShowResults secondAttempt={true} verbCorrect={verbCorrect} verb={verb} />
+                <ShowResults
+                  secondAttempt={true}
+                  verbCorrect={verbCorrect}
+                  verb={verb}
+                />
 
                 <Button
                   onClick={internalHandleOnNextQuestion}
@@ -109,17 +125,30 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
               </>
             ) : validated && !secondAttempt ? (
               <>
-                <ShowResults secondAttempt={false} verbCorrect={verbCorrect} verb={verb} />
+                <ShowResults
+                  secondAttempt={false}
+                  verbCorrect={verbCorrect}
+                  verb={verb}
+                />
 
                 <Button
                   onClick={handleSecondAttempt}
-                  variant="contained" color="primary">
+                  variant="contained"
+                  color="primary"
+                >
                   Try again
                 </Button>
               </>
-            ): (
-              <Button type="submit" variant="contained" color="primary">
-                Validate
+            ) : (
+              <Button
+                className={nextBtn}
+                type="submit"
+                variant="contained"
+                disableElevation
+              >
+                <div className={insideBtnContainer}>
+                  Next <ArrowForwardIcon className={arrowIcon} />
+                </div>
               </Button>
             )}
           </Form>
