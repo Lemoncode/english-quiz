@@ -14,9 +14,9 @@ export const title = css`
 `;
 
 export const inputContainer = css`
-  margin-top: ${spacing(21)};
+  margin-top: ${spacing(19)};
   margin-bottom: ${spacing(6)};
-  padding-top: ${spacing(10)};
+  padding: ${spacing(10)} ${spacing(5)};
   height: 26rem;
   position: relative;
   background-color: ${color.lightYellow};
@@ -26,14 +26,14 @@ export const inputContainer = css`
 export const pictureContainer = css`
   position: absolute;
   left: 50%;
-  transform: translate(-50%, -90%);
+  transform: translate(-50%, -100%);
   background-color: ${color.lightWhite};
-  width: 14rem;
+  width: 12rem;
+  padding: 1rem;
   margin: 0 auto;
+  border-radius: 2rem;
   -webkit-box-shadow: 2px 3px 23px 5px rgba(140, 140, 140, 0.38);
   box-shadow: 2px 3px 23px 5px rgba(140, 140, 140, 0.38);
-  border-radius: 2rem;
-  padding: 1rem;
 `;
 
 export const picture = css`
@@ -50,14 +50,16 @@ export const insideBtnContainer = css`
 export const nextBtn = css`
   display: flex;
   justify-content: flex-end;
+  border-radius: 1.4rem;
   width: ${spacing(30)};
   margin: ${spacing(4)} auto 0 auto;
-  padding: ${spacing(1.5)};
+  padding: ${spacing(1.5)} ${spacing(3)};
   font-family: 'M PLUS Rounded 1c', sans-serif;
   text-transform: capitalize;
   font-weight: 700;
-  color: ${color.primaryMain};
-  background-color: ${color.primaryLight};
+  font-size: 1.2rem;
+  color: ${color.lightWhite};
+  background-color: ${color.primaryMain};
   transition: all 0.2s;
   --webkit-transition: all 0.2s;
   &:hover,
@@ -70,5 +72,5 @@ export const nextBtn = css`
 
 export const arrowIcon = css`
   margin-left: auto;
-  font-size: 1rem;
+  font-size: 1.4rem;
 `;

@@ -11,7 +11,7 @@ export const theme: Theme = merge(defaultTheme, {
   },
   palette: {
     background: {
-      default: '#f9f9f9',
+      default: '#ccc',
     },
     text: {
       primary: '#1d3e4c',
@@ -22,7 +22,7 @@ export const theme: Theme = merge(defaultTheme, {
       primaryDark: '#bb7f87',
       lightWhite: '#f9f9f9',
       lightPink: '#fbf5ff',
-      lightYellow: '#f6e0be',
+      lightYellow: 'white',
       lightBlue: '#eaf9fe',
       dark: '#1d3e4c',
     },
