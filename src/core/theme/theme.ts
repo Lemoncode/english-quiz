@@ -27,5 +27,11 @@ export const theme: Theme = merge(defaultTheme, {
       dark: '#1d3e4c',
     },
   },
+  breakpoints: {
+    values: {
+      xs: 400,
+      sm: 550,
+    },
+  },
   spacing: (factor: number) => `${0.5 * factor}rem`, // 1 unit = 8px / 0.5rem
 });

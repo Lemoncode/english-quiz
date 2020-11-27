@@ -1,16 +1,26 @@
 import { css } from 'emotion';
 import { theme } from '../../core/theme';
 
-const { palette, spacing } = theme;
+const { palette, spacing, breakpoints } = theme;
 const color = palette.customPalette;
 
 export const mainContainer = css`
-  width: 70%;
+  width: 90%;
+  @media (min-width: ${breakpoints.values.xs}px) {
+    width: 70%;
+  }
+  @media (min-width: ${breakpoints.values.sm}px) {
+    max-width: 24rem;
+  }
 `;
 
 export const title = css`
   margin-top: ${spacing(4)};
+  font-size: 1.6rem;
   text-align: center;
+  @media (min-width: ${breakpoints.values.xs}px) {
+    font-size: 1.75rem;
+  }
 `;
 
 export const backContainer = css`
@@ -28,12 +38,15 @@ export const pictureContainer = css`
   left: 50%;
   transform: translate(-50%, -100%);
   background-color: ${color.lightWhite};
-  width: 12rem;
+  width: 10rem;
   padding: 1rem;
   margin: 0 auto;
   border-radius: 2rem;
   -webkit-box-shadow: 2px 3px 23px 5px rgba(140, 140, 140, 0.38);
   box-shadow: 2px 3px 23px 5px rgba(140, 140, 140, 0.38);
+  @media (min-width: ${breakpoints.values.xs}px) {
+    width: 12rem;
+  }
 `;
 
 export const picture = css`
@@ -83,9 +96,9 @@ export const insideBtnContainer = css`
 
 export const nextBtn = css`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   border-radius: 1.4rem;
-  width: ${spacing(30)};
+  width: ${spacing(20)};
   margin: ${spacing(4)} auto 0 auto;
   padding: ${spacing(1.5)} ${spacing(3)};
   font-family: 'M PLUS Rounded 1c', sans-serif;
@@ -101,9 +114,16 @@ export const nextBtn = css`
     outline: none;
     background-color: ${color.primaryDark};
   }
+  @media (min-width: ${breakpoints.values.xs}px) {
+    width: ${spacing(30)};
+    justify-content: flex-end;
+  }
 `;
 
 export const arrowIcon = css`
-  margin-left: auto;
+  margin-left: ${spacing(1)};
   font-size: 1.4rem;
+  @media (min-width: ${breakpoints.values.xs}px) {
+    margin-left: auto;
+  }
 `;
