@@ -6,7 +6,8 @@ const defaultTheme = createMuiTheme();
 
 export const theme: Theme = merge(defaultTheme, {
   typography: {
-    fontFamily: ['M PLUS Rounded 1c', 'sans-serif'].join(','),
+    // fontFamily property doesn't work here. It is temporary used globally in layout/app-layout.styles
+    fontFamily: '"M PLUS Rounded 1c", sans-serif',
   },
   palette: {
     background: {
