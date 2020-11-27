@@ -13,10 +13,10 @@ export const title = css`
   text-align: center;
 `;
 
-export const inputContainer = css`
+export const backContainer = css`
   margin-top: ${spacing(19)};
   margin-bottom: ${spacing(6)};
-  padding: ${spacing(10)} ${spacing(5)};
+  padding: ${spacing(10)} ${spacing(5)} ${spacing(1)};
   height: 26rem;
   position: relative;
   background-color: ${color.lightYellow};
@@ -38,6 +38,40 @@ export const pictureContainer = css`
 
 export const picture = css`
   max-width: 100%;
+`;
+
+export const inputContainer = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: ${spacing(4)};
+  height: 85%;
+`;
+
+export const inputField = css`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  & label {
+    font-size: 1.1rem;
+
+    font-weight: 700;
+  }
+
+  & input {
+    font-family: inherit;
+    border: none;
+    border-bottom: 2px solid ${color.dark};
+    padding: ${spacing(1)};
+    font-size: 1.1rem;
+    &:hover,
+    &:active,
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid ${color.lightBlue};
+    }
+  }
 `;
 
 export const insideBtnContainer = css`
@@ -65,8 +99,7 @@ export const nextBtn = css`
   &:hover,
   &:active {
     outline: none;
-    color: ${color.primaryLight};
-    background-color: ${color.primaryMain};
+    background-color: ${color.primaryDark};
   }
 `;
 

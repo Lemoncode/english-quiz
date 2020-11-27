@@ -19,11 +19,11 @@ export const theme: Theme = merge(defaultTheme, {
     customPalette: {
       primaryLight: '#c36367',
       primaryMain: '#b33c40',
-      primaryDark: '#bb7f87',
+      primaryDark: '#8c2f32',
       lightWhite: '#f9f9f9',
       lightPink: '#fbf5ff',
       lightYellow: 'white',
-      lightBlue: '#eaf9fe',
+      lightBlue: '#4ca3c7',
       dark: '#1d3e4c',
     },
   },

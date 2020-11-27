@@ -48,8 +48,10 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
     title,
     mainContainer,
     inputContainer,
+    backContainer,
     pictureContainer,
     picture,
+    inputField,
     insideBtnContainer,
     nextBtn,
     arrowIcon,
@@ -83,7 +85,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
   return (
     <main className={mainContainer}>
       <h1 className={title}>
-        Question {`${currentQuestion} / ${totalQuestions}`}
+        Batir ({`${currentQuestion} / ${totalQuestions}`})
       </h1>
       <Formik
         onSubmit={(values, actions) => {
@@ -105,7 +107,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
         {() => (
           <Form>
             {!validated && (
-              <div className={inputContainer}>
+              <div className={backContainer}>
                 <div className={pictureContainer}>
                   <img
                     className={picture}
@@ -114,10 +116,21 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                   ></img>
                 </div>
 
-                <h2>{verb.translation}</h2>
-                <TextFieldComponent name="infinitive" label="infinitive" />
-                <TextFieldComponent name="past" label="Past" />
-                <TextFieldComponent name="participle" label="Participle" />
+                {/* <h2>{verb.translation}</h2> */}
+                <div className={inputContainer}>
+                  <div className={inputField}>
+                    <label htmlFor="infinitive">Infinitive</label>
+                    <input type="text" name="infinitive" id="infinitive" />
+                  </div>
+                  <div className={inputField}>
+                    <label htmlFor="past">Past</label>
+                    <input type="text" name="past" id="past" />
+                  </div>
+                  <div className={inputField}>
+                    <label htmlFor="participle">Participle</label>
+                    <input type="text" name="participle" id="participle" />
+                  </div>
+                </div>
               </div>
             )}
             {validated &&
