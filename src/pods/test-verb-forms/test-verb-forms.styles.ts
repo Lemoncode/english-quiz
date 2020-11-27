@@ -5,15 +5,30 @@ const { palette, spacing } = theme;
 const color = palette.customPalette;
 
 export const mainContainer = css`
-  width: 40%;
+  width: 70%;
+`;
+
+export const title = css`
+  margin-top: ${spacing(4)};
+  text-align: center;
 `;
 
 export const inputContainer = css`
+  margin-top: ${spacing(21)};
+  margin-bottom: ${spacing(6)};
+  padding-top: ${spacing(10)};
+  height: 26rem;
+  position: relative;
   background-color: ${color.lightYellow};
+  border-radius: 2rem;
 `;
 
 export const pictureContainer = css`
-  width: 18rem;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -90%);
+  background-color: ${color.lightWhite};
+  width: 14rem;
   margin: 0 auto;
   -webkit-box-shadow: 2px 3px 23px 5px rgba(140, 140, 140, 0.38);
   box-shadow: 2px 3px 23px 5px rgba(140, 140, 140, 0.38);

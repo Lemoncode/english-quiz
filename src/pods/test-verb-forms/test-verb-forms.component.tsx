@@ -45,6 +45,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
   );
 
   const {
+    title,
     mainContainer,
     inputContainer,
     pictureContainer,
@@ -81,7 +82,9 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
 
   return (
     <main className={mainContainer}>
-      <h1>Question {`${currentQuestion} / ${totalQuestions}`}</h1>
+      <h1 className={title}>
+        Question {`${currentQuestion} / ${totalQuestions}`}
+      </h1>
       <Formik
         onSubmit={(values, actions) => {
           const isCorrect = answerIsCorrect(verb, values);
