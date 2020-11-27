@@ -44,7 +44,15 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
     createDefaultVerbQuiz()
   );
 
-  const { insideBtnContainer, nextBtn, arrowIcon } = classes;
+  const {
+    mainContainer,
+    inputContainer,
+    pictureContainer,
+    picture,
+    insideBtnContainer,
+    nextBtn,
+    arrowIcon,
+  } = classes;
 
   const handleValidateAnswer = (isCorrect: VerbCorrect) => {
     if (isCorrect.all) {
@@ -72,7 +80,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
   };
 
   return (
-    <div>
+    <main className={mainContainer}>
       <h1>Question {`${currentQuestion} / ${totalQuestions}`}</h1>
       <Formik
         onSubmit={(values, actions) => {
@@ -94,12 +102,15 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
         {() => (
           <Form>
             {!validated && (
-              <div>
-                <img
-                  src={`/assets/verb-images/${verb.infinitive}.png`}
-                  height="300"
-                  width="300"
-                ></img>
+              <div className={inputContainer}>
+                <div className={pictureContainer}>
+                  <img
+                    className={picture}
+                    // src={`/assets/verb-images/${verb.infinitive}.png`}
+                    src={`/assets/verb-images/break.png`}
+                  ></img>
+                </div>
+
                 <h2>{verb.translation}</h2>
                 <TextFieldComponent name="infinitive" label="infinitive" />
                 <TextFieldComponent name="past" label="Past" />
@@ -154,6 +165,6 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
           </Form>
         )}
       </Formik>
-    </div>
+    </main>
   );
 };

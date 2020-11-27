@@ -4,13 +4,12 @@ import { Palette as DefaultPalette } from '@material-ui/core/styles/createPalett
 interface Palette extends DefaultPalette {
   customPalette: {
     primaryLight: string;
-    primaryDirty: string;
     primaryMain: string;
     primaryDark: string;
-    bgLight: string;
-    bgPink: string;
-    bgYellow: string;
-    bgBlue: string;
+    lightWhite: string;
+    lightPink: string;
+    lightYellow: string;
+    lightBlue: string;
     dark: string;
   };
 }

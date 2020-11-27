@@ -14,18 +14,17 @@ export const theme: Theme = merge(defaultTheme, {
       default: '#f9f9f9',
     },
     text: {
-      primary: '#305f72',
+      primary: '#1d3e4c',
     },
     customPalette: {
-      primaryLight: '#fff1ef',
-      primaryDirty: '#f19895',
-      primaryMain: '#ec8689',
+      primaryLight: '#c36367',
+      primaryMain: '#b33c40',
       primaryDark: '#bb7f87',
       lightWhite: '#f9f9f9',
       lightPink: '#fbf5ff',
-      lightYellow: '#fff5e5',
+      lightYellow: '#f6e0be',
       lightBlue: '#eaf9fe',
-      dark: '#305f72',
+      dark: '#1d3e4c',
     },
   },
   spacing: (factor: number) => `${0.5 * factor}rem`, // 1 unit = 8px / 0.5rem

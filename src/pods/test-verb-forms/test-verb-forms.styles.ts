@@ -4,6 +4,27 @@ import { theme } from '../../core/theme';
 const { palette, spacing } = theme;
 const color = palette.customPalette;
 
+export const mainContainer = css`
+  width: 40%;
+`;
+
+export const inputContainer = css`
+  background-color: ${color.lightYellow};
+`;
+
+export const pictureContainer = css`
+  width: 18rem;
+  margin: 0 auto;
+  -webkit-box-shadow: 2px 3px 23px 5px rgba(140, 140, 140, 0.38);
+  box-shadow: 2px 3px 23px 5px rgba(140, 140, 140, 0.38);
+  border-radius: 2rem;
+  padding: 1rem;
+`;
+
+export const picture = css`
+  max-width: 100%;
+`;
+
 export const insideBtnContainer = css`
   display: flex;
   justify-content: space-between;
@@ -14,13 +35,14 @@ export const insideBtnContainer = css`
 export const nextBtn = css`
   display: flex;
   justify-content: flex-end;
+  width: ${spacing(30)};
+  margin: ${spacing(4)} auto 0 auto;
+  padding: ${spacing(1.5)};
   font-family: 'M PLUS Rounded 1c', sans-serif;
   text-transform: capitalize;
-  padding: ${spacing(1.5)};
   font-weight: 700;
-  width: ${spacing(30)};
-  background-color: ${color.primaryLight};
   color: ${color.primaryMain};
+  background-color: ${color.primaryLight};
   transition: all 0.2s;
   --webkit-transition: all 0.2s;
   &:hover,
