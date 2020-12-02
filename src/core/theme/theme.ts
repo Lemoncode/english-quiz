@@ -5,30 +5,33 @@ import { Theme } from './theme.vm';
 const defaultTheme = createMuiTheme();
 
 export const theme: Theme = merge(defaultTheme, {
+  typography: {
+    // fontFamily property doesn't work here. It is temporary used globally in layout/app-layout.styles
+    fontFamily: '"M PLUS Rounded 1c", sans-serif',
+  },
   palette: {
-    primary: {
-      light: '#4a8089',
-      main: '#1a535c',
-      dark: '#002a33',
+    background: {
+      default: '#ccc',
     },
-    secondary: {
-      light: '#fff584',
-      main: '#d6c254',
-      dark: '#a29223',
+    text: {
+      primary: '#1d3e4c',
     },
-    success: {
-      main: '#43a047',
-    },
-    info: {
-      main: '#1976d2',
-    },
-    warning: {
-      main: '#ffa000',
-    },
-    table: {
-      row: {
-        main: '#ddd',
-      },
+    customPalette: {
+      primaryLight: '#c36367',
+      primaryMain: '#b33c40',
+      primaryDark: '#8c2f32',
+      lightWhite: '#f9f9f9',
+      lightPink: '#fbf5ff',
+      lightYellow: 'white',
+      lightBlue: '#4ca3c7',
+      dark: '#1d3e4c',
     },
   },
-} as Theme);
+  breakpoints: {
+    values: {
+      xs: 400,
+      sm: 550,
+    },
+  },
+  spacing: (factor: number) => `${0.5 * factor}rem`, // 1 unit = 8px / 0.5rem
+});
