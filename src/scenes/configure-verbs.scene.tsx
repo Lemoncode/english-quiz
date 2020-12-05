@@ -4,7 +4,7 @@ import { AppLayout } from '../layout';
 
 export const ConfigureVerbsScene: React.FC = () => {
   return (
-    <AppLayout>
+    <AppLayout background={'red'}>
       <ConfigureVerbsContainer />
     </AppLayout>
   );

@@ -1,7 +1,11 @@
 import React from 'react';
 import * as classes from './app-layout.styles';
 
-export const AppLayout: React.FunctionComponent = props => {
-  const { children } = props;
-  return <div className={classes.root}>{children}</div>;
+interface Props {
+  background: string;
+}
+
+export const AppLayout: React.FunctionComponent<Props> = props => {
+  const { children, background } = props;
+  return <div className={classes.root(background)}>{children}</div>;
 };

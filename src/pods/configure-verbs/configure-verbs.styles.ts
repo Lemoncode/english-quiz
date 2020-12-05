@@ -6,6 +6,7 @@ const color = palette.customPalette;
 
 export const mainContainer = css`
   width: 90%;
+  min-height: 100vh;
   @media (min-width: ${breakpoints.values.xs}px) {
     width: 70%;
   }
@@ -16,6 +17,7 @@ export const mainContainer = css`
 
 export const title = css`
   margin-top: ${spacing(4)};
+  color: ${color.lightWhite};
   font-size: 1.6rem;
   font-weight: 700;
   text-align: center;
