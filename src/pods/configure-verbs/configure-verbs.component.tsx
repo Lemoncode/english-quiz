@@ -5,6 +5,7 @@ import {
   FormControlLabel,
   Button,
 } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
 import { VerbEntity } from './configure-verbs.vm';
 import produce, { immerable } from 'immer';
 import { getOnlySelected } from './configure-verbs.business';
@@ -112,8 +113,10 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
     title,
     backContainer,
     btnContainer,
-    btn,
+    saveBtn,
+    cancelBtn,
     verbList,
+    verbTitle,
   } = classes;
 
   const handleCheckedChange = (verbId: string) => (
@@ -146,7 +149,7 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
       <div className={backContainer}>
         <div className={btnContainer}>
           <Button
-            className={btn}
+            className={saveBtn}
             variant="contained"
             color="primary"
             onClick={() => onSave(allItems)}
@@ -155,7 +158,7 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
             Save
           </Button>
           <Button
-            className={btn}
+            className={cancelBtn}
             variant="contained"
             color="secondary"
             onClick={onCancel}
@@ -164,8 +167,9 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
             Cancel
           </Button>
         </div>
+        <Divider />
         <ul className={verbList}>
-          <li>
+          <li className={verbTitle}>
             <FormControlLabel
               control={
                 <Checkbox
@@ -180,11 +184,16 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
               label={`Total selected: ${selection.length}`}
             />
           </li>
+          <Divider />
           {allItems.map(verb => (
-            <CheckBoxMemo
-              verb={verb}
-              handleCheckedChange={handleCheckedChange}
-            />
+            <>
+              <CheckBoxMemo
+                classTitle={verbTitle}
+                verb={verb}
+                handleCheckedChange={handleCheckedChange}
+              />
+              <Divider />
+            </>
           ))}
         </ul>
       </div>
@@ -195,12 +204,13 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
 interface PropsCheckBoxMemo {
   verb: VerbEntity;
   handleCheckedChange: (verbId: string) => (e, checked) => void;
+  classTitle: string;
 }
 
 const CheckBoxMemo = React.memo((props: PropsCheckBoxMemo) => {
-  const { verb, handleCheckedChange } = props;
+  const { verb, handleCheckedChange, classTitle } = props;
   return (
-    <li key={verb.verbKey}>
+    <li key={verb.verbKey} className={classTitle}>
       <FormControlLabel
         control={
           <Checkbox

@@ -38,9 +38,10 @@ export const backContainer = css`
 export const btnContainer = css`
   display: flex;
   justify-content: space-between;
+  margin-bottom: ${spacing(5)};
 `;
 
-export const btn = css`
+export const saveBtn = css`
   display: flex;
   justify-content: center;
   border-radius: 1rem;
@@ -50,7 +51,25 @@ export const btn = css`
   text-transform: capitalize;
   font-weight: 700;
   font-size: 1.1rem;
-  color: ${color.lightWhite};
+  transition: all 0.2s;
+  color: white;
+  --webkit-transition: all 0.2s;
+  &:first-of-type {
+    margin-right: ${spacing(3)};
+  }
+`;
+
+export const cancelBtn = css`
+  display: flex;
+  justify-content: center;
+  border-radius: 1rem;
+  width: ${spacing(20)};
+  padding: ${spacing(1)} ${spacing(2)};
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: white;
   background-color: ${color.primaryMain};
   transition: all 0.2s;
   --webkit-transition: all 0.2s;
@@ -67,4 +86,15 @@ export const btn = css`
 export const verbList = css`
   padding: 0;
   list-style: none;
+`;
+
+export const verbTitle = css`
+  display: flex;
+  padding: ${spacing(1)} 0;
+  & label span {
+    text-transform: capitalize;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
 `;
