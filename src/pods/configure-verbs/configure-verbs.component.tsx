@@ -107,7 +107,14 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
     clearAllSelectedItems,
   } = useSelectionManager(verbCollection, getOnlySelected(verbCollection));
 
-  const { mainContainer, title } = classes;
+  const {
+    mainContainer,
+    title,
+    backContainer,
+    btnContainer,
+    btn,
+    verbList,
+  } = classes;
 
   const handleCheckedChange = (verbId: string) => (
     e: React.ChangeEvent<HTMLInputElement>
@@ -135,38 +142,52 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
 
   return (
     <main className={mainContainer}>
-      <Typography className={title} variant="h1">
-        Choose verbs to run the test:
-      </Typography>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={() => onSave(allItems)}
-      >
-        Save
-      </Button>
-      <Button variant="contained" color="secondary" onClick={onCancel}>
-        Cancel
-      </Button>
-
-      <ul>
-        <li>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={rootSelectionState !== RootSelectionStates.none}
-                onChange={handleRootCheckboxChange()}
-                color="primary"
-                indeterminate={rootSelectionState === RootSelectionStates.some}
-              />
-            }
-            label={`Total selected: ${selection.length}`}
-          />
-        </li>
-        {allItems.map(verb => (
-          <CheckBoxMemo verb={verb} handleCheckedChange={handleCheckedChange} />
-        ))}
-      </ul>
+      <h1 className={title}>Verbs Settings:</h1>
+      <div className={backContainer}>
+        <div className={btnContainer}>
+          <Button
+            className={btn}
+            variant="contained"
+            color="primary"
+            onClick={() => onSave(allItems)}
+            disableElevation
+          >
+            Save
+          </Button>
+          <Button
+            className={btn}
+            variant="contained"
+            color="secondary"
+            onClick={onCancel}
+            disableElevation
+          >
+            Cancel
+          </Button>
+        </div>
+        <ul className={verbList}>
+          <li>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={rootSelectionState !== RootSelectionStates.none}
+                  onChange={handleRootCheckboxChange()}
+                  color="primary"
+                  indeterminate={
+                    rootSelectionState === RootSelectionStates.some
+                  }
+                />
+              }
+              label={`Total selected: ${selection.length}`}
+            />
+          </li>
+          {allItems.map(verb => (
+            <CheckBoxMemo
+              verb={verb}
+              handleCheckedChange={handleCheckedChange}
+            />
+          ))}
+        </ul>
+      </div>
     </main>
   );
 };
@@ -188,7 +209,7 @@ const CheckBoxMemo = React.memo((props: PropsCheckBoxMemo) => {
             color="primary"
           />
         }
-        label={verb.verbDescription}
+        label={verb.verbKey}
       />
     </li>
   );
