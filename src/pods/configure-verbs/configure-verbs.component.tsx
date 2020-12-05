@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import { VerbEntity } from './configure-verbs.vm';
 import produce, { immerable } from 'immer';
-import { getOnlySelected } from "./configure-verbs.business";
+import { getOnlySelected } from './configure-verbs.business';
 
 interface Props {
   verbCollection: VerbEntity[];
@@ -15,47 +15,62 @@ interface Props {
   onCancel: () => void;
 }
 
-enum RootSelectionStates { all, some, none }; // Possible states of the root checkbox
-interface Selectable { selected: boolean }; // Interface created for filtering
+enum RootSelectionStates {
+  all,
+  some,
+  none,
+} // Possible states of the root checkbox
+interface Selectable {
+  selected: boolean;
+} // Interface created for filtering
 
 // Custom hook for handling changes in selected items' collection
-const useSelectionManager = function <T extends Selectable>(initalAllItems: T[], initialSelection: T[]) {
+const useSelectionManager = function<T extends Selectable>(
+  initalAllItems: T[],
+  initialSelection: T[]
+) {
   const [selection, setSelection] = React.useState<T[]>(initialSelection);
-  const [rootSelectionState, setRootSelectionState] = React.useState<RootSelectionStates>(
-    RootSelectionStates.none
-  );
+  const [rootSelectionState, setRootSelectionState] = React.useState<
+    RootSelectionStates
+  >(RootSelectionStates.none);
   const [allItems, setAllItems] = React.useState<T[]>(initalAllItems);
 
   const calculateSelectionState = (allItems: T[], selection: T[]) => {
     if (!selection || selection.length === 0) {
       return RootSelectionStates.none;
     } else {
-      return (selection.length === allItems.length) ? RootSelectionStates.all : RootSelectionStates.some;
+      return selection.length === allItems.length
+        ? RootSelectionStates.all
+        : RootSelectionStates.some;
     }
   };
 
   React.useEffect(() => {
     setSelection(initialSelection);
-    setRootSelectionState(calculateSelectionState(initalAllItems, initialSelection));
+    setRootSelectionState(
+      calculateSelectionState(initalAllItems, initialSelection)
+    );
     setAllItems(initalAllItems);
   }, [initalAllItems]);
 
-  const clearAllSelectedItems = () => setAllItems(allItems.map(
-    element => {
-      return {
-        ...element,
-        selected: false
-      }
-    })
-  );
-  const selectAllItems = () => setAllItems(allItems.map(
-    element => {
-      return {
-        ...element,
-        selected: true
-      }
-    })
-  );
+  const clearAllSelectedItems = () =>
+    setAllItems(
+      allItems.map(element => {
+        return {
+          ...element,
+          selected: false,
+        };
+      })
+    );
+  const selectAllItems = () =>
+    setAllItems(
+      allItems.map(element => {
+        return {
+          ...element,
+          selected: true,
+        };
+      })
+    );
   const getOnlySelected = (collection: T[]): T[] => {
     return collection.filter(({ selected }) => selected);
   };
@@ -66,10 +81,18 @@ const useSelectionManager = function <T extends Selectable>(initalAllItems: T[],
 
   React.useEffect(() => {
     setRootSelectionState(calculateSelectionState(allItems, selection));
-  }, [selection])
+  }, [selection]);
 
-  return { selection, setSelection, allItems, setAllItems, rootSelectionState, selectAllItems, clearAllSelectedItems }
-}
+  return {
+    selection,
+    setSelection,
+    allItems,
+    setAllItems,
+    rootSelectionState,
+    selectAllItems,
+    clearAllSelectedItems,
+  };
+};
 
 export const ConfigureVerbsComponent: React.FC<Props> = props => {
   const { verbCollection, onSave, onCancel } = props;
@@ -105,11 +128,11 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
     } else {
       clearAllSelectedItems();
     }
-  }
+  };
 
   return (
-    <>
-      <Typography variant="h3">Choose verbs to run the test:</Typography>
+    <main>
+      <Typography variant="h1">Choose verbs to run the test:</Typography>
       <Button
         variant="contained"
         color="primary"
@@ -139,7 +162,7 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
           <CheckBoxMemo verb={verb} handleCheckedChange={handleCheckedChange} />
         ))}
       </ul>
-    </>
+    </main>
   );
 };
 
