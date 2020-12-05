@@ -29,7 +29,7 @@ export const backContainer = css`
   padding: ${spacing(10)} ${spacing(5)} ${spacing(1)};
   height: 26rem;
   position: relative;
-  background-color: ${color.lightYellow};
+  background-color: ${color.lightWhite};
   border-radius: 2rem;
 `;
 
@@ -76,6 +76,7 @@ export const inputField = css`
     font-family: inherit;
     border: none;
     border-bottom: 2px solid ${color.dark};
+    background-color: ${color.lightWhite};
     padding: ${spacing(1)};
     font-size: 1.1rem;
     &:hover,

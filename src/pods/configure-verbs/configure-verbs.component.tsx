@@ -8,6 +8,7 @@ import {
 import { VerbEntity } from './configure-verbs.vm';
 import produce, { immerable } from 'immer';
 import { getOnlySelected } from './configure-verbs.business';
+import * as classes from './configure-verbs.styles';
 
 interface Props {
   verbCollection: VerbEntity[];
@@ -106,6 +107,8 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
     clearAllSelectedItems,
   } = useSelectionManager(verbCollection, getOnlySelected(verbCollection));
 
+  const { mainContainer, title } = classes;
+
   const handleCheckedChange = (verbId: string) => (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -131,8 +134,10 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
   };
 
   return (
-    <main>
-      <Typography variant="h1">Choose verbs to run the test:</Typography>
+    <main className={mainContainer}>
+      <Typography className={title} variant="h1">
+        Choose verbs to run the test:
+      </Typography>
       <Button
         variant="contained"
         color="primary"
