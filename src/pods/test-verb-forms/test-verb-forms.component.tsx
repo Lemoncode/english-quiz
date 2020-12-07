@@ -9,7 +9,7 @@ import {
   createDefaultVerbCorrect,
 } from './test-verb-forms.vm';
 import { Formik, Form } from 'formik';
-import { TextFieldComponent } from 'common/components';
+import { TextFieldComponent, InputComponent } from 'common/components';
 import { answerIsCorrect } from './test-verb-forms.business';
 import { ShowResults } from './components';
 import * as classes from './test-verb-forms.styles';
@@ -85,7 +85,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
   return (
     <main className={mainContainer}>
       <h1 className={title}>
-        Batir ({`${currentQuestion} / ${totalQuestions}`})
+        {verb.translation} ({`${currentQuestion} / ${totalQuestions}`})
       </h1>
       <Formik
         onSubmit={(values, actions) => {
@@ -111,8 +111,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                 <div className={pictureContainer}>
                   <img
                     className={picture}
-                    // src={`/assets/verb-images/${verb.infinitive}.png`}
-                    src={`/assets/verb-images/break.png`}
+                    src={`/assets/verb-images/${verb.infinitive}.png`}
                   ></img>
                 </div>
 
@@ -120,15 +119,15 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                 <div className={inputContainer}>
                   <div className={inputField}>
                     <label htmlFor="infinitive">Infinitive</label>
-                    <input type="text" name="infinitive" id="infinitive" />
+                    <InputComponent name="infinitive" id="infinitive" />
                   </div>
                   <div className={inputField}>
                     <label htmlFor="past">Past</label>
-                    <input type="text" name="past" id="past" />
+                    <InputComponent name="past" id="past" />
                   </div>
                   <div className={inputField}>
                     <label htmlFor="participle">Participle</label>
-                    <input type="text" name="participle" id="participle" />
+                    <InputComponent name="participle" id="participle" />
                   </div>
                 </div>
               </div>
