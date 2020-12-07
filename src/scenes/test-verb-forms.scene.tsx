@@ -4,7 +4,7 @@ import { TestVerbFormContainer } from 'pods/test-verb-forms';
 
 export const TestVerbFormsScene: React.FC = () => {
   return (
-    <AppLayout>
+    <AppLayout background={'light'}>
       <TestVerbFormContainer />
     </AppLayout>
   );
