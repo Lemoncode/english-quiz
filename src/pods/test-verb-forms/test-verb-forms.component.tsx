@@ -85,7 +85,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
   return (
     <main className={mainContainer}>
       <h1 className={title}>
-        Batir ({`${currentQuestion} / ${totalQuestions}`})
+        {verb.translation} ({`${currentQuestion} / ${totalQuestions}`})
       </h1>
       <Formik
         onSubmit={(values, actions) => {
@@ -111,8 +111,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                 <div className={pictureContainer}>
                   <img
                     className={picture}
-                    // src={`/assets/verb-images/${verb.infinitive}.png`}
-                    src={`/assets/verb-images/break.png`}
+                    src={`/assets/verb-images/${verb.infinitive}.png`}
                   ></img>
                 </div>
 
