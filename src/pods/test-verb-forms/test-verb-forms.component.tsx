@@ -120,7 +120,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                       type="text"
                       name="infinitive"
                       id="infinitive"
-                      autocomplete="off"
+                      autoComplete="off"
                     />
                   </div>
                   <div className={inputField}>
@@ -129,7 +129,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                       type="text"
                       name="past"
                       id="past"
-                      autocomplete="off"
+                      autoComplete="off"
                     />
                   </div>
                   <div className={inputField}>
@@ -138,7 +138,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                       type="text"
                       name="participle"
                       id="participle"
-                      autocomplete="off"
+                      autoComplete="off"
                     />
                   </div>
                 </div>
@@ -154,11 +154,14 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                 />
 
                 <Button
+                  className={nextBtn}
                   onClick={internalHandleOnNextQuestion}
                   variant="contained"
-                  color="primary"
                 >
-                  Next verb
+                  <div className={insideBtnContainer}>
+                    <span>Next Verb</span>
+                    <ArrowForwardIcon className={arrowIcon} />
+                  </div>
                 </Button>
               </>
             ) : validated && !secondAttempt ? (
