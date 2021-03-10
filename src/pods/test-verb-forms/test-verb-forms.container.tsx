@@ -18,8 +18,8 @@ export const TestVerbFormContainer = () => {
   );
   const { setScore } = React.useContext(scoreContext);
   const { userSettings } = React.useContext(settingsContext);
-  const [ totalQuestions ] = React.useState(userSettings.numberQuestions);
-  const [ hasSecondChance ] = React.useState(userSettings.secondChance);
+  const [totalQuestions] = React.useState(userSettings.numberQuestions);
+  const [hasSecondChance] = React.useState(userSettings.secondChance);
 
   const [currentQuestion, setCurrentQuestion] = React.useState(
     INITIAL_CURRENT_QUESTION

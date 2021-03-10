@@ -8,7 +8,7 @@ import {
   VerbCorrect,
   createDefaultVerbCorrect,
 } from './test-verb-forms.vm';
-import { Formik, Form } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { TextFieldComponent } from 'common/components';
 import { answerIsCorrect } from './test-verb-forms.business';
 import { ShowResults } from './components';
@@ -43,7 +43,6 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
   const [initialQuiz, setInitialQuiz] = React.useState<VerbQuiz>(
     createDefaultVerbQuiz()
   );
-
   const {
     title,
     mainContainer,
@@ -114,20 +113,18 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                     src={`/assets/verb-images/${verb.infinitive}.png`}
                   ></img>
                 </div>
-
-                {/* <h2>{verb.translation}</h2> */}
                 <div className={inputContainer}>
                   <div className={inputField}>
                     <label htmlFor="infinitive">Infinitive</label>
-                    <input type="text" name="infinitive" id="infinitive" />
+                    <Field type="text" name="infinitive" id="infinitive" />
                   </div>
                   <div className={inputField}>
                     <label htmlFor="past">Past</label>
-                    <input type="text" name="past" id="past" />
+                    <Field type="text" name="past" id="past" />
                   </div>
                   <div className={inputField}>
                     <label htmlFor="participle">Participle</label>
-                    <input type="text" name="participle" id="participle" />
+                    <Field type="text" name="participle" id="participle" />
                   </div>
                 </div>
               </div>
