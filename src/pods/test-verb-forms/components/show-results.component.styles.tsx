@@ -33,8 +33,6 @@ export const insideRightAnswer = css`
 `;
 
 export const buttonRight = css`
-  display: flex;
-  justify-content: center;
   border-radius: 1.4rem;
   width: ${spacing(20)};
   margin: ${spacing(4)} auto 0 auto;

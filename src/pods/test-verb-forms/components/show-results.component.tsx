@@ -20,7 +20,7 @@ export const ShowResults: React.FC<Props> = props => {
     verbsForm,
     answer,
     insideRightAnswer,
-    insideBtn
+    insideBtn,
   } = classes;
 
   const { secondAttempt, verbCorrect, verb } = props;
@@ -33,8 +33,10 @@ export const ShowResults: React.FC<Props> = props => {
         />
       </div>
       <div className={insideRightAnswer}>
-        <div className={`${insideBtnContainer} ${buttonRight}`}>
-          <span>RIGHT !!!!</span>
+        <div className={buttonRight}>
+          <div className={insideBtn}>
+            <span>RIGHT !!!!</span>
+          </div>
         </div>
         <div>
           <img
