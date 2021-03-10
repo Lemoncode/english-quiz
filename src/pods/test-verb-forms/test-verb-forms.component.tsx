@@ -116,15 +116,30 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                 <div className={inputContainer}>
                   <div className={inputField}>
                     <label htmlFor="infinitive">Infinitive</label>
-                    <Field type="text" name="infinitive" id="infinitive" />
+                    <Field
+                      type="text"
+                      name="infinitive"
+                      id="infinitive"
+                      autocomplete="off"
+                    />
                   </div>
                   <div className={inputField}>
                     <label htmlFor="past">Past</label>
-                    <Field type="text" name="past" id="past" />
+                    <Field
+                      type="text"
+                      name="past"
+                      id="past"
+                      autocomplete="off"
+                    />
                   </div>
                   <div className={inputField}>
                     <label htmlFor="participle">Participle</label>
-                    <Field type="text" name="participle" id="participle" />
+                    <Field
+                      type="text"
+                      name="participle"
+                      id="participle"
+                      autocomplete="off"
+                    />
                   </div>
                 </div>
               </div>
