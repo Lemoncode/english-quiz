@@ -103,7 +103,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
         }}
         initialValues={initialQuiz}
       >
-        {({}) => (
+        {() => (
           <Form>
             {!validated && (
               <div className={backContainer}>
@@ -111,40 +111,24 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                   <img
                     className={picture}
                     src={`/assets/verb-images/${verb.infinitive}.png`}
-                    // src={`/assets/verb-images/break.png`}
                   ></img>
                 </div>
-
-                {/* <h2>{verb.translation}</h2> */}
                 <div className={inputContainer}>
                   <div className={inputField}>
                     <label htmlFor="infinitive">Infinitive</label>
-                    <Field
-                      type="text"
-                      name="infinitive"
-                      id="infinitive"
-                    />
+                    <Field type="text" name="infinitive" id="infinitive" />
                   </div>
                   <div className={inputField}>
                     <label htmlFor="past">Past</label>
-                    <Field
-                      type="text"
-                      name="past"
-                      id="past"
-                    />
+                    <Field type="text" name="past" id="past" />
                   </div>
                   <div className={inputField}>
                     <label htmlFor="participle">Participle</label>
-                    <Field
-                      type="text"
-                      name="participle"
-                      id="participle"
-                    />
+                    <Field type="text" name="participle" id="participle" />
                   </div>
                 </div>
               </div>
             )}
-            {/* <pre>{JSON.stringify(values, null, 4)}</pre> */}
             {validated &&
             (!hasSecondChance || secondAttempt || verbCorrect.all) ? (
               <>
@@ -158,7 +142,6 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                   onClick={internalHandleOnNextQuestion}
                   variant="contained"
                   color="primary"
-                  type="submit"
                 >
                   Next verb
                 </Button>
