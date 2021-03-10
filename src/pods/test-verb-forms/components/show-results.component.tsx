@@ -34,9 +34,7 @@ export const ShowResults: React.FC<Props> = props => {
       </div>
       <div className={insideRightAnswer}>
         <div className={buttonRight}>
-          <div className={insideBtn}>
-            <span>RIGHT !!!!</span>
-          </div>
+          <span>RIGHT !!!!</span>
         </div>
         <div>
           <img

@@ -23,7 +23,7 @@ export const insideBtnContainer = css`
 
 export const insideBtn = css`
   text-align: center;
-`
+`;
 
 export const insideRightAnswer = css`
   display: flex;
@@ -33,6 +33,7 @@ export const insideRightAnswer = css`
 `;
 
 export const buttonRight = css`
+  text-align: center;
   border-radius: 1.4rem;
   width: ${spacing(20)};
   margin: ${spacing(4)} auto 0 auto;
