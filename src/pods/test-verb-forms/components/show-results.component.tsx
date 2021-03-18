@@ -59,7 +59,7 @@ export const ShowResults: React.FC<Props> = props => {
       </div>
       <div className={buttonWrong}>
         <div className={insideBtn}>
-          <span>Nope, Right</span>
+          <span>Oops... nope</span>
         </div>
       </div>
       <div>
