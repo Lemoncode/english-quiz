@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Verb, VerbCorrect } from '../test-verb-forms.vm';
 import { generateHint } from '../test-verb-forms.business';
-import * as classes from './show-results.component.styles';
+import * as classes from './show-results.component.styles'; //TODO: move styles to common-app?
 
 interface Props {
   secondAttempt: boolean;
@@ -10,26 +10,35 @@ interface Props {
 }
 
 export const ShowResults: React.FC<Props> = props => {
+  const { secondAttempt, verbCorrect, verb } = props;
+  
+  return verbCorrect.all ? 
+         (<ShowResultCorrect verb={verb}/>) : 
+         !secondAttempt ? 
+         (<ShowSecondChance verbCorrect={verbCorrect}/>) :
+         (<ShowResultWrong verb={verb}/>);
+};
+
+
+//TODO: Move interface and component to a common-app folder. Rename Props_ResultCorrect as Props and import styles in the new file.
+interface Props_ResultCorrect {
+  verb: Verb;
+}
+const ShowResultCorrect: React.FC<Props_ResultCorrect> = props => {
   const {
     backContainer,
     pictureContainer,
     picture,
-    insideBtnContainer,
     buttonRight,
-    buttonWrong,
-    verbsForm,
-    answer,
     insideRightAnswer,
-    insideBtn,
   } = classes;
 
-  const { secondAttempt, verbCorrect, verb } = props;
-  return verbCorrect.all ? (
+  return (
     <div className={backContainer}>
       <div className={pictureContainer}>
         <img
           className={picture}
-          src={`/assets/verb-images/${verb.infinitive}.png`}
+          src={`/assets/verb-images/${props.verb.infinitive}.png`}
         />
       </div>
       <div className={insideRightAnswer}>
@@ -45,11 +54,40 @@ export const ShowResults: React.FC<Props> = props => {
         </div>
       </div>
     </div>
-  ) : !secondAttempt ? (
+  );
+}
+
+
+//TODO: Move interface and component to a common-app folder. Rename Props_SecondChance as Props in the new file.
+interface Props_SecondChance {
+  verbCorrect: VerbCorrect;
+}
+const ShowSecondChance: React.FC<Props_SecondChance> = props => {
+  return (
     <span>
-      You have a second chance. You failed in {generateHint(verbCorrect)}.
+      You have a second chance. You failed in {generateHint(props.verbCorrect)}.
     </span>
-  ) : (
+  ); 
+}
+
+
+//TODO: Move interface and component to a common-app folder. Rename Props_SecondChance as Props and import styles in the new file.
+interface Props_ResultWrong {
+  verb: Verb;
+}
+const ShowResultWrong: React.FC<Props_ResultWrong> = props => {
+  const {verb} = props;
+  const {
+    backContainer,
+    pictureContainer,
+    picture,
+    buttonWrong,
+    verbsForm,
+    answer,
+    insideBtn,
+  } = classes;
+  
+  return (
     <div className={backContainer}>
       <div className={pictureContainer}>
         <img
@@ -71,4 +109,4 @@ export const ShowResults: React.FC<Props> = props => {
       </div>
     </div>
   );
-};
+}
