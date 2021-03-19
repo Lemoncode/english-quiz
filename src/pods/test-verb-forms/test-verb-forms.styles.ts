@@ -92,7 +92,7 @@ export const insideBtnContainer = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 60%;
+  width: 80%;
 `;
 
 export const nextBtn = css`
