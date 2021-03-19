@@ -119,19 +119,20 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
     verbTitle,
   } = classes;
 
-  const handleCheckedChange = (verbId: string) => (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const newTemporalSelection = produce(allItems, draft => {
-      const index = draft.findIndex(item => item.verbKey === verbId);
+  const handleCheckedChange = React.useCallback(
+    (verbId: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newTemporalSelection = produce(allItems, draft => {
+        const index = draft.findIndex(item => item.verbKey === verbId);
 
-      if (index !== -1) {
-        draft[index].selected = !draft[index].selected;
-      }
-    });
+        if (index !== -1) {
+          draft[index].selected = !draft[index].selected;
+        }
+      });
 
-    setAllItems(newTemporalSelection);
-  };
+      setAllItems(newTemporalSelection);
+    },
+    [allItems]
+  );
 
   const handleRootCheckboxChange = () => (
     e: React.ChangeEvent<HTMLInputElement>
