@@ -1,13 +1,8 @@
 import * as React from 'react';
-import {
-  Typography,
-  Checkbox,
-  FormControlLabel,
-  Button,
-} from '@material-ui/core';
+import { Checkbox, FormControlLabel, Button } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import { VerbEntity } from './configure-verbs.vm';
-import produce, { immerable } from 'immer';
+import produce from 'immer';
 import { getOnlySelected } from './configure-verbs.business';
 import * as classes from './configure-verbs.styles';
 
@@ -134,9 +129,7 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
     [allItems]
   );
 
-  const handleRootCheckboxChange = () => (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleRootCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (rootSelectionState !== RootSelectionStates.all) {
       selectAllItems();
     } else {
@@ -175,7 +168,7 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
               control={
                 <Checkbox
                   checked={rootSelectionState !== RootSelectionStates.none}
-                  onChange={handleRootCheckboxChange()}
+                  onChange={handleRootCheckboxChange}
                   color="primary"
                   indeterminate={
                     rootSelectionState === RootSelectionStates.some
