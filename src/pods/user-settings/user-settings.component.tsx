@@ -64,7 +64,8 @@ export const UserSettingsComponent: React.FC<Props> = props => {
                   className={field}
                 />
 
-                {/* <li>
+                {/* Commented on purpose, just if in case we want to recover second chance setting */
+                /* <li>
                   <FormControlLabel
                     control={
                       <Checkbox
