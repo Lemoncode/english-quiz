@@ -1,10 +1,12 @@
 import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { Verb, VerbTenses, VerbQuiz, createDefaultVerbQuiz } from "./test-fill-gap.vm";
 import { Formik, Form } from 'formik';
 import { GapComponent, ShowResultsComponent } from './components';
 import { answerIsCorrect } from './test-fill-gap.business';
+import * as styles from './test-fill-gap.styles';
 
 interface Props {
   currentQuestion: number;
@@ -32,6 +34,18 @@ export const TestFillGapComponent: React.FC<Props> = props => {
     createDefaultVerbQuiz()
   );
 
+  const {
+    title,
+    mainContainer,
+    inputContainer,
+    backContainer,
+    pictureContainer,
+    picture,
+    insideBtnContainer,
+    nextBtn,
+    arrowIcon,
+  } = styles;
+
   const handleValidateAnswer = (isCorrect: boolean) => {
     if (isCorrect) {
       setScore(score + 1);
@@ -46,8 +60,10 @@ export const TestFillGapComponent: React.FC<Props> = props => {
   }
 
   return (
-    <div>
-      <h1>Question {`${currentQuestion} / ${totalQuestions}`}</h1>
+    <main className={mainContainer}>
+      <h1 className={title}>
+        {verb.translation} ({`${currentQuestion} / ${totalQuestions}`})
+      </h1>
       <Formik
         onSubmit={(values, actions) => {
           const isCorrect = answerIsCorrect(verb, values);
@@ -61,25 +77,30 @@ export const TestFillGapComponent: React.FC<Props> = props => {
         {() => (
           <Form>
             {!validated && (
-              <div>
-                <Typography variant="subtitle1">
-                  Translation: {verb.translation}
-                </Typography>
-                <GapComponent
-                  isGap={initialQuiz.tense === VerbTenses.infinitive}
-                  text={verb.infinitive}
-                  tense={"Infinitive"}
-                />
-                <GapComponent
-                  isGap={initialQuiz.tense === VerbTenses.past}
-                  text={verb.past}
-                  tense={"Past"}
-                />
-                <GapComponent
-                  isGap={initialQuiz.tense === VerbTenses.participle}
-                  text={verb.participle}
-                  tense={"Participle"}
-                />
+              <div className={backContainer}>
+                <div className={pictureContainer}>
+                  <img
+                    className={picture}
+                    src={`/assets/verb-images/${verb.infinitive}.png`}
+                  />
+                </div>
+                <div className={inputContainer}>
+                  <GapComponent
+                    isGap={initialQuiz.tense === VerbTenses.infinitive}
+                    text={verb.infinitive}
+                    tense={"Infinitive"}
+                  />
+                  <GapComponent
+                    isGap={initialQuiz.tense === VerbTenses.past}
+                    text={verb.past}
+                    tense={"Past"}
+                  />
+                  <GapComponent
+                    isGap={initialQuiz.tense === VerbTenses.participle}
+                    text={verb.participle}
+                    tense={"Participle"}
+                  />
+                </div>
               </div>
             )}
             {validated ? (
@@ -87,21 +108,31 @@ export const TestFillGapComponent: React.FC<Props> = props => {
                 <ShowResultsComponent isCorrect={isCorrect} verb={verb} />
 
                 <Button
+                  className={nextBtn}
                   onClick={internalHandleOnNextQuestion}
                   variant="contained"
-                  color="primary"
                 >
-                  Next verb
+                  <div className={insideBtnContainer}>
+                    <span>Next Verb</span>
+                    <ArrowForwardIcon className={arrowIcon} />
+                  </div>
                 </Button>
               </>
             ) : (
-                <Button type="submit" variant="contained" color="primary">
-                  Validate
+                <Button
+                  className={nextBtn}
+                  type="submit"
+                  variant="contained"
+                  disableElevation
+                >
+                  <div className={insideBtnContainer}>
+                    Next <ArrowForwardIcon className={arrowIcon} />
+                  </div>
                 </Button>
               )}
           </Form>
         )}
       </Formik>
-    </div>
+    </main>
   )
 };
