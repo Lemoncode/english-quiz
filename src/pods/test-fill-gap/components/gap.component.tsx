@@ -1,6 +1,6 @@
 import * as React from "react";
-import Typography from "@material-ui/core/Typography";
-import { TextFieldComponent } from 'common/components';
+import { Field } from "formik";
+import * as styles from './components.styles';
 
 interface Props {
   isGap: boolean;
@@ -10,11 +10,18 @@ interface Props {
 
 export const GapComponent: React.FC<Props> = props => {
   const { isGap, text, tense } = props;
+  const { inputField, verbsForm } = styles;
   return isGap ? (
-    <TextFieldComponent name="response" label={tense} />
+    <div className={inputField}>
+      <label>{tense}</label>
+      <Field
+        type="text"
+        name="response"
+        id="response"
+        autoComplete="off"
+      />
+    </div>
   ) : (
-    <Typography variant="subtitle1">
-      {tense}: {text}
-    </Typography>
+    <span className={verbsForm}>{tense}: {text}</span>
   );
 }
