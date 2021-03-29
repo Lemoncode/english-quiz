@@ -687,7 +687,7 @@ export const defaultFullVerbs = [
     infinitive: 'split',
     past: 'split',
     participle: 'split',
-    translation: 'hender',
+    translation: 'dividir, partir',
   },
   {
     infinitive: 'spoil',
@@ -813,7 +813,7 @@ export const defaultFullVerbs = [
     infinitive: 'undergo',
     past: 'underwent',
     participle: 'undergone',
-    translation: 'sufrir',
+    translation: 'someterse a, experimentar',
   },
   {
     infinitive: 'understand',
@@ -873,7 +873,7 @@ export const defaultFullVerbs = [
     infinitive: 'wring',
     past: 'wrung',
     participle: 'wrung',
-    translation: 'torcer',
+    translation: 'escurrir',
   },
   {
     infinitive: 'write',
