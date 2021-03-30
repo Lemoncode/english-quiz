@@ -6,7 +6,7 @@ import { Verb, VerbTenses, VerbQuiz, createDefaultVerbQuiz } from "./test-fill-g
 import { Formik, Form } from 'formik';
 import { GapComponent, ShowResultsComponent } from './components';
 import { answerIsCorrect } from './test-fill-gap.business';
-import * as styles from './test-fill-gap.styles';
+import * as styles from 'common/styles/tests.styles';
 
 interface Props {
   currentQuestion: number;
