@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Verb, VerbCorrect } from '../test-verb-forms.vm';
 import { generateHint } from '../test-verb-forms.business';
-import * as classes from './show-results.component.styles'; //TODO: move styles to common-app?
+import * as classes from 'common/styles/tests.styles';
 
 interface Props {
   secondAttempt: boolean;

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Field } from "formik";
-import * as styles from './components.styles';
+import * as styles from 'common/styles/tests.styles';
 
 interface Props {
   isGap: boolean;

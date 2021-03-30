@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import { theme } from '../../core/theme';
+import { theme } from 'core/theme';
 
 const { palette, spacing, breakpoints } = theme;
 const color = palette.customPalette;
@@ -127,4 +127,69 @@ export const arrowIcon = css`
   @media (min-width: ${breakpoints.values.xs}px) {
     margin-left: auto;
   }
+`;
+
+export const insideBtn = css`
+  text-align: center;
+`;
+
+export const insideRightAnswer = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+export const buttonRight = css`
+  text-align: center;
+  border-radius: 1.4rem;
+  width: ${spacing(20)};
+  margin: ${spacing(4)} auto 0 auto;
+  padding: ${spacing(2.5)} ${spacing(3)};
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: ${color.lightWhite};
+  background-color: #33cc33;
+  transition: all 0.2s;
+  --webkit-transition: all 0.2s;
+  @media (min-width: ${breakpoints.values.xs}px) {
+    width: ${spacing(30)};
+    justify-content: flex-end;
+  }
+`;
+
+export const buttonWrong = css`
+  border-radius: 1.4rem;
+  width: ${spacing(20)};
+  margin: ${spacing(4)} auto 0 auto;
+  padding: ${spacing(2)} ${spacing(3)};
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: ${color.lightWhite};
+  background-color: ${color.primaryMain};
+  transition: all 0.2s;
+  --webkit-transition: all 0.2s;
+  @media (min-width: ${breakpoints.values.xs}px) {
+    width: ${spacing(30)};
+    justify-content: flex-end;
+  }
+`;
+
+export const answer = css`
+  display: block;
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 1rem;
+  text-align: center;
+  text-decoration: underline;
+`;
+
+export const verbsForm = css`
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 500;
 `;

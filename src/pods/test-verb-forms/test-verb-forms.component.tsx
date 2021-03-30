@@ -12,7 +12,7 @@ import { Formik, Form, Field } from 'formik';
 import { TextFieldComponent } from 'common/components';
 import { answerIsCorrect } from './test-verb-forms.business';
 import { ShowResults } from './components';
-import * as classes from './test-verb-forms.styles';
+import * as classes from 'common/styles/tests.styles';
 
 interface Props {
   currentQuestion: number;
