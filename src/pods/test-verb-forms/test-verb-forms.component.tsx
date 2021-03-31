@@ -13,6 +13,7 @@ import { TextFieldComponent } from 'common/components';
 import { answerIsCorrect } from './test-verb-forms.business';
 import { ShowResults } from './components';
 import * as classes from 'common/styles/tests.styles';
+import { Pronunciation } from "common/components";
 
 interface Props {
   currentQuestion: number;
@@ -81,6 +82,10 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
     setSecondAttempt(true);
   };
 
+  const textToSpeech = ():string => {
+    return `${verb.infinitive}. ${verb.past}. ${verb.participle}`;
+  };
+
   return (
     <main className={mainContainer}>
       <h1 className={title}>
@@ -142,6 +147,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                     />
                   </div>
                 </div>
+                <Pronunciation text={textToSpeech()}/>
               </div>
             )}
             {validated &&
@@ -181,16 +187,18 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                 </Button>
               </>
             ) : (
-              <Button
-                className={nextBtn}
-                type="submit"
-                variant="contained"
-                disableElevation
-              >
-                <div className={insideBtnContainer}>
-                  Next <ArrowForwardIcon className={arrowIcon} />
-                </div>
-              </Button>
+              <>
+                <Button
+                  className={nextBtn}
+                  type="submit"
+                  variant="contained"
+                  disableElevation
+                >
+                  <div className={insideBtnContainer}>
+                    Next <ArrowForwardIcon className={arrowIcon} />
+                  </div>
+                </Button>
+              </>
             )}
           </Form>
         )}

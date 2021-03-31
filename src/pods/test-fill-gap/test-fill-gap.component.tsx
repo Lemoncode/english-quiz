@@ -7,6 +7,7 @@ import { Formik, Form } from 'formik';
 import { GapComponent, ShowResultsComponent } from './components';
 import { answerIsCorrect } from './test-fill-gap.business';
 import * as styles from 'common/styles/tests.styles';
+import { Pronunciation } from "common/components";
 
 interface Props {
   currentQuestion: number;
@@ -59,6 +60,10 @@ export const TestFillGapComponent: React.FC<Props> = props => {
     onNextQuestion();
   }
 
+  const textToSpeech = ():string => {
+    return `${verb.infinitive}. ${verb.past}. ${verb.participle}`;
+  };
+
   return (
     <main className={mainContainer}>
       <h1 className={title}>
@@ -101,6 +106,7 @@ export const TestFillGapComponent: React.FC<Props> = props => {
                     tense={"Participle"}
                   />
                 </div>
+                <Pronunciation text={textToSpeech()}/>
               </div>
             )}
             {validated ? (

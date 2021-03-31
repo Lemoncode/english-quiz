@@ -45,6 +45,7 @@
     "react-dom": "^16.12.0",
     "react-hot-loader": "^4.12.18",
     "react-router-dom": "^5.2.0",
+    "react-speech-kit": "^3.0.1",
     "regenerator-runtime": "^0.13.3"
   },
   "devDependencies": {
