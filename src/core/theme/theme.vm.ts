@@ -11,6 +11,8 @@ interface Palette extends DefaultPalette {
     lightYellow: string;
     lightBlue: string;
     dark: string;
+    volumeLight: string;
+    volumeDark: string;
   };
 }
 

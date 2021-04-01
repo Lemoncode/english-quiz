@@ -24,6 +24,8 @@ export const theme: Theme = merge(defaultTheme, {
       lightPink: '#fbf5ff',
       lightBlue: '#4ca3c7',
       dark: '#1d3e4c',
+      volumeLight: '#007C45',
+      volumeDark: '#536F00',
     },
   },
   breakpoints: {
