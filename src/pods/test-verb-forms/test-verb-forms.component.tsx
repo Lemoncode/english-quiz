@@ -83,6 +83,9 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
   };
 
   const textToSpeech = ():string => {
+    if (verb.infinitive === 'read') { // Workaround for 'to read', using homophones
+      return 'reed. red. red';
+    }
     return `${verb.infinitive}. ${verb.past}. ${verb.participle}`;
   };
 
