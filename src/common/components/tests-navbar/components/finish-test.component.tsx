@@ -20,7 +20,13 @@ export const FinishTest: React.FC<Props> = props => {
   const [open, setOpen] = React.useState(false);
   const { setScore } = React.useContext(scoreContext);
   const history = useHistory();
-  const { finishBtn } = classes;
+  const {
+    finishBtn,
+    dialogTitle,
+    dialogContent,
+    dialogNoBtn,
+    dialogYesBtn,
+  } = classes;
 
   const handleOpenDialog = () => {
     setOpen(true);
@@ -49,22 +55,29 @@ export const FinishTest: React.FC<Props> = props => {
       <Dialog
         open={open}
         onClose={handleCloseDialog}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
       >
-        <DialogTitle>
-          Finish the test earlier?
+        <DialogTitle className={dialogTitle}>
+          Are you sure you want to cancel this test?
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            If you want to finish the test before answering all the questions please press button 'YES'.
+          <DialogContentText className={dialogContent}>
+            If you want to finish the test before answering all the questions please press 'Yes'.
+            Otherwise press 'No'.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button
+            className={dialogNoBtn}
+            onClick={handleCloseDialog}
+            variant="contained"
+            disableElevation
+          >
+            No
+          </Button>
+          <Button
+            className={dialogYesBtn}
             onClick={handleFinishTest}
             variant="contained"
-            color="primary"
             disableElevation
           >
             Yes
