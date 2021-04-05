@@ -1,5 +1,6 @@
 import { VerbEntityGlobal } from 'core/verbs';
 import { Verb, VerbQuiz, VerbTenses } from './test-fill-gap.vm';
+import { trimObject, lowObject } from 'common/business';
 
 // TODO: maybe add some defensive programming here? edge cases / errors ?
 export const pickRandomVerb = (
@@ -20,21 +21,10 @@ export const pickRandomVerb = (
   };
 };
 
-const verbToLower = (verb: Verb): Verb => ({
-  infinitive: verb.infinitive.toLowerCase(),
-  past: verb.past.toLowerCase(),
-  participle: verb.participle.toLowerCase(),
-  translation: verb.translation.toLowerCase(),
-});
-
-const quizToLower = (quiz: VerbQuiz) => ({
-  ...quiz,
-  response: quiz.response.toLowerCase(),
-});
-
 export const answerIsCorrect = (verb: Verb, quiz: VerbQuiz): boolean => {
-  const verbLower = verbToLower(verb);
-  const quizLower = quizToLower(quiz);
+  const verbLower = lowObject(verb);
+  const quizTrimmed = trimObject(quiz, ['response']);
+  const quizLower = lowObject(quizTrimmed, ['response']);
 
   return quizLower.tense === VerbTenses.infinitive ? verbLower.infinitive === quizLower.response :
     quizLower.tense === VerbTenses.past ? verbLower.past === quizLower.response :
