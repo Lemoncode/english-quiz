@@ -14,6 +14,22 @@ export const mainContainer = css`
   }
 `;
 
+export const bg1 = css`
+  background-color: #32b852;
+`;
+
+export const bg2 = css`
+  background-color: #ac6d2f;
+`;
+
+export const bg3 = css`
+  background-color: #ffff00;
+`;
+
+export const bg4 = css`
+  background-color: #f44611;
+`;
+
 export const title = css`
   margin-top: ${spacing(4)};
   font-size: 1.6rem;
