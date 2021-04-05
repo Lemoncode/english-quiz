@@ -1,13 +1,12 @@
 import * as React from 'react';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { Verb, VerbTenses, VerbQuiz, createDefaultVerbQuiz } from "./test-fill-gap.vm";
 import { Formik, Form } from 'formik';
 import { GapComponent, ShowResultsComponent } from './components';
 import { answerIsCorrect } from './test-fill-gap.business';
 import * as styles from 'common/styles/tests.styles';
-import { Pronunciation } from "common/components";
+import { Pronunciation, TestsNavbar } from "common/components";
 
 interface Props {
   currentQuestion: number;
@@ -69,6 +68,7 @@ export const TestFillGapComponent: React.FC<Props> = props => {
 
   return (
     <main className={mainContainer}>
+      <TestsNavbar score={score} currentQuestion={currentQuestion} />
       <h1 className={title}>
         {verb.translation} ({`${currentQuestion} / ${totalQuestions}`})
       </h1>
