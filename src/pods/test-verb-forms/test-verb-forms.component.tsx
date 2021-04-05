@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Typography, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import {
   Verb,
@@ -9,9 +9,8 @@ import {
   createDefaultVerbCorrect,
 } from './test-verb-forms.vm';
 import { Formik, Form, Field } from 'formik';
-import { TextFieldComponent } from 'common/components';
 import { answerIsCorrect } from './test-verb-forms.business';
-import { ShowResults } from './components';
+import { ShowResultsComponent } from 'common/components/show-results';
 import * as classes from 'common/styles/tests.styles';
 import { Pronunciation } from "common/components";
 
@@ -40,6 +39,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
   );
   const [validated, setValidated] = React.useState(false);
   const [secondAttempt, setSecondAttempt] = React.useState(false);
+  const [isCorrect, setIsCorrect] = React.useState(false);
 
   const [initialQuiz, setInitialQuiz] = React.useState<VerbQuiz>(
     createDefaultVerbQuiz()
@@ -82,7 +82,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
     setSecondAttempt(true);
   };
 
-  const textToSpeech = ():string => {
+  const textToSpeech = (): string => {
     if (verb.infinitive === 'read') { // Workaround for 'to read', using homophones
       return 'reed. red. red';
     }
@@ -96,16 +96,17 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
       </h1>
       <Formik
         onSubmit={(values, actions) => {
-          const isCorrect = answerIsCorrect(verb, values);
-          handleValidateAnswer(isCorrect);
-          if (!hasSecondChance || secondAttempt || isCorrect.all) {
+          const answerCorrection = answerIsCorrect(verb, values);
+          setIsCorrect(answerCorrection.all);
+          handleValidateAnswer(answerCorrection);
+          if (!hasSecondChance || secondAttempt || answerCorrection.all) {
             actions.resetForm({ values: createDefaultVerbQuiz() });
           }
           if (hasSecondChance && !secondAttempt) {
-            if (!isCorrect.infinitive)
+            if (!answerCorrection.infinitive)
               actions.setFieldError('infinitive', 'Incorrect');
-            if (!isCorrect.past) actions.setFieldError('past', 'Incorrect');
-            if (!isCorrect.participle)
+            if (!answerCorrection.past) actions.setFieldError('past', 'Incorrect');
+            if (!answerCorrection.participle)
               actions.setFieldError('participle', 'Incorrect');
           }
         }}
@@ -150,16 +151,16 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                     />
                   </div>
                 </div>
-                <Pronunciation text={textToSpeech()}/>
+                <Pronunciation text={textToSpeech()} />
               </div>
             )}
             {validated &&
-            (!hasSecondChance || secondAttempt || verbCorrect.all) ? (
+              (!hasSecondChance || secondAttempt || verbCorrect.all) ? (
               <>
-                <ShowResults
-                  secondAttempt={true}
-                  verbCorrect={verbCorrect}
+                <ShowResultsComponent
+                  isCorrect={isCorrect}
                   verb={verb}
+                  showAnswer={true}
                 />
 
                 <Button
@@ -175,10 +176,10 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
               </>
             ) : validated && !secondAttempt ? (
               <>
-                <ShowResults
-                  secondAttempt={false}
-                  verbCorrect={verbCorrect}
+                <ShowResultsComponent
+                  isCorrect={isCorrect}
                   verb={verb}
+                  showAnswer={false}
                 />
 
                 <Button

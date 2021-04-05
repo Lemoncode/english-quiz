@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { Verb } from '../test-fill-gap.vm';
+import { Verb } from './model';
 import * as styles from 'common/styles/tests.styles';
 
 interface Props {
   isCorrect: boolean;
   verb: Verb;
+  showAnswer: boolean;
 }
 
 export const ShowResultsComponent: React.FC<Props> = props => {
-  const { isCorrect, verb } = props;
+  const { isCorrect, verb, showAnswer } = props;
   const {
     backContainer,
     pictureContainer,
@@ -49,13 +50,16 @@ export const ShowResultsComponent: React.FC<Props> = props => {
               <span>Oops... nope</span>
             </div>
           </div>
-          <div>
-            <span className={answer}>Answer</span>
-            <span className={verbsForm}>Infinite: {verb.infinitive}</span>
-            <span className={verbsForm}>Past: {verb.past}</span>
-            <span className={verbsForm}>participle: {verb.participle}</span>
-            <span className={verbsForm}>translation: {verb.translation}</span>
-          </div>
+          {showAnswer ? (
+            <div>
+              <span className={answer}>Answer</span>
+              <span className={verbsForm}>Infinite: {verb.infinitive}</span>
+              <span className={verbsForm}>Past: {verb.past}</span>
+              <span className={verbsForm}>participle: {verb.participle}</span>
+              <span className={verbsForm}>translation: {verb.translation}</span>
+            </div>
+
+          ) : <></>}
         </>
       )}
     </div>

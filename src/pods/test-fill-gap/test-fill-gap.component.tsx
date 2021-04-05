@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { Verb, VerbTenses, VerbQuiz, createDefaultVerbQuiz } from "./test-fill-gap.vm";
 import { Formik, Form } from 'formik';
-import { GapComponent, ShowResultsComponent } from './components';
+import { GapComponent } from './components';
+import { ShowResultsComponent } from 'common/components/show-results';
 import { answerIsCorrect } from './test-fill-gap.business';
 import * as styles from 'common/styles/tests.styles';
 import { Pronunciation } from "common/components";
@@ -60,7 +60,7 @@ export const TestFillGapComponent: React.FC<Props> = props => {
     onNextQuestion();
   }
 
-  const textToSpeech = ():string => {
+  const textToSpeech = (): string => {
     if (verb.infinitive === 'read') { // Workaround for 'to read', using homophones
       return 'reed. red. red';
     }
@@ -109,12 +109,12 @@ export const TestFillGapComponent: React.FC<Props> = props => {
                     tense={"Participle"}
                   />
                 </div>
-                <Pronunciation text={textToSpeech()}/>
+                <Pronunciation text={textToSpeech()} />
               </div>
             )}
             {validated ? (
               <>
-                <ShowResultsComponent isCorrect={isCorrect} verb={verb} />
+                <ShowResultsComponent isCorrect={isCorrect} verb={verb} showAnswer={true} />
 
                 <Button
                   className={nextBtn}
@@ -128,17 +128,17 @@ export const TestFillGapComponent: React.FC<Props> = props => {
                 </Button>
               </>
             ) : (
-                <Button
-                  className={nextBtn}
-                  type="submit"
-                  variant="contained"
-                  disableElevation
-                >
-                  <div className={insideBtnContainer}>
-                    Next <ArrowForwardIcon className={arrowIcon} />
-                  </div>
-                </Button>
-              )}
+              <Button
+                className={nextBtn}
+                type="submit"
+                variant="contained"
+                disableElevation
+              >
+                <div className={insideBtnContainer}>
+                  Next <ArrowForwardIcon className={arrowIcon} />
+                </div>
+              </Button>
+            )}
           </Form>
         )}
       </Formik>
