@@ -1,5 +1,6 @@
 import { VerbEntityGlobal } from 'core/verbs';
 import { Verb, VerbQuiz, VerbCorrect, createDefaultVerbCorrect } from './test-verb-forms.vm';
+import { trimObject, lowObject } from 'common/business';
 
 // TODO: maybe add some defensive programming here? edge cases / errors ?
 export const pickRandomVerb = (
@@ -20,22 +21,10 @@ export const pickRandomVerb = (
   };
 };
 
-const verbToLower = (verb: Verb): Verb => ({
-  infinitive: verb.infinitive.toLowerCase(),
-  past: verb.past.toLowerCase(),
-  participle: verb.participle.toLowerCase(),
-  translation: verb.translation.toLowerCase(),
-});
-
-const quizToLower = (quiz: VerbQuiz) => ({
-  past: quiz.past.toLowerCase(),
-  participle: quiz.participle.toLowerCase(),
-  infinitive: quiz.infinitive.toLowerCase(),
-});
-
 export const answerIsCorrect = (verb: Verb, quiz: VerbQuiz): VerbCorrect => {
-  const verbLower = verbToLower(verb);
-  const quizLower = quizToLower(quiz);
+  const verbLower = lowObject(verb);
+  const quizTrimmed = trimObject(quiz);
+  const quizLower = lowObject(quizTrimmed);
 
   let verbCorrect = createDefaultVerbCorrect();
   verbCorrect.infinitive = verbLower.infinitive === quizLower.infinitive;
@@ -47,10 +36,10 @@ export const answerIsCorrect = (verb: Verb, quiz: VerbQuiz): VerbCorrect => {
 
 export const generateHint = (verbCorrect: VerbCorrect) => {
   // TODO: Magic consts move to upper const file
-  const infinitive = (!verbCorrect.infinitive) ? 'infinitive'  : '';
+  const infinitive = (!verbCorrect.infinitive) ? 'infinitive' : '';
   const past = (!verbCorrect.past) ? 'past' : '';
-  const participle = (!verbCorrect.participle) ? 'participle': '';
-  
+  const participle = (!verbCorrect.participle) ? 'participle' : '';
+
   return removeBeginningAndTrailingCommaIfExists(`${infinitive}, ${past}, ${participle}`);
 };
 
@@ -58,6 +47,6 @@ const removeBeginningAndTrailingCommaIfExists = (hint: string) => {
   hint = hint.trim();
   hint = hint.replace(", ,", ","); //To remove double comma
   hint = hint[0] === ',' ? hint.substring(2, hint.length) : hint; //To remove beginning comma
-  hint = hint[hint.length-1] === ',' ? hint.substring(0, hint.length-1) : hint; //To remove trailing comma
+  hint = hint[hint.length - 1] === ',' ? hint.substring(0, hint.length - 1) : hint; //To remove trailing comma
   return hint;
 }
