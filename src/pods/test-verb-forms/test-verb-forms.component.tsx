@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Typography, Button } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import {
   Verb,
@@ -9,11 +9,10 @@ import {
   createDefaultVerbCorrect,
 } from './test-verb-forms.vm';
 import { Formik, Form, Field } from 'formik';
-import { TextFieldComponent } from 'common/components';
 import { answerIsCorrect } from './test-verb-forms.business';
 import { ShowResults } from './components';
 import * as classes from 'common/styles/tests.styles';
-import { Pronunciation } from "common/components";
+import { Pronunciation, TestsNavbar } from "common/components";
 
 interface Props {
   currentQuestion: number;
@@ -91,6 +90,7 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
 
   return (
     <main className={mainContainer}>
+      <TestsNavbar score={score} currentQuestion={currentQuestion} />
       <h1 className={title}>
         {verb.translation} ({`${currentQuestion} / ${totalQuestions}`})
       </h1>
