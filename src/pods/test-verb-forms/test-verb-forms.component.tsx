@@ -1,18 +1,13 @@
 import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import {
-  Verb,
-  VerbQuiz,
-  createDefaultVerbQuiz,
-  VerbCorrect,
-  createDefaultVerbCorrect,
-} from './test-verb-forms.vm';
+import { VerbQuiz, createDefaultVerbQuiz } from './test-verb-forms.vm';
 import { Formik, Form, Field } from 'formik';
 import { answerIsCorrect } from './test-verb-forms.business';
-import { ShowResults } from './components';
+import { ShowResults } from 'common/components/show-results';
+import { Verb, VerbCorrect, createDefaultVerbCorrect } from 'common/model';
 import * as classes from 'common/styles/tests.styles';
-import { Pronunciation, TestsNavbar } from "common/components";
+import { Pronunciation, TestsNavbar } from 'common/components';
 
 interface Props {
   currentQuestion: number;
@@ -56,15 +51,15 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
     arrowIcon,
   } = classes;
 
-  const handleValidateAnswer = (isCorrect: VerbCorrect) => {
-    if (isCorrect.all) {
+  const handleValidateAnswer = (verbCorrection: VerbCorrect) => {
+    if (verbCorrection.all) {
       if (secondAttempt) {
         setScore(score + 0.5);
       } else {
         setScore(score + 1);
       }
     }
-    setVerbCorrect(isCorrect);
+    setVerbCorrect(verbCorrection);
     setValidated(true);
   };
 
@@ -81,8 +76,9 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
     setSecondAttempt(true);
   };
 
-  const textToSpeech = ():string => {
-    if (verb.infinitive === 'read') { // Workaround for 'to read', using homophones
+  const textToSpeech = (): string => {
+    if (verb.infinitive === 'read') {
+      // Workaround for 'to read', using homophones
       return 'reed. red. red';
     }
     return `${verb.infinitive}. ${verb.past}. ${verb.participle}`;
@@ -96,16 +92,17 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
       </h1>
       <Formik
         onSubmit={(values, actions) => {
-          const isCorrect = answerIsCorrect(verb, values);
-          handleValidateAnswer(isCorrect);
-          if (!hasSecondChance || secondAttempt || isCorrect.all) {
+          const verbCorrection = answerIsCorrect(verb, values);
+          handleValidateAnswer(verbCorrection);
+          if (!hasSecondChance || secondAttempt || verbCorrection.all) {
             actions.resetForm({ values: createDefaultVerbQuiz() });
           }
           if (hasSecondChance && !secondAttempt) {
-            if (!isCorrect.infinitive)
+            if (!verbCorrection.infinitive)
               actions.setFieldError('infinitive', 'Incorrect');
-            if (!isCorrect.past) actions.setFieldError('past', 'Incorrect');
-            if (!isCorrect.participle)
+            if (!verbCorrection.past)
+              actions.setFieldError('past', 'Incorrect');
+            if (!verbCorrection.participle)
               actions.setFieldError('participle', 'Incorrect');
           }
         }}
@@ -150,14 +147,15 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                     />
                   </div>
                 </div>
-                <Pronunciation text={textToSpeech()}/>
+                <Pronunciation text={textToSpeech()} />
               </div>
             )}
             {validated &&
             (!hasSecondChance || secondAttempt || verbCorrect.all) ? (
               <>
                 <ShowResults
-                  secondAttempt={true}
+                  secondAttemptEnabled={hasSecondChance}
+                  isSecondAttempt={true}
                   verbCorrect={verbCorrect}
                   verb={verb}
                 />
@@ -176,7 +174,8 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
             ) : validated && !secondAttempt ? (
               <>
                 <ShowResults
-                  secondAttempt={false}
+                  secondAttemptEnabled={hasSecondChance}
+                  isSecondAttempt={false}
                   verbCorrect={verbCorrect}
                   verb={verb}
                 />
