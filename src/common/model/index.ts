@@ -1,1 +1,1 @@
-export * from './verbs.model';
+export * from './verb.model';
