@@ -14,22 +14,6 @@ export const mainContainer = css`
   }
 `;
 
-export const bg1 = css`
-  background-color: #32b852;
-`;
-
-export const bg2 = css`
-  background-color: #ac6d2f;
-`;
-
-export const bg3 = css`
-  background-color: #ffff00;
-`;
-
-export const bg4 = css`
-  background-color: #f44611;
-`;
-
 export const title = css`
   margin-top: ${spacing(4)};
   font-size: 1.6rem;
@@ -47,6 +31,22 @@ export const backContainer = css`
   position: relative;
   background-color: ${color.lightWhite};
   border-radius: 2rem;
+`;
+
+export const backgroundResult1 = css`
+  background-color: #9BDE7E;
+`;
+
+export const backgroundResult2 = css`
+  background-color: #F9F871;
+`;
+
+export const backgroundResult3 = css`
+  background-color: #FFD180;
+`;
+
+export const backgroundResult4 = css`
+  background-color: #999999;
 `;
 
 export const pictureContainer = css`

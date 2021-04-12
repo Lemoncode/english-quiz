@@ -27,74 +27,78 @@ export const FinalScoreComponent: React.FC<Props> = props => {
     picture,
     nextBtn,
     arrowIcon,
-    bg1,
-    bg2,
-    bg3,
-    bg4,
+    backgroundResult1,
+    backgroundResult2,
+    backgroundResult3,
+    backgroundResult4,
   } = classes;
 
-  const resultClasses = (total, correct) => {
-    let resultClassColor;
-
-    if (correct >= total * 0.9) {
-      resultClassColor = bg1;
-    } else if (correct > total * 0.5 && correct <= total * 0.7) {
-      resultClassColor = bg3;
-    } else if (correct > total * 0.7 && correct < total * 0.9) {
-      resultClassColor = bg4;
+  const resultClass = () => {
+    if (correct/total >= 0.9) {
+      return backgroundResult1;
+    } else if (correct/total >= 0.7) {
+      return backgroundResult2;
+    } else if (correct/total >= 0.5) {
+      return backgroundResult3;
     } else {
-      resultClassColor = bg2;
+      return backgroundResult4;
     }
-
-    return resultClassColor;
   };
 
-  const resultSentences = (total, correct) => {
-    let resultSentence;
+  const resultIcon = () => {
+    if (correct/total >= 0.9) {
+      return "trophy.png";
+    } else if (correct/total >= 0.7) {
+      return "well-done.png";
+    } else if (correct/total >= 0.5) {
+      return "reading.png";
+    } else {
+      return "skull.png";
+    }
+  }
 
-    if (correct >= total * 0.9) {
-      resultSentence = (
-        <Typography variant="h5" className={title}>
-          Perfect!!!!!
-        </Typography>
+  const resultMessage = () => {
+    if (correct/total >= 0.9) {
+      return (
+        <h5 className={title}>
+          Congratulations!!! You did a great job
+        </h5>
       );
-    } else if (correct > total * 0.5 && correct <= total * 0.7) {
-      resultSentence = (
-        <Typography variant="h5" className={title}>
-          Should Improve!!!
-        </Typography>
+    } else if (correct/total >= 0.7) {
+      return (
+        <h5 className={title}>
+          You are on the right track!
+        </h5>
       );
-    } else if (correct > total * 0.7 && correct < total * 0.9) {
-      resultSentence = (
-        <Typography variant="h5" className={title}>
-          Need a little to be Perfect!!!
-        </Typography>
+    } else if (correct/total >= 0.5) {
+      return (
+        <h5 className={title}>
+          Keep working!
+        </h5>
       );
     } else {
-      resultSentence = (
-        <Typography variant="h5" className={title}>
-          This is not OK!!!
-        </Typography>
+      return (
+        <h5 className={title}>
+          You should study more...
+        </h5>
       );
     }
-
-    return resultSentence;
   };
 
   return (
     <div className={mainContainer}>
-      <div className={`${backContainer} ${resultClasses(total, correct)}`}>
+      <div className={`${backContainer} ${resultClass()}`}>
         <div className={pictureContainer}>
-          <img className={picture} src={`/assets/results/treasure.png`}></img>
+          <img className={picture} src={`/assets/results/${resultIcon()}`}></img>
         </div>
         <div>
-          <Typography variant="h5" className={title}>
-            Your Final score:
-          </Typography>
-          <Typography variant="h5" className={title}>
+          <h5 className={title}>
+            Final score:
+          </h5>
+          <h5 className={title}>
             <span>{`${correct}/${total}`}</span>
-          </Typography>
-          {resultSentences(total, correct)}
+          </h5>
+          {resultMessage()}
         </div>
       </div>
       <Button
