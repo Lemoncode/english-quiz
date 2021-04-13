@@ -1,70 +1,46 @@
-import * as React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Typography } from '@material-ui/core';
 import { routes } from 'core/router';
-import * as classes from './home.styles';
-import { Button } from '@material-ui/core';
+import * as React from 'react';
+import { Link } from 'react-router-dom';
+import * as classes from 'common/styles/tests.styles';
+import logo from '../../assets/static/logo-english-quiz.png';
+import Button from '@material-ui/core/Button';
 
-export const HomeComponent: React.FC = () => {
+export const HomeComponent = () => {
   const {
-    mainContainer,
     title,
-    backContainer,
-    buttonsContainer,
-    testFillGapButton,
-    userSettingsButton,
+    mainContainer,
+    inputContainer,
+    homeBackContainer,
+    pictureContainer,
+    picture,
+    inputField,
+    insideBtnContainer,
+    homeButton,
+    arrowIcon,
+    logoHome,
+    homeLink
   } = classes;
-  const history = useHistory();
 
-  const handleClick = (route: string) => {
-    history.push(route);
-  };
   return (
-    <>
-      <main className={mainContainer}>
-        <h1 className={title}>English Quizz</h1>
-        <div className={backContainer}>
-          <div className={buttonsContainer}>
-            <Button
-              classes={{
-                root: testFillGapButton,
-              }}
-              variant="contained"
-              onClick={() => handleClick(routes.testVerbForms)}
-            >
-              Start Test + participle tenses
-            </Button>
-          </div>
-          <div className={buttonsContainer}>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={() => handleClick(routes.testFillGap)}
-            >
-              Start Test &apos;Fill the gap&apos;
-            </Button>
-          </div>
-          <div className={buttonsContainer}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => handleClick(routes.configureVerbs)}
-            >
-              Configure Verb List
-            </Button>
-          </div>
-          <div className={classes.buttonsContainer}>
-            <Button
-              classes={{
-                root: userSettingsButton,
-              }}
-              variant="contained"
-              onClick={() => handleClick(routes.userSettings)}
-            >
-              User Settings
-            </Button>
-          </div>
+    <main className={mainContainer}>
+      <div className={homeBackContainer}>
+        <div className={`${pictureContainer} ${logoHome}`}>
+          <img className={picture} src={logo}></img>
         </div>
-      </main>
-    </>
+        <Button className={homeButton} variant="contained">
+          <Link to={routes.testVerbForms} className={homeLink}>Start Test + participle tenses</Link>
+        </Button>
+        <Button className={homeButton} variant="contained">
+          <Link to={routes.testFillGap} className={homeLink}>Start Test 'Fill the gap'</Link>
+        </Button>
+        <Button className={homeButton} variant="contained">
+          <Link to={routes.configureVerbs} className={homeLink}>Configure Verb List</Link>
+        </Button>
+        <Button className={homeButton} variant="contained">
+          <Link to={routes.userSettings} className={homeLink}>User Settings</Link>
+        </Button>
+      </div>
+    </main>
   );
 };
