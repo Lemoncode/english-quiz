@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TestVerbFormComponent } from './test-verb-forms.component';
-import { Verb } from './test-verb-forms.vm';
+import { Verb } from 'common/model';
 import { globalVerbsContext } from 'core/verbs';
 import { pickRandomVerb } from './test-verb-forms.business';
 import { useHistory } from 'react-router-dom';

@@ -1,12 +1,18 @@
 import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import { Verb, VerbTenses, VerbQuiz, createDefaultVerbQuiz } from "./test-fill-gap.vm";
+import {
+  VerbTenses,
+  VerbQuiz,
+  createDefaultVerbQuiz,
+} from './test-fill-gap.vm';
 import { Formik, Form } from 'formik';
-import { GapComponent, ShowResultsComponent } from './components';
+import { GapComponent } from './components';
+import { ShowResults } from 'common/components/show-results';
+import { Verb, VerbCorrect, createDefaultVerbCorrect } from 'common/model';
 import { answerIsCorrect } from './test-fill-gap.business';
 import * as styles from 'common/styles/tests.styles';
-import { Pronunciation, TestsNavbar } from "common/components";
+import { Pronunciation, TestsNavbar } from 'common/components';
 
 interface Props {
   currentQuestion: number;
@@ -27,7 +33,9 @@ export const TestFillGapComponent: React.FC<Props> = props => {
     setScore,
   } = props;
 
-  const [isCorrect, setIsCorrect] = React.useState(false);
+  const [verbCorrect, setVerbCorrect] = React.useState<VerbCorrect>(
+    createDefaultVerbCorrect()
+  );
   const [validated, setValidated] = React.useState(false);
 
   const [initialQuiz, setInitialQuiz] = React.useState<VerbQuiz>(
@@ -46,21 +54,22 @@ export const TestFillGapComponent: React.FC<Props> = props => {
     arrowIcon,
   } = styles;
 
-  const handleValidateAnswer = (isCorrect: boolean) => {
-    if (isCorrect) {
+  const handleValidateAnswer = (verbCorrection: VerbCorrect) => {
+    if (verbCorrection.all) {
       setScore(score + 1);
     }
-    setIsCorrect(isCorrect);
+    setVerbCorrect(verbCorrection);
     setValidated(true);
   };
 
   const internalHandleOnNextQuestion = () => {
     setValidated(false);
     onNextQuestion();
-  }
+  };
 
-  const textToSpeech = ():string => {
-    if (verb.infinitive === 'read') { // Workaround for 'to read', using homophones
+  const textToSpeech = (): string => {
+    if (verb.infinitive === 'read') {
+      // Workaround for 'to read', using homophones
       return 'reed. red. red';
     }
     return `${verb.infinitive}. ${verb.past}. ${verb.participle}`;
@@ -96,25 +105,30 @@ export const TestFillGapComponent: React.FC<Props> = props => {
                   <GapComponent
                     isGap={initialQuiz.tense === VerbTenses.infinitive}
                     text={verb.infinitive}
-                    tense={"Infinitive"}
+                    tense={'Infinitive'}
                   />
                   <GapComponent
                     isGap={initialQuiz.tense === VerbTenses.past}
                     text={verb.past}
-                    tense={"Past"}
+                    tense={'Past'}
                   />
                   <GapComponent
                     isGap={initialQuiz.tense === VerbTenses.participle}
                     text={verb.participle}
-                    tense={"Participle"}
+                    tense={'Participle'}
                   />
                 </div>
-                <Pronunciation text={textToSpeech()}/>
+                <Pronunciation text={textToSpeech()} />
               </div>
             )}
             {validated ? (
               <>
-                <ShowResultsComponent isCorrect={isCorrect} verb={verb} />
+                <ShowResults
+                  secondAttemptEnabled={false}
+                  isSecondAttempt={false}
+                  verbCorrect={verbCorrect}
+                  verb={verb}
+                />
 
                 <Button
                   className={nextBtn}
@@ -128,20 +142,20 @@ export const TestFillGapComponent: React.FC<Props> = props => {
                 </Button>
               </>
             ) : (
-                <Button
-                  className={nextBtn}
-                  type="submit"
-                  variant="contained"
-                  disableElevation
-                >
-                  <div className={insideBtnContainer}>
-                    Next <ArrowForwardIcon className={arrowIcon} />
-                  </div>
-                </Button>
-              )}
+              <Button
+                className={nextBtn}
+                type="submit"
+                variant="contained"
+                disableElevation
+              >
+                <div className={insideBtnContainer}>
+                  Next <ArrowForwardIcon className={arrowIcon} />
+                </div>
+              </Button>
+            )}
           </Form>
         )}
       </Formik>
     </main>
-  )
+  );
 };

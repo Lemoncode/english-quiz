@@ -1,24 +1,26 @@
 import * as React from 'react';
-import { Verb, VerbCorrect } from '../test-verb-forms.vm';
-import { generateHint } from '../test-verb-forms.business';
+import { Verb, VerbCorrect } from 'common/model';
+import { generateHint } from './show-results.business';
 import * as classes from 'common/styles/tests.styles';
 
 interface Props {
-  secondAttempt: boolean;
+  secondAttemptEnabled: boolean;
+  isSecondAttempt: boolean;
   verbCorrect: VerbCorrect;
   verb: Verb;
 }
 
 export const ShowResults: React.FC<Props> = props => {
-  const { secondAttempt, verbCorrect, verb } = props;
-  
-  return verbCorrect.all ? 
-         (<ShowResultCorrect verb={verb}/>) : 
-         !secondAttempt ? 
-         (<ShowSecondChance verbCorrect={verbCorrect}/>) :
-         (<ShowResultWrong verb={verb}/>);
-};
+  const { secondAttemptEnabled, isSecondAttempt, verbCorrect, verb } = props;
 
+  return verbCorrect.all ? (
+    <ShowResultCorrect verb={verb} />
+  ) : !isSecondAttempt && secondAttemptEnabled ? (
+    <ShowSecondChance verbCorrect={verbCorrect} />
+  ) : (
+    <ShowResultWrong verb={verb} />
+  );
+};
 
 //TODO: Move interface and component to a common-app folder. Rename Props_ResultCorrect as Props and import styles in the new file.
 interface Props_ResultCorrect {
@@ -55,8 +57,7 @@ const ShowResultCorrect: React.FC<Props_ResultCorrect> = props => {
       </div>
     </div>
   );
-}
-
+};
 
 //TODO: Move interface and component to a common-app folder. Rename Props_SecondChance as Props in the new file.
 interface Props_SecondChance {
@@ -67,16 +68,15 @@ const ShowSecondChance: React.FC<Props_SecondChance> = props => {
     <span>
       You have a second chance. You failed in {generateHint(props.verbCorrect)}.
     </span>
-  ); 
-}
-
+  );
+};
 
 //TODO: Move interface and component to a common-app folder. Rename Props_SecondChance as Props and import styles in the new file.
 interface Props_ResultWrong {
   verb: Verb;
 }
 const ShowResultWrong: React.FC<Props_ResultWrong> = props => {
-  const {verb} = props;
+  const { verb } = props;
   const {
     backContainer,
     pictureContainer,
@@ -86,7 +86,7 @@ const ShowResultWrong: React.FC<Props_ResultWrong> = props => {
     answer,
     insideBtn,
   } = classes;
-  
+
   return (
     <div className={backContainer}>
       <div className={pictureContainer}>
@@ -109,4 +109,4 @@ const ShowResultWrong: React.FC<Props_ResultWrong> = props => {
       </div>
     </div>
   );
-}
+};
