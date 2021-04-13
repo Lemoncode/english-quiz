@@ -65,7 +65,8 @@ export const UserSettingsComponent: React.FC<Props> = props => {
                   />
                 </div>
 
-                <div className={inputField}>
+                {/* Commented on purpose, just in case we want to recover second chance setting */
+                /*<div className={inputField}>
                   <label htmlFor="secondChance">Allow second chance</label>
                   <Field
                     type="checkbox"
@@ -73,7 +74,7 @@ export const UserSettingsComponent: React.FC<Props> = props => {
                     checked={values.secondChance}
                     onChange={handleChange}
                   />
-                </div>
+                </div>*/}
                 
                 <div className={btnContainerUser}>
                   <Button
