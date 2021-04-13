@@ -33,6 +33,17 @@ export const backContainer = css`
   border-radius: 2rem;
 `;
 
+export const homeBackContainer = css`
+  margin-top: ${spacing(19)};
+  margin-bottom: ${spacing(6)};
+  padding: ${spacing(10)} ${spacing(5)} ${spacing(1)};
+  min-height: 26rem;
+  position: relative;
+  padding-bottom: 1.5rem;
+  background-color: ${color.lightWhite};
+  border-radius: 2rem;
+`;
+
 export const backgroundResult1 = css`
   background-color: #9BDE7E;
 `;
@@ -68,6 +79,10 @@ export const pictureContainer = css`
 export const picture = css`
   max-width: 100%;
 `;
+
+export const logoHome = css`
+  width: 300px;
+`
 
 export const inputContainer = css`
   display: flex;
@@ -136,6 +151,36 @@ export const nextBtn = css`
     justify-content: flex-end;
   }
 `;
+
+export const homeButton = css`
+  display: flex;
+  border-radius: 1.4rem;
+  width: ${spacing(30)};
+  margin: ${spacing(3)} auto 0 auto;
+  padding: ${spacing(1.5)} ${spacing(3)};
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #ffffff;
+  background-color: #242470;
+  transition: all 0.2s;
+  --webkit-transition: all 0.2s;
+  &:hover,
+  &:active {
+    outline: none;
+    background-color: #e4142c;
+  }
+  @media (min-width: ${breakpoints.values.xs}px) {
+    width: ${spacing(30)};
+    justify-content: center;
+  }
+`
+
+export const homeLink = css`
+  color: #ffffff;
+  text-decoration: none;
+`
 
 export const arrowIcon = css`
   margin-left: ${spacing(1)};
