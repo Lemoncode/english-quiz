@@ -33,6 +33,22 @@ export const backContainer = css`
   border-radius: 2rem;
 `;
 
+export const backgroundResult1 = css`
+  background-color: #9BDE7E;
+`;
+
+export const backgroundResult2 = css`
+  background-color: #F9F871;
+`;
+
+export const backgroundResult3 = css`
+  background-color: #FFD180;
+`;
+
+export const backgroundResult4 = css`
+  background-color: #999999;
+`;
+
 export const pictureContainer = css`
   position: absolute;
   left: 50%;
