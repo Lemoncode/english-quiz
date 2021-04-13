@@ -26,7 +26,7 @@ export const title = css`
   }
 `;
 
-export const backContainer = css`
+export const backContainerVerbs = css`
   margin-top: ${spacing(3)};
   margin-bottom: ${spacing(0)};
   padding: ${spacing(5)} ${spacing(5)};
@@ -35,10 +35,23 @@ export const backContainer = css`
   border-top-right-radius: 3rem;
 `;
 
-export const btnContainer = css`
+export const btnContainerVerbs = css`
   display: flex;
   justify-content: space-between;
   margin-bottom: ${spacing(5)};
+`;
+
+export const backContainerUser = css`
+  margin-top: ${spacing(3)};
+  margin-bottom: ${spacing(0)};
+  padding: ${spacing(5)} ${spacing(5)};
+  background-color: ${color.lightWhite};
+  border-radius: 3rem;
+`;
+
+export const btnContainerUser = css`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const saveBtn = css`
@@ -97,4 +110,36 @@ export const verbTitle = css`
     font-weight: 700;
     font-size: 1.1rem;
   }
+`;
+
+export const inputField = css`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  & label {
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  & input {
+    font-family: inherit;
+    border: none;
+    border-bottom: 2px solid ${color.dark};
+    background-color: ${color.lightWhite};
+    padding: ${spacing(1)};
+    font-size: 1.1rem;
+    &:hover,
+    &:active,
+    &:focus {
+      outline: none;
+      border-bottom: 2px solid ${color.lightBlue};
+    }
+  }
+`;
+
+export const errorMsg = css`
+  color: red;
+  font-weight: 700;
 `;
