@@ -4,7 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import { VerbEntity } from './configure-verbs.vm';
 import produce from 'immer';
 import { getOnlySelected } from './configure-verbs.business';
-import * as classes from './configure-verbs.styles';
+import * as classes from 'common/styles/settings.styles';
 
 interface Props {
   verbCollection: VerbEntity[];
@@ -106,8 +106,8 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
   const {
     mainContainer,
     title,
-    backContainer,
-    btnContainer,
+    backContainerVerbs,
+    btnContainerVerbs,
     saveBtn,
     cancelBtn,
     verbList,
@@ -140,8 +140,8 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
   return (
     <main className={mainContainer}>
       <h1 className={title}>Verbs Settings:</h1>
-      <div className={backContainer}>
-        <div className={btnContainer}>
+      <div className={backContainerVerbs}>
+        <div className={btnContainerVerbs}>
           <Button
             className={saveBtn}
             variant="contained"

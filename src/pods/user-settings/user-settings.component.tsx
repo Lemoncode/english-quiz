@@ -1,15 +1,9 @@
 import * as React from 'react';
-import {
-  Typography,
-  Checkbox,
-  FormControlLabel,
-  Button,
-  TextField,
-} from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import { SettingsEntity } from 'core/settings';
 import { QuestionsRestrictions } from 'core/const';
-import { Formik } from 'formik';
-import * as classes from './user-settings.styles';
+import { Formik, Field, ErrorMessage } from 'formik';
+import * as classes from 'common/styles/settings.styles';
 interface Props {
   onSave: (settings: SettingsEntity) => void;
   onCancel: () => void;
@@ -21,19 +15,26 @@ export const UserSettingsComponent: React.FC<Props> = props => {
   const {
     mainContainer,
     title,
-    backContainer,
-    field,
-    buttonsContainer,
+    backContainerUser,
+    inputField,
+    btnContainerUser,
+    saveBtn,
+    cancelBtn,
+    errorMsg,
   } = classes;
 
-  //Material-UI limitation on TextField when prefilling the value
-  const PREFILLED = true;
+  const validateNumberQuestions = (message) => (value) => {
+    return value < QuestionsRestrictions.MIN_NUMBER_QUESTIONS
+      || value > QuestionsRestrictions.MAX_NUMBER_QUESTIONS
+      ? message
+      : undefined;
+  }
 
   return (
     <>
       <main className={mainContainer}>
         <h1 className={title}>User settings:</h1>
-        <div className={backContainer}>
+        <div className={backContainerUser}>
           <Formik
             initialValues={{
               numberQuestions: userSettings.numberQuestions,
@@ -46,41 +47,37 @@ export const UserSettingsComponent: React.FC<Props> = props => {
           >
             {({ values, handleSubmit, isSubmitting, handleChange }) => (
               <form onSubmit={handleSubmit}>
-                <TextField
-                  name="numberQuestions"
-                  label="Number of questions"
-                  type="number"
-                  InputLabelProps={{
-                    shrink: PREFILLED,
-                  }}
-                  variant="outlined"
-                  inputProps={{
-                    min: QuestionsRestrictions.MIN_NUMBER_QUESTIONS,
-                    max: QuestionsRestrictions.MAX_NUMBER_QUESTIONS,
-                    step: QuestionsRestrictions.STEP,
-                  }}
-                  value={values.numberQuestions}
-                  onChange={handleChange}
-                  className={field}
-                />
-
-                {/* Commented on purpose, just if in case we want to recover second chance setting */
-                /* <li>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="secondChance"
-                        color="primary"
-                        checked={values.secondChance}
-                        onChange={handleChange}
-                      />
-                    }
-                    label="Allow second chance"
+                <div className={inputField}>
+                  <label htmlFor="numberQuestions">Number of questions</label>
+                  <Field
+                    type="number"
+                    name="numberQuestions"
+                    id="numberQuestions"
+                    autoComplete="off"
+                    value={values.numberQuestions}
+                    onChange={handleChange}
+                    validate={validateNumberQuestions('Must be between 5 & 100')}
                   />
-                </li>
-                  */}
-                <div className={buttonsContainer}>
+                  <ErrorMessage
+                    className={errorMsg}
+                    component="span"
+                    name="numberQuestions"
+                  />
+                </div>
+
+                <div className={inputField}>
+                  <label htmlFor="secondChance">Allow second chance</label>
+                  <Field
+                    type="checkbox"
+                    name="secondChance"
+                    checked={values.secondChance}
+                    onChange={handleChange}
+                  />
+                </div>
+                
+                <div className={btnContainerUser}>
                   <Button
+                    className={saveBtn}
                     variant="contained"
                     color="primary"
                     type="submit"
@@ -89,6 +86,7 @@ export const UserSettingsComponent: React.FC<Props> = props => {
                     Save
                   </Button>
                   <Button
+                    className={cancelBtn}
                     variant="contained"
                     color="secondary"
                     onClick={onCancel}
