@@ -155,7 +155,7 @@ export const nextBtn = css`
 export const homeButton = css`
   display: flex;
   border-radius: 1.4rem;
-  width: ${spacing(30)};
+  width: ${spacing(26.5)};
   margin: ${spacing(3)} auto 0 auto;
   padding: ${spacing(1.5)} ${spacing(3)};
   font-family: 'M PLUS Rounded 1c', sans-serif;
