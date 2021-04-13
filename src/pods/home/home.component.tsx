@@ -29,7 +29,7 @@ export const HomeComponent: React.FC = () => {
                 root: testFillGapButton,
               }}
               variant="contained"
-              onClick={() => handleClick(routes.testFillGap)}
+              onClick={() => handleClick(routes.testVerbForms)}
             >
               Start Test + participle tenses
             </Button>
@@ -38,7 +38,7 @@ export const HomeComponent: React.FC = () => {
             <Button
               variant="contained"
               color="secondary"
-              onClick={() => handleClick(routes.testVerbForms)}
+              onClick={() => handleClick(routes.testFillGap)}
             >
               Start Test &apos;Fill the gap&apos;
             </Button>
