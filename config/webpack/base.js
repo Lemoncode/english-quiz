@@ -45,12 +45,18 @@ module.exports = merge(
     plugins: [
       new HtmlWebpackPlugin({
         favicon: 'assets/favicon.ico',
-        filename: 'index.html',
+        filename: 'app.html',
         template: 'index.html',
       }),
 
       new CopyPlugin({
-        patterns: [{ from: 'assets', to: 'assets' }],
+        patterns: [
+          { from: '../static/index.html', to: 'index.html' },
+          { from: '../static/about.html', to: 'about.html' },
+          { from: '../static/styles.css', to: 'styles.css' },
+          { from: '../static/about.styles.css', to: 'about.styles.css' },
+          { from: 'assets', to: 'assets' },
+        ],
       }),
     ],
   }
