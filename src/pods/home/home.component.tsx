@@ -29,7 +29,7 @@ export const HomeComponent = () => {
           <img className={picture} src={logo}></img>
         </div>
         <Button className={homeButton} variant="contained">
-          <Link to={routes.testVerbForms} className={homeLink}>Start Test + participle tenses</Link>
+          <Link to={routes.testVerbForms} className={homeLink}>Start Test 'Irregular verbs'</Link>
         </Button>
         <Button className={homeButton} variant="contained">
           <Link to={routes.testFillGap} className={homeLink}>Start Test 'Fill the gap'</Link>
