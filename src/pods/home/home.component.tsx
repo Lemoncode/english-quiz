@@ -19,7 +19,7 @@ export const HomeComponent = () => {
     homeButton,
     arrowIcon,
     logoHome,
-    homeLink
+    homeLink,
   } = classes;
 
   return (
@@ -29,16 +29,24 @@ export const HomeComponent = () => {
           <img className={picture} src={logo}></img>
         </div>
         <Button className={homeButton} variant="contained">
-          <Link to={routes.testVerbForms} className={homeLink}>Start Test 'Irregular verbs'</Link>
+          <Link to={routes.testVerbForms} className={homeLink}>
+            Start Test 'Irregular verbs'
+          </Link>
         </Button>
         <Button className={homeButton} variant="contained">
-          <Link to={routes.testFillGap} className={homeLink}>Start Test 'Fill the gap'</Link>
+          <Link to={routes.testFillGap} className={homeLink}>
+            Start Test 'Fill the gap'
+          </Link>
         </Button>
         <Button className={homeButton} variant="contained">
-          <Link to={routes.configureVerbs} className={homeLink}>Configure Verb List</Link>
+          <Link to={routes.configureVerbs} className={homeLink}>
+            Choose your verbs
+          </Link>
         </Button>
         <Button className={homeButton} variant="contained">
-          <Link to={routes.userSettings} className={homeLink}>User Settings</Link>
+          <Link to={routes.userSettings} className={homeLink}>
+            User Settings
+          </Link>
         </Button>
       </div>
     </main>

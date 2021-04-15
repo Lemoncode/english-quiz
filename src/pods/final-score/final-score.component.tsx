@@ -34,11 +34,11 @@ export const FinalScoreComponent: React.FC<Props> = props => {
   } = classes;
 
   const resultClass = () => {
-    if (correct/total >= 0.9) {
+    if (correct / total >= 0.9) {
       return backgroundResult1;
-    } else if (correct/total >= 0.7) {
+    } else if (correct / total >= 0.7) {
       return backgroundResult2;
-    } else if (correct/total >= 0.5) {
+    } else if (correct / total >= 0.5) {
       return backgroundResult3;
     } else {
       return backgroundResult4;
@@ -46,42 +46,26 @@ export const FinalScoreComponent: React.FC<Props> = props => {
   };
 
   const resultIcon = () => {
-    if (correct/total >= 0.9) {
-      return "trophy.png";
-    } else if (correct/total >= 0.7) {
-      return "well-done.png";
-    } else if (correct/total >= 0.5) {
-      return "reading.png";
+    if (correct / total >= 0.9) {
+      return 'trophy.png';
+    } else if (correct / total >= 0.7) {
+      return 'well-done.png';
+    } else if (correct / total >= 0.5) {
+      return 'reading.png';
     } else {
-      return "skull.png";
+      return 'skull.png';
     }
-  }
+  };
 
   const resultMessage = () => {
-    if (correct/total >= 0.9) {
-      return (
-        <h5 className={title}>
-          Congratulations!!! You did a great job
-        </h5>
-      );
-    } else if (correct/total >= 0.7) {
-      return (
-        <h5 className={title}>
-          You are on the right track!
-        </h5>
-      );
-    } else if (correct/total >= 0.5) {
-      return (
-        <h5 className={title}>
-          Keep working!
-        </h5>
-      );
+    if (correct / total >= 0.9) {
+      return <h5 className={title}>Congratulations!!! You did a great job</h5>;
+    } else if (correct / total >= 0.7) {
+      return <h5 className={title}>You are on the right track!</h5>;
+    } else if (correct / total >= 0.5) {
+      return <h5 className={title}>Keep working!</h5>;
     } else {
-      return (
-        <h5 className={title}>
-          You should study more...
-        </h5>
-      );
+      return <h5 className={title}>You should study a bit more...</h5>;
     }
   };
 
@@ -89,12 +73,13 @@ export const FinalScoreComponent: React.FC<Props> = props => {
     <div className={mainContainer}>
       <div className={`${backContainer} ${resultClass()}`}>
         <div className={pictureContainer}>
-          <img className={picture} src={`/assets/results/${resultIcon()}`}></img>
+          <img
+            className={picture}
+            src={`/assets/results/${resultIcon()}`}
+          ></img>
         </div>
         <div>
-          <h5 className={title}>
-            Final score:
-          </h5>
+          <h5 className={title}>Final score:</h5>
           <h5 className={title}>
             <span>{`${correct}/${total}`}</span>
           </h5>
