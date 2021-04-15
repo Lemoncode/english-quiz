@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { VerbQuiz, createDefaultVerbQuiz } from './test-verb-forms.vm';
 import { Formik, Form, Field } from 'formik';
 import { answerIsCorrect } from './test-verb-forms.business';
@@ -181,11 +182,14 @@ export const TestVerbFormComponent: React.FC<Props> = props => {
                 />
 
                 <Button
+                  className={nextBtn}
                   onClick={handleSecondAttempt}
                   variant="contained"
-                  color="primary"
                 >
-                  Try again
+                  <div className={insideBtnContainer}>
+                    <span>Try again</span>
+                    <ArrowBackIcon className={arrowIcon} />
+                  </div>
                 </Button>
               </>
             ) : (

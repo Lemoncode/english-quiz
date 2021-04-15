@@ -16,7 +16,7 @@ export const ShowResults: React.FC<Props> = props => {
   return verbCorrect.all ? (
     <ShowResultCorrect verb={verb} />
   ) : !isSecondAttempt && secondAttemptEnabled ? (
-    <ShowSecondChance verbCorrect={verbCorrect} />
+    <ShowSecondChance infinitive={verb.infinitive} verbCorrect={verbCorrect} />
   ) : (
     <ShowResultWrong verb={verb} />
   );
@@ -61,13 +61,43 @@ const ShowResultCorrect: React.FC<Props_ResultCorrect> = props => {
 
 //TODO: Move interface and component to a common-app folder. Rename Props_SecondChance as Props in the new file.
 interface Props_SecondChance {
+  infinitive: string;
   verbCorrect: VerbCorrect;
 }
 const ShowSecondChance: React.FC<Props_SecondChance> = props => {
+  const { infinitive, verbCorrect } = props;
+  const {
+    backContainer,
+    pictureContainer,
+    picture,
+    buttonSecondChance,
+    insideBtn,
+    secondChanceText,
+  } = classes;
   return (
-    <span>
-      You have a second chance. You failed in {generateHint(props.verbCorrect)}.
-    </span>
+    <div className={backContainer}>
+      <div className={pictureContainer}>
+        <img
+          className={picture}
+          src={`/assets/verb-images/${infinitive}.png`}
+        />
+      </div>
+      <div className={buttonSecondChance}>
+        <div className={insideBtn}>
+          <span>Something is wrong</span>
+        </div>
+      </div>
+      <div>
+        <span className={secondChanceText}>
+          Don't worry, you have a second chance. Here's hint, you missed these tenses:
+        </span>
+        <ul>
+          {!verbCorrect.infinitive && <li><span className={secondChanceText}>Infinitive</span></li>}
+          {!verbCorrect.past && <li><span className={secondChanceText}>Past</span></li>}
+          {!verbCorrect.participle && <li><span className={secondChanceText}>Participle</span></li>}
+        </ul>
+      </div>
+    </div>
   );
 };
 

@@ -240,6 +240,25 @@ export const buttonWrong = css`
   }
 `;
 
+export const buttonSecondChance = css`
+  border-radius: 1.4rem;
+  width: ${spacing(20)};
+  margin: ${spacing(4)} auto 0 auto;
+  padding: ${spacing(2)} ${spacing(3)};
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: ${color.lightWhite};
+  background-color: #ED7432;
+  transition: all 0.2s;
+  --webkit-transition: all 0.2s;
+  @media (min-width: ${breakpoints.values.xs}px) {
+    width: ${spacing(30)};
+    justify-content: flex-end;
+  }
+`;
+
 export const answer = css`
   display: block;
   font-size: 2rem;
@@ -253,4 +272,13 @@ export const verbsForm = css`
   display: block;
   font-size: 1.3rem;
   font-weight: 500;
+`;
+
+export const secondChanceText = css`
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 500;
+  @media (min-width: ${breakpoints.values.sm}px) {
+    font-size: 1.3rem;
+  }
 `;
