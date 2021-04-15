@@ -184,6 +184,7 @@
   }
 
   .button {
+    width: 30%;
     line-height: 2rem;
     font-size: 1rem;
     margin-top: 3%;
