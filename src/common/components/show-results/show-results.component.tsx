@@ -31,6 +31,7 @@ const ShowResultCorrect: React.FC<Props_ResultCorrect> = props => {
     backContainer,
     pictureContainer,
     picture,
+    ballons,
     buttonRight,
     insideRightAnswer,
   } = classes;
@@ -49,7 +50,7 @@ const ShowResultCorrect: React.FC<Props_ResultCorrect> = props => {
         </div>
         <div>
           <img
-            className={picture}
+            className={`${picture} ${ballons}`}
             src={`/assets/right-answer/right.png`}
             alt=""
           />
