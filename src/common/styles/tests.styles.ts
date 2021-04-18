@@ -80,6 +80,10 @@ export const picture = css`
   max-width: 100%;
 `;
 
+export const ballons = css`
+  margin-top: 2rem;
+`
+
 export const logoHome = css`
   width: 300px;
 `
