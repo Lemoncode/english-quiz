@@ -175,7 +175,7 @@ export const homeButton = css`
     outline: none;
     background-color: #e4142c;
   }
-  @media (min-width: ${breakpoints.values.xs}px) {
+  @media (min-width: ${breakpoints.values.sm}px) {
     width: ${spacing(30)};
     justify-content: center;
   }

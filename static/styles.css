@@ -35,11 +35,11 @@
 }
 
 .img-logo {
-  width: 20rem;
+  width: 18rem;
 }
 
 .txt {
-  color: #6F7F89;
+  color: #6f7f89;
   width: 95%;
   margin: 0 auto;
   margin-bottom: 3rem;
@@ -150,10 +150,8 @@
 }
 
 @media (min-width: 1024px) {
- 
   .component {
     padding: 1% 0;
-    
   }
 
   .component-title {
@@ -174,7 +172,6 @@
   .img-logo {
     width: 20rem;
   }
-
 
   .txt {
     width: 80%;
