@@ -11,6 +11,7 @@ RUN npm run build
 # Release
 FROM base AS release
 ENV STATIC_FILES_PATH=./public
+ENV NODE_ENV=production
 COPY --from=build-front /usr/app/dist $STATIC_FILES_PATH
 COPY ./server/package.json ./
 COPY ./server/index.js ./
