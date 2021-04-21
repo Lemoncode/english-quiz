@@ -1,5 +1,6 @@
 {
   "name": "server",
+  "description": "Nodejs server with express",
   "version": "1.0.0",
   "author": "Lemoncode",
   "license": "MIT",
