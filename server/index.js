@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(redirectHttpsMiddleware);
 }
 
-const staticFilesPath = path.resolve(__dirname, '../dist');
+const staticFilesPath = path.resolve(__dirname, process.env.STATIC_FILES_PATH);
 app.use('/', express.static(staticFilesPath));
 
 const PORT = process.env.PORT || 8081;
