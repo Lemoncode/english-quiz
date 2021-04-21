@@ -1,11 +1,8 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Lemoncode",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.17.1"
   }
