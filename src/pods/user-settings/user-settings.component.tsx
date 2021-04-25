@@ -29,7 +29,7 @@ export const UserSettingsComponent: React.FC<Props> = props => {
       ? message
       : undefined;
   };
-  console.log(typeof localStorage.getItem('numberQuestions'));
+ 
   return (
     <>
       <main className={mainContainer}>
