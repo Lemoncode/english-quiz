@@ -35,7 +35,7 @@ export const HomeComponent = () => {
         </Button>
         <Button className={homeButton} variant="contained">
           <Link to={routes.testFillGap} className={homeLink}>
-            Start Test 'Fill the gap'
+            Start Test<br/>'Fill the gap'
           </Link>
         </Button>
         <Button className={homeButton} variant="contained">
