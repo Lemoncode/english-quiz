@@ -23,7 +23,7 @@ export const TestsNavbar: React.FC<Props> = props => {
           <span className={appBarTitle}>
             Score: {score}/{currentQuestion}
           </span>
-          <FinishTest score={score} currentQuestion={currentQuestion}/>
+          <FinishTest score={score}/>
         </Toolbar>
       </AppBar>
     </div>
