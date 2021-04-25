@@ -1,5 +1,6 @@
 export const DefaultSettings = {
-  DEFAULT_NUMBER_QUESTIONS: 15,
+  DEFAULT_NUMBER_QUESTIONS:
+    Number(localStorage.getItem('numberQuestions')) || 15,
   DEFAULT_SECOND_CHANCE_ENABLED: false,
 };
 
