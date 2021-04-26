@@ -8,17 +8,19 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { scoreContext } from 'core/score';
 import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
+import { settingsContext } from 'core/settings';
 import * as classes from './finish-test.styles';
 
 interface Props {
   score: number;
-  currentQuestion: number;
 }
 
 export const FinishTest: React.FC<Props> = props => {
-  const { score, currentQuestion } = props;
-  const [open, setOpen] = React.useState(false);
+  const { score } = props;
+  const { userSettings } = React.useContext(settingsContext);
   const { setScore } = React.useContext(scoreContext);
+  const [open, setOpen] = React.useState(false);
+  const [totalQuestions] = React.useState(userSettings.numberQuestions);
   const history = useHistory();
   const {
     finishBtn,
@@ -38,7 +40,7 @@ export const FinishTest: React.FC<Props> = props => {
 
   const handleFinishTest = () => {
     // Set current score before navigating to 'finalScore'
-    setScore({ totalQuestions: currentQuestion, answeredCorrectly: score});
+    setScore({ totalQuestions, answeredCorrectly: score});
     history.push(routes.finalScore);
   };
 
@@ -48,7 +50,7 @@ export const FinishTest: React.FC<Props> = props => {
         className={finishBtn}
         onClick={handleOpenDialog}
         variant="contained"
-        disableElevation  
+        disableElevation
       >
         Finish test
       </Button>
