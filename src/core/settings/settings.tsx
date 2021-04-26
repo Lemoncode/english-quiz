@@ -22,7 +22,7 @@ export const SettingsProvider: React.FC = props => {
     numberQuestions: DefaultSettings.DEFAULT_NUMBER_QUESTIONS,
     secondChance: DefaultSettings.DEFAULT_SECOND_CHANCE_ENABLED,
   });
-
+  
   return (
     <settingsContext.Provider
       value={{

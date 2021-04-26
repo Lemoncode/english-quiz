@@ -23,13 +23,13 @@ export const UserSettingsComponent: React.FC<Props> = props => {
     errorMsg,
   } = classes;
 
-  const validateNumberQuestions = (message) => (value) => {
-    return value < QuestionsRestrictions.MIN_NUMBER_QUESTIONS
-      || value > QuestionsRestrictions.MAX_NUMBER_QUESTIONS
+  const validateNumberQuestions = message => value => {
+    return value < QuestionsRestrictions.MIN_NUMBER_QUESTIONS ||
+      value > QuestionsRestrictions.MAX_NUMBER_QUESTIONS
       ? message
       : undefined;
-  }
-
+  };
+ 
   return (
     <>
       <main className={mainContainer}>
@@ -43,6 +43,10 @@ export const UserSettingsComponent: React.FC<Props> = props => {
             onSubmit={(values: SettingsEntity, { setSubmitting }) => {
               setSubmitting(false);
               onSave(values);
+              localStorage.setItem(
+                'numberQuestions',
+                JSON.stringify(values.numberQuestions)
+              );
             }}
           >
             {({ values, handleSubmit, isSubmitting, handleChange }) => (
@@ -56,7 +60,9 @@ export const UserSettingsComponent: React.FC<Props> = props => {
                     autoComplete="off"
                     value={values.numberQuestions}
                     onChange={handleChange}
-                    validate={validateNumberQuestions('Must be between 5 & 100')}
+                    validate={validateNumberQuestions(
+                      'Must be between 5 & 100'
+                    )}
                   />
                   <ErrorMessage
                     className={errorMsg}
@@ -75,7 +81,7 @@ export const UserSettingsComponent: React.FC<Props> = props => {
                     onChange={handleChange}
                   />
                 </div>*/}
-                
+
                 <div className={btnContainerUser}>
                   <Button
                     className={saveBtn}
