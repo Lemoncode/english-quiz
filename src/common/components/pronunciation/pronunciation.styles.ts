@@ -11,7 +11,7 @@ export const pronunciationContainer = css`
 `;
 
 export const volumeIcon = css`
-  width: ${spacing(4)};
+  width: ${spacing(6)};
   color: ${color.lightWhite};
   background-color: ${color.volumeLight};
   transition: all 0.2s;
@@ -20,8 +20,5 @@ export const volumeIcon = css`
   &:active {
     outline: none;
     background-color: ${color.volumeDark};
-  }
-  @media (min-width: ${breakpoints.values.xs}px) {
-    width: ${spacing(6)};
   }
 `;
