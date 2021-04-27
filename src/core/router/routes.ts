@@ -4,6 +4,7 @@ interface SwitchRoutes {
   root: string;
   testVerbForms: string;
   testFillGap: string;
+  testMultipleChoice: string;
   finalScore: string;
   configureVerbs: string;
   userSettings: string;
@@ -13,6 +14,7 @@ export const switchRoutes: SwitchRoutes = {
   root: '/',
   testVerbForms: '/test-forms',
   testFillGap: '/test-fill-gap',
+  testMultipleChoice: '/test-multiple-choice',
   finalScore: '/final-score',
   configureVerbs: '/configure-verbs',
   userSettings: '/user-settings',
