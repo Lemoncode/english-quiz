@@ -159,7 +159,7 @@ export const nextBtn = css`
 export const homeButton = css`
   display: flex;
   border-radius: 1.4rem;
-  width: ${spacing(26.5)};
+  width: ${spacing(26.6)};
   margin: ${spacing(3)} auto 0 auto;
   padding: ${spacing(1.5)} ${spacing(3)};
   font-family: 'M PLUS Rounded 1c', sans-serif;
@@ -219,7 +219,7 @@ export const buttonRight = css`
   background-color: #33cc33;
   transition: all 0.2s;
   --webkit-transition: all 0.2s;
-  @media (min-width: ${breakpoints.values.xs}px) {
+  @media (min-width: ${breakpoints.values.sm}px) {
     width: ${spacing(30)};
     justify-content: flex-end;
   }
@@ -238,7 +238,7 @@ export const buttonWrong = css`
   background-color: ${color.primaryMain};
   transition: all 0.2s;
   --webkit-transition: all 0.2s;
-  @media (min-width: ${breakpoints.values.xs}px) {
+  @media (min-width: ${breakpoints.values.sm}px) {
     width: ${spacing(30)};
     justify-content: flex-end;
   }
