@@ -46,13 +46,13 @@ export const TestMultipleChoiceContainer = () => {
       // Check the first other option is not repeated
       do {
         otherRandom = pickRandomVerb(selectedVerbs, verbCollection);
-      } while(randomVerb.infinitive !== otherRandom.infinitive);
+      } while(randomVerb.infinitive === otherRandom.infinitive);
       setOtherOption1(otherRandom);
       // Check the second other option is not repeated
       do {
         otherRandom2 = pickRandomVerb(selectedVerbs, verbCollection);
-      } while(randomVerb.infinitive !== otherRandom2.infinitive &&
-              otherRandom.infinitive !== otherRandom2.infinitive);
+      } while(randomVerb.infinitive === otherRandom2.infinitive &&
+              otherRandom.infinitive === otherRandom2.infinitive);
       setOtherOption2(otherRandom2);
     }
   }, [currentQuestion]);

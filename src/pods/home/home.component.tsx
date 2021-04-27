@@ -1,4 +1,3 @@
-import { Typography } from '@material-ui/core';
 import { routes } from 'core/router';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
@@ -8,16 +7,11 @@ import Button from '@material-ui/core/Button';
 
 export const HomeComponent = () => {
   const {
-    title,
     mainContainer,
-    inputContainer,
     homeBackContainer,
     pictureContainer,
     picture,
-    inputField,
-    insideBtnContainer,
     homeButton,
-    arrowIcon,
     logoHome,
     homeLink,
   } = classes;
@@ -29,13 +23,18 @@ export const HomeComponent = () => {
           <img className={picture} src={logo}></img>
         </div>
         <Button className={homeButton} variant="contained">
-          <Link to={routes.testVerbForms} className={homeLink}>
-            Start Test 'Irregular verbs'
+          <Link to={routes.testMultipleChoice} className={homeLink}>
+            Start Test<br/>'Multiple choice'
           </Link>
         </Button>
         <Button className={homeButton} variant="contained">
           <Link to={routes.testFillGap} className={homeLink}>
             Start Test<br/>'Fill the gap'
+          </Link>
+        </Button>
+        <Button className={homeButton} variant="contained">
+          <Link to={routes.testVerbForms} className={homeLink}>
+            Start Test<br/>'Irregular verbs'
           </Link>
         </Button>
         <Button className={homeButton} variant="contained">

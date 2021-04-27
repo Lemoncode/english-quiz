@@ -41,6 +41,8 @@ export const TestMultipleChoiceComponent: React.FC<Props> = props => {
   );
 
   const {
+    mainContainer,
+    title,
     nextBtn,
     insideBtnContainer,
     arrowIcon,
@@ -60,56 +62,78 @@ export const TestMultipleChoiceComponent: React.FC<Props> = props => {
   };
 
   return (
-    <Formik
-      onSubmit={(values, actions) => {
-        const isCorrect = answerIsCorrect(verb, values);
-        handleValidateAnswer(isCorrect);
-        const reset = createDefaultVerbQuiz();
-        actions.resetForm({ values: reset });
-        setInitialQuiz(reset);
-      }}
-      initialValues={initialQuiz}
-    >
-      {() => (
-        <Form>
-          {!validated && (
-            <select name="response" id="response">
-              <option value={verb.infinitive}>
-                {`${verb.infinitive}/${verb.past}/${verb.participle}`}
-              </option>
-              <option value={otherOption1.infinitive}>
-                {`${otherOption1.infinitive}/${otherOption1.past}/${otherOption1.participle}`}
-              </option>
-              <option value={otherOption2.infinitive}>
-                {`${otherOption2.infinitive}/${otherOption2.past}/${otherOption2.participle}`}
-              </option>
-            </select>
-          )}
-          {validated ? (
-            <>
-              <ShowResults
-                secondAttemptEnabled={false}
-                isSecondAttempt={false}
-                verbCorrect={verbCorrect}
-                verb={verb}
-              />
-
-              <Button
-                className={nextBtn}
-                onClick={internalHandleOnNextQuestion}
-                variant="contained"
-              >
-                <div className={insideBtnContainer}>
-                  <span>Next Verb</span>
-                  <ArrowForwardIcon className={arrowIcon} />
+    <main className={mainContainer}>
+      <h1 className={title}>
+        {verb.translation} ({`${currentQuestion} / ${totalQuestions}`})
+      </h1>
+      <Formik
+        onSubmit={(values, actions) => {
+          const isCorrect = answerIsCorrect(verb, values);
+          handleValidateAnswer(isCorrect);
+          const reset = createDefaultVerbQuiz();
+          actions.resetForm({ values: reset });
+          setInitialQuiz(reset);
+        }}
+        initialValues={initialQuiz}
+      >
+        {() => (
+          <Form>
+            {!validated && (
+              <>
+                <div>
+                  <label>
+                    <Field
+                      type="radio"
+                      name="response"
+                      value={verb.infinitive}
+                    />
+                    {`${verb.infinitive}/${verb.past}/${verb.participle}`}
+                  </label>
+                  <label>
+                    <Field
+                      type="radio"
+                      name="response"
+                      value={otherOption1.infinitive}
+                    />
+                    {`${otherOption1.infinitive}/${otherOption1.past}/${otherOption1.participle}`}
+                  </label>
+                  <label>
+                    <Field
+                      type="radio"
+                      name="response"
+                      value={otherOption2.infinitive}
+                    />
+                    {`${otherOption2.infinitive}/${otherOption2.past}/${otherOption2.participle}`}
+                  </label>
                 </div>
-              </Button>
-            </>
-          ) : (
-            <button type="submit">Next</button>
-          )}
-        </Form>
-      )}
-    </Formik>
+              </>
+            )}
+            {validated ? (
+              <>
+                <ShowResults
+                  secondAttemptEnabled={false}
+                  isSecondAttempt={false}
+                  verbCorrect={verbCorrect}
+                  verb={verb}
+                />
+
+                <Button
+                  className={nextBtn}
+                  onClick={internalHandleOnNextQuestion}
+                  variant="contained"
+                >
+                  <div className={insideBtnContainer}>
+                    <span>Next Verb</span>
+                    <ArrowForwardIcon className={arrowIcon} />
+                  </div>
+                </Button>
+              </>
+            ) : (
+              <button type="submit">Next</button>
+            )}
+          </Form>
+        )}
+      </Formik>
+    </main>
   );
 }
