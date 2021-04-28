@@ -123,6 +123,23 @@ export const inputField = css`
   }
 `;
 
+export const radioField = css`
+  font-family: inherit;
+  padding: ${spacing(1)};
+  font-size: 1.1rem;
+
+  & input {
+    cursor: pointer;
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: ${color.dark};
+      border-radius: 0.5rem;
+      color: ${color.lightWhite}
+    }
+  }
+`;
+
 export const insideBtnContainer = css`
   display: flex;
   justify-content: space-between;
