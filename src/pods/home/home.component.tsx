@@ -6,6 +6,13 @@ import * as classes from 'common/styles/tests.styles';
 import logo from '../../assets/static/logo-english-quiz.png';
 import Button from '@material-ui/core/Button';
 
+const createLink = (to: string) => {
+  return {
+    pathname: to,
+    state: { fromHome: true },
+  };
+};
+
 export const HomeComponent = () => {
   const {
     title,
@@ -29,22 +36,24 @@ export const HomeComponent = () => {
           <img className={picture} src={logo}></img>
         </div>
         <Button className={homeButton} variant="contained">
-          <Link to={routes.testVerbForms} className={homeLink}>
+          <Link to={createLink(routes.testVerbForms)} className={homeLink}>
             Start Test 'Irregular verbs'
           </Link>
         </Button>
         <Button className={homeButton} variant="contained">
-          <Link to={routes.testFillGap} className={homeLink}>
-            Start Test<br/>'Fill the gap'
+          <Link to={createLink(routes.testFillGap)} className={homeLink}>
+            Start Test
+            <br />
+            'Fill the gap'
           </Link>
         </Button>
         <Button className={homeButton} variant="contained">
-          <Link to={routes.configureVerbs} className={homeLink}>
+          <Link to={createLink(routes.configureVerbs)} className={homeLink}>
             Choose your verbs
           </Link>
         </Button>
         <Button className={homeButton} variant="contained">
-          <Link to={routes.userSettings} className={homeLink}>
+          <Link to={createLink(routes.userSettings)} className={homeLink}>
             User Settings
           </Link>
         </Button>
