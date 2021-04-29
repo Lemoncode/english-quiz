@@ -15,7 +15,7 @@ import {
   UserSettingsScene,
 } from 'scenes';
 
-var handleRedirect = (Component, routeProps): React.ReactNode => {
+const handleRedirect = (Component, routeProps): React.ReactNode => {
   if (!routeProps.location.state?.fromHome) {
     return (
       <Redirect
