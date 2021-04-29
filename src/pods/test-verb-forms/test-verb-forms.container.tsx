@@ -35,7 +35,11 @@ export const TestVerbFormContainer = () => {
   );
 
   React.useEffect(() => {
-    setScore({ totalQuestions, answeredCorrectly: INITIAL_ANSWERED_CORRECTLY });
+    if (history.location.state === undefined) {
+      history.push(routes.root);
+    } else {
+      setScore({ totalQuestions, answeredCorrectly: INITIAL_ANSWERED_CORRECTLY });
+    }
   }, []);
 
   React.useEffect(() => {

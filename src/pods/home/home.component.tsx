@@ -29,12 +29,18 @@ export const HomeComponent = () => {
           <img className={picture} src={logo}></img>
         </div>
         <Button className={homeButton} variant="contained">
-          <Link to={routes.testVerbForms} className={homeLink}>
+          <Link to={{
+            pathname: routes.testVerbForms,
+            state: { fromHome: true },
+          }} className={homeLink}>
             Start Test 'Irregular verbs'
           </Link>
         </Button>
         <Button className={homeButton} variant="contained">
-          <Link to={routes.testFillGap} className={homeLink}>
+          <Link to={{
+            pathname: routes.testFillGap,
+            state: { fromHome: true },
+          }} className={homeLink}>
             Start Test<br/>'Fill the gap'
           </Link>
         </Button>
