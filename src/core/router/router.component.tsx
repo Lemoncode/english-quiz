@@ -15,8 +15,8 @@ import {
   UserSettingsScene,
 } from 'scenes';
 
-const handleRedirect = (Component, routeProps): React.ReactNode => {
-  if (!routeProps.location.state?.fromHome) {
+const handleRedirect = (Component, routeProps, from = 'fromHome'): React.ReactNode => {
+  if (!routeProps.location.state?.[from]) {
     return (
       <Redirect
         to={{
@@ -43,7 +43,7 @@ export const RouterComponent: React.FunctionComponent = () => {
         <Route
           exact={true}
           path={switchRoutes.finalScore}
-          render={location => handleRedirect(FinalScoreScene, location)}
+          render={location => handleRedirect(FinalScoreScene, location, 'fromTest')}
         />
         <Route
           exact={true}

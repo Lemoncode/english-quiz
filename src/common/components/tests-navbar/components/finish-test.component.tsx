@@ -41,7 +41,10 @@ export const FinishTest: React.FC<Props> = props => {
   const handleFinishTest = () => {
     // Set current score before navigating to 'finalScore'
     setScore({ totalQuestions, answeredCorrectly: score});
-    history.push(routes.finalScore);
+    history.push({
+      pathname: routes.finalScore,
+      state: { fromTest: true },
+    });
   };
 
   return (

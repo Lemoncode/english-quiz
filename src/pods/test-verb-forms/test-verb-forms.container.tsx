@@ -51,7 +51,10 @@ export const TestVerbFormContainer = () => {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       setScore({ totalQuestions, answeredCorrectly: currentScore });
-      history.push(routes.finalScore);
+      history.push({
+        pathname: routes.finalScore,
+        state: { fromTest: true },
+      });
     }
   };
 
