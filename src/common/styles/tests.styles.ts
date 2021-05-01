@@ -87,6 +87,25 @@ export const ballons = css`
 export const logoHome = css`
   width: 300px;
 `
+export const optionsList = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: ${spacing(2)} 0 0;
+  height: 85%;
+  list-style: none;
+`;
+
+export const optionItem = css`
+  display: flex;
+  padding: ${spacing(1)} 0;
+  & label span {
+    text-transform: capitalize;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+`;
 
 export const inputContainer = css`
   display: flex;
@@ -119,23 +138,6 @@ export const inputField = css`
     &:focus {
       outline: none;
       border-bottom: 2px solid ${color.lightBlue};
-    }
-  }
-`;
-
-export const radioField = css`
-  font-family: inherit;
-  padding: ${spacing(1)};
-  font-size: 1.1rem;
-
-  & input {
-    cursor: pointer;
-    &:hover,
-    &:active,
-    &:focus {
-      background-color: ${color.dark};
-      border-radius: 0.5rem;
-      color: ${color.lightWhite}
     }
   }
 `;

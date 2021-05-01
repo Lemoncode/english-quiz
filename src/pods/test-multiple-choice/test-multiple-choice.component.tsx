@@ -8,6 +8,7 @@ import { Verb, VerbCorrect, createDefaultVerbCorrect } from 'common/model';
 import { answerIsCorrect } from './test-multiple-choice.business';
 import * as styles from 'common/styles/tests.styles';
 import { TestsNavbar } from 'common/components';
+import { FormControlLabel, Radio } from '@material-ui/core';
 
 interface Props {
   currentQuestion: number;
@@ -56,8 +57,8 @@ export const TestMultipleChoiceComponent: React.FC<Props> = props => {
     nextBtn,
     insideBtnContainer,
     arrowIcon,
-    radioField,
-    inputContainer,
+    optionItem,
+    optionsList,
   } = styles;
 
   const handleValidateAnswer = (verbCorrection: VerbCorrect) => {
@@ -108,21 +109,24 @@ export const TestMultipleChoiceComponent: React.FC<Props> = props => {
                       src={`/assets/verb-images/${verb.infinitive}.png`}
                     ></img>
                   </div>
-                  <div className={inputContainer}>
+                  <ul className={optionsList}>
                     {options.map((option: Verb, index: number) => (
-                      <div className={radioField} key={`verb-${index}`}>
+                      <li className={optionItem} key={`verb-${index}`}>
                         <Field
-                          type="radio"
                           name="response"
-                          id={`response-${option.infinitive}`}
                           value={option.infinitive}
-                        />
-                        <label
-                          htmlFor={`response-${option.infinitive}`}
-                        >{`${option.infinitive}/${option.past}/${option.participle}`}</label>
-                      </div>
+                          type="radio"
+                        >
+                          {({ field }) => (
+                            <FormControlLabel
+                              control={<Radio {...field} color="primary" />}
+                              label={`${option.infinitive}/${option.past}/${option.participle}`}
+                            />
+                          )}
+                        </Field>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </div>
               </>
             )}
