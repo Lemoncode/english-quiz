@@ -26,3 +26,11 @@ export const answerIsCorrect = (verb: Verb, quiz: VerbQuiz): VerbCorrect => {
   verbCorrect.all = verb.infinitive === quiz.response;
   return verbCorrect;
 };
+
+export const mixOptions = (options: Verb[]) => {
+  for (let i = options.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+  return options;
+};

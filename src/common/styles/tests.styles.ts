@@ -87,6 +87,7 @@ export const ballons = css`
 export const logoHome = css`
   width: 300px;
 `
+
 export const optionsList = css`
   display: flex;
   flex-direction: column;

@@ -5,7 +5,7 @@ import { VerbQuiz, createDefaultVerbQuiz } from './test-multiple-choice.vm';
 import { Formik, Form, Field } from 'formik';
 import { ShowResults } from 'common/components/show-results';
 import { Verb, VerbCorrect, createDefaultVerbCorrect } from 'common/model';
-import { answerIsCorrect } from './test-multiple-choice.business';
+import { answerIsCorrect, mixOptions } from './test-multiple-choice.business';
 import * as styles from 'common/styles/tests.styles';
 import { TestsNavbar } from 'common/components';
 import { FormControlLabel, Radio } from '@material-ui/core';
@@ -74,14 +74,6 @@ export const TestMultipleChoiceComponent: React.FC<Props> = props => {
     onNextQuestion();
   };
 
-  const mixOptions = (options: Verb[]) => {
-    for (let i = options.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [options[i], options[j]] = [options[j], options[i]];
-    }
-    return options;
-  };
-
   return (
     <main className={mainContainer}>
       <TestsNavbar score={score} currentQuestion={currentQuestion} />
@@ -120,7 +112,7 @@ export const TestMultipleChoiceComponent: React.FC<Props> = props => {
                           {({ field }) => (
                             <FormControlLabel
                               control={<Radio {...field} color="primary" />}
-                              label={`${option.infinitive}/${option.past}/${option.participle}`}
+                              label={`${option.infinitive}-${option.past}-${option.participle}`}
                             />
                           )}
                         </Field>
