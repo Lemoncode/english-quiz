@@ -4,6 +4,7 @@ import Divider from '@material-ui/core/Divider';
 import { VerbEntity } from './configure-verbs.vm';
 import produce from 'immer';
 import { getOnlySelected } from './configure-verbs.business';
+import { MIN_NUMBER_VERBS } from 'core/const';
 import * as classes from 'common/styles/settings.styles';
 
 interface Props {
@@ -108,10 +109,12 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
     title,
     backContainerVerbs,
     btnContainerVerbs,
+    insideBtnContainerVerbs,
     saveBtn,
     cancelBtn,
     verbList,
     verbTitle,
+    errorMsg,
   } = classes;
 
   const handleCheckedChange = React.useCallback(
@@ -137,29 +140,40 @@ export const ConfigureVerbsComponent: React.FC<Props> = props => {
     }
   };
 
+  const internalHandleOnSave = () => {
+    if(selection.length >= MIN_NUMBER_VERBS) {
+      onSave(allItems);
+    }
+  };
+
   return (
     <main className={mainContainer}>
       <h1 className={title}>Verbs Settings:</h1>
       <div className={backContainerVerbs}>
         <div className={btnContainerVerbs}>
-          <Button
-            className={saveBtn}
-            variant="contained"
-            color="primary"
-            onClick={() => onSave(allItems)}
-            disableElevation
-          >
-            Save
-          </Button>
-          <Button
-            className={cancelBtn}
-            variant="contained"
-            color="secondary"
-            onClick={onCancel}
-            disableElevation
-          >
-            Cancel
-          </Button>
+          <div className={insideBtnContainerVerbs}>
+            <Button
+              className={saveBtn}
+              variant="contained"
+              color="primary"
+              onClick={() => internalHandleOnSave()}
+              disableElevation
+            >
+              Save
+            </Button>
+            <Button
+              className={cancelBtn}
+              variant="contained"
+              color="secondary"
+              onClick={onCancel}
+              disableElevation
+            >
+              Cancel
+            </Button>
+          </div>
+          {selection.length < MIN_NUMBER_VERBS &&
+            <span className={errorMsg}>Must select at least 3 verbs</span>
+          }
         </div>
         <Divider />
         <ul className={verbList}>

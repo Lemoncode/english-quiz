@@ -36,9 +36,13 @@ export const backContainerVerbs = css`
 `;
 
 export const btnContainerVerbs = css`
+  margin-bottom: ${spacing(2)};
+`;
+
+export const insideBtnContainerVerbs = css`
   display: flex;
   justify-content: space-between;
-  margin-bottom: ${spacing(5)};
+  margin-bottom: ${spacing(0.5)};
 `;
 
 export const backContainerUser = css`

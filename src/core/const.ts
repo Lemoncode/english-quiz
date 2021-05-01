@@ -9,3 +9,5 @@ export const QuestionsRestrictions = {
   MAX_NUMBER_QUESTIONS: '100',
   STEP: '1',
 };
+
+export const MIN_NUMBER_VERBS = 3;
