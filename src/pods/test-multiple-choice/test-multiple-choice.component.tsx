@@ -7,6 +7,8 @@ import { ShowResults } from 'common/components/show-results';
 import { Verb, VerbCorrect, createDefaultVerbCorrect } from 'common/model';
 import { answerIsCorrect } from './test-multiple-choice.business';
 import * as styles from 'common/styles/tests.styles';
+import { TestsNavbar } from 'common/components';
+import { FormControlLabel, Radio } from '@material-ui/core';
 
 interface Props {
   currentQuestion: number;
@@ -40,12 +42,23 @@ export const TestMultipleChoiceComponent: React.FC<Props> = props => {
     createDefaultVerbQuiz()
   );
 
+  const [options, setOptions] = React.useState<Verb[]>([]);
+
+  React.useEffect(() => {
+    setOptions(mixOptions([verb, otherOption1, otherOption2]));
+  }, [verb]);
+
   const {
     mainContainer,
+    backContainer,
+    pictureContainer,
+    picture,
     title,
     nextBtn,
     insideBtnContainer,
     arrowIcon,
+    optionItem,
+    optionsList,
   } = styles;
 
   const handleValidateAnswer = (verbCorrection: VerbCorrect) => {
@@ -61,8 +74,17 @@ export const TestMultipleChoiceComponent: React.FC<Props> = props => {
     onNextQuestion();
   };
 
+  const mixOptions = (options: Verb[]) => {
+    for (let i = options.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
+    }
+    return options;
+  };
+
   return (
     <main className={mainContainer}>
+      <TestsNavbar score={score} currentQuestion={currentQuestion} />
       <h1 className={title}>
         {verb.translation} ({`${currentQuestion} / ${totalQuestions}`})
       </h1>
@@ -80,31 +102,31 @@ export const TestMultipleChoiceComponent: React.FC<Props> = props => {
           <Form>
             {!validated && (
               <>
-                <div>
-                  <label>
-                    <Field
-                      type="radio"
-                      name="response"
-                      value={verb.infinitive}
-                    />
-                    {`${verb.infinitive}/${verb.past}/${verb.participle}`}
-                  </label>
-                  <label>
-                    <Field
-                      type="radio"
-                      name="response"
-                      value={otherOption1.infinitive}
-                    />
-                    {`${otherOption1.infinitive}/${otherOption1.past}/${otherOption1.participle}`}
-                  </label>
-                  <label>
-                    <Field
-                      type="radio"
-                      name="response"
-                      value={otherOption2.infinitive}
-                    />
-                    {`${otherOption2.infinitive}/${otherOption2.past}/${otherOption2.participle}`}
-                  </label>
+                <div className={backContainer}>
+                  <div className={pictureContainer}>
+                    <img
+                      className={picture}
+                      src={`/assets/verb-images/${verb.infinitive}.png`}
+                    ></img>
+                  </div>
+                  <ul className={optionsList}>
+                    {options.map((option: Verb, index: number) => (
+                      <li className={optionItem} key={`verb-${index}`}>
+                        <Field
+                          name="response"
+                          value={option.infinitive}
+                          type="radio"
+                        >
+                          {({ field }) => (
+                            <FormControlLabel
+                              control={<Radio {...field} color="primary" />}
+                              label={`${option.infinitive}/${option.past}/${option.participle}`}
+                            />
+                          )}
+                        </Field>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </>
             )}
@@ -129,11 +151,22 @@ export const TestMultipleChoiceComponent: React.FC<Props> = props => {
                 </Button>
               </>
             ) : (
-              <button type="submit">Next</button>
+              <>
+                <Button
+                  className={nextBtn}
+                  type="submit"
+                  variant="contained"
+                  disableElevation
+                >
+                  <div className={insideBtnContainer}>
+                    Next <ArrowForwardIcon className={arrowIcon} />
+                  </div>
+                </Button>
+              </>
             )}
           </Form>
         )}
       </Formik>
     </main>
   );
-}
+};
