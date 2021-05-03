@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
 import { scoreContext } from 'core/score';
 import { settingsContext } from 'core/settings';
-import { testsContext } from 'core/tests-context';
 
 const INITIAL_ANSWERED_CORRECTLY = 0;
 const INITIAL_CURRENT_QUESTION = 1;
@@ -19,7 +18,6 @@ export const TestVerbFormContainer = () => {
   );
   const { setScore } = React.useContext(scoreContext);
   const { userSettings } = React.useContext(settingsContext);
-  const { setTestInProgress } = React.useContext(testsContext);
   const [totalQuestions] = React.useState(userSettings.numberQuestions);
   const [hasSecondChance] = React.useState(userSettings.secondChance);
 
@@ -38,7 +36,6 @@ export const TestVerbFormContainer = () => {
 
   React.useEffect(() => {
     setScore({ totalQuestions, answeredCorrectly: INITIAL_ANSWERED_CORRECTLY });
-    setTestInProgress(true);
   }, []);
 
   React.useEffect(() => {

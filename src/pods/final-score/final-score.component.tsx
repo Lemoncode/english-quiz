@@ -4,7 +4,6 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
-import { testsContext } from 'core/tests-context';
 import * as classes from 'common/styles/tests.styles';
 
 interface Props {
@@ -15,10 +14,8 @@ interface Props {
 export const FinalScoreComponent: React.FC<Props> = props => {
   const { total, correct } = props;
   const history = useHistory();
-  const { setTestInProgress } = React.useContext(testsContext);
 
   const handleNavigatetoMain = () => {
-    setTestInProgress(false);
     history.push(routes.root);
   };
 
