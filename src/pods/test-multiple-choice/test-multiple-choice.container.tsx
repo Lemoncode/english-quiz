@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TestMultipleChoiceComponent } from './test-multiple-choice.component';
 import { Verb, createDefaultVerb } from 'common/model';
 import { globalVerbsContext } from 'core/verbs';
-import { pickRandomVerb } from './test-multiple-choice.business';
+import { pickRandomVerb, pickOtherOptions } from './test-multiple-choice.business';
 import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
 import { scoreContext } from 'core/score';
@@ -42,18 +42,9 @@ export const TestMultipleChoiceContainer = () => {
     if (currentQuestion <= totalQuestions) {
       const randomVerb = pickRandomVerb(selectedVerbs, verbCollection);
       setCurrentVerb(randomVerb);
-      let otherRandom:Verb, otherRandom2:Verb;
-      // Check the first other option is not repeated
-      do {
-        otherRandom = pickRandomVerb(selectedVerbs, verbCollection);
-      } while(randomVerb.infinitive === otherRandom.infinitive);
-      setOtherOption1(otherRandom);
-      // Check the second other option is not repeated
-      do {
-        otherRandom2 = pickRandomVerb(selectedVerbs, verbCollection);
-      } while(randomVerb.infinitive === otherRandom2.infinitive ||
-              otherRandom.infinitive === otherRandom2.infinitive);
-      setOtherOption2(otherRandom2);
+      const otherOptions = pickOtherOptions(randomVerb, selectedVerbs, verbCollection);
+      setOtherOption1(otherOptions[0]);
+      setOtherOption2(otherOptions[1]);
     }
   }, [currentQuestion]);
 
