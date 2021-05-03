@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TestFillGapComponent } from './test-fill-gap.component';
 import { Verb, createDefaultVerb } from 'common/model';
 import { globalVerbsContext } from 'core/verbs';
-import { pickRandomVerb } from './test-fill-gap.business';
+import { pickRandomVerb } from 'common/business';
 import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
 import { scoreContext } from 'core/score';
