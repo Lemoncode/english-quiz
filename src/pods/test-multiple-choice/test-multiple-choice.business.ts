@@ -1,3 +1,4 @@
+import shuffle from 'lodash.shuffle';
 import { VerbEntityGlobal } from 'core/verbs';
 import { VerbQuiz } from './test-multiple-choice.vm';
 import { Verb, VerbCorrect, createDefaultVerbCorrect } from 'common/model';
@@ -28,9 +29,5 @@ export const answerIsCorrect = (verb: Verb, quiz: VerbQuiz): VerbCorrect => {
 };
 
 export const mixOptions = (options: Verb[]) => {
-  for (let i = options.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [options[i], options[j]] = [options[j], options[i]];
-  }
-  return options;
+  return shuffle(options);
 };
