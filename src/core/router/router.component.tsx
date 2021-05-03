@@ -9,33 +9,34 @@ import {
   TestVerbFormsScene,
   UserSettingsScene,
 } from 'scenes';
+import { AuthRoute } from './authroute';
 
 export const RouterComponent: React.FunctionComponent = () => {
   return (
     <Router>
       <Switch>
         <Route exact={true} path={switchRoutes.root} component={HomeScene} />
-        <Route
+        <AuthRoute
           exact={true}
           path={switchRoutes.configureVerbs}
           component={ConfigureVerbsScene}
         />
-        <Route
+        <AuthRoute
           exact={true}
           path={switchRoutes.finalScore}
           component={FinalScoreScene}
         />
-        <Route
+        <AuthRoute
           exact={true}
           path={switchRoutes.testFillGap}
           component={TestFillGapScene}
         />
-        <Route
+        <AuthRoute
           exact={true}
           path={switchRoutes.testVerbForms}
           component={TestVerbFormsScene}
         />
-        <Route
+        <AuthRoute
           exact={true}
           path={switchRoutes.userSettings}
           component={UserSettingsScene}
