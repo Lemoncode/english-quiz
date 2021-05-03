@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
 import { scoreContext } from 'core/score';
 import { settingsContext } from 'core/settings';
+import { testsContext } from 'core/tests-context';
 
 const INITIAL_ANSWERED_CORRECTLY = 0;
 const INITIAL_CURRENT_QUESTION = 1;
@@ -18,6 +19,7 @@ export const TestFillGapContainer = () => {
   );
   const { setScore } = React.useContext(scoreContext);
   const { userSettings } = React.useContext(settingsContext);
+  const { setTestInProgress } = React.useContext(testsContext);
   const [totalQuestions] = React.useState(userSettings.numberQuestions);
   const [currentQuestion, setCurrentQuestion] = React.useState(
     INITIAL_CURRENT_QUESTION
@@ -31,6 +33,7 @@ export const TestFillGapContainer = () => {
 
   React.useEffect(() => {
     setScore({ totalQuestions, answeredCorrectly: INITIAL_ANSWERED_CORRECTLY });
+    setTestInProgress(true);
   }, []);
 
   React.useEffect(() => {

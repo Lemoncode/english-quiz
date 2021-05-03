@@ -10,6 +10,7 @@ import {
   UserSettingsScene,
 } from 'scenes';
 import { AuthRoute } from './authroute';
+import { TestsRoute } from './testsroute';
 
 export const RouterComponent: React.FunctionComponent = () => {
   return (
@@ -21,7 +22,7 @@ export const RouterComponent: React.FunctionComponent = () => {
           path={switchRoutes.configureVerbs}
           component={ConfigureVerbsScene}
         />
-        <AuthRoute
+        <TestsRoute
           exact={true}
           path={switchRoutes.finalScore}
           component={FinalScoreScene}

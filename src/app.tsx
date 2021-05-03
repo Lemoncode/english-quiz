@@ -5,6 +5,7 @@ import { ThemeProviderComponent } from 'core/theme';
 import { GlobalVerbsProvider } from 'core/verbs';
 import { ScoreProvider } from 'core/score';
 import { SettingsProvider } from 'core/settings';
+import { TestsProvider } from 'core/tests-context';
 
 const App: React.FunctionComponent = () => {
   return (
@@ -12,7 +13,9 @@ const App: React.FunctionComponent = () => {
       <ScoreProvider>
         <GlobalVerbsProvider>
           <SettingsProvider>
-            <RouterComponent />
+            <TestsProvider>
+              <RouterComponent />
+            </TestsProvider>
           </SettingsProvider>
         </GlobalVerbsProvider>
       </ScoreProvider>
