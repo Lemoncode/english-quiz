@@ -30,9 +30,13 @@ const pickOption = (
 };
 
 export const answerIsCorrect = (verb: Verb, quiz: VerbQuiz): VerbCorrect => {
-  let verbCorrect = createDefaultVerbCorrect();
-  verbCorrect.all = verb.infinitive === quiz.response;
-  return verbCorrect;
+  const isCorrect = verb.infinitive === quiz.response;
+  return {
+    infinitive: isCorrect,
+    past: isCorrect,
+    participle: isCorrect,
+    all: isCorrect,
+  };
 };
 
 export const mixOptions = (options: Verb[]) => {
