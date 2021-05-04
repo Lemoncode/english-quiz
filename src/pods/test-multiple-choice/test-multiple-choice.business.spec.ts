@@ -1,20 +1,37 @@
 import { VerbEntityGlobal } from 'core/verbs';
 import { VerbQuiz } from './test-multiple-choice.vm';
 import { Verb } from 'common/model';
-import { pickOtherOptions, answerIsCorrect } from './test-multiple-choice.business';
+import {
+  pickOtherOptions,
+  answerIsCorrect,
+} from './test-multiple-choice.business';
 
 describe('Test multiple choice business specs', () => {
   describe('pickOtherOptions function', () => {
+    it('Should return an empty array when verbCollection is empty', () => {
+      //Arrange
+      const rightOption = {};
+      const selectedVerbs = [];
+      const verbs = [];
+
+      //Act
+      const options = pickOtherOptions(<Verb>rightOption, selectedVerbs, verbs);
+
+      //Assert
+      expect(Array.isArray(options)).toBeTruthy();
+      expect(options.length).toBe(0);
+    });
+
     it('Should pick two different verbs from selected list other than the right option', () => {
       //Arrange
-      const rightOption:Verb = {
+      const rightOption: Verb = {
         translation: 'comer',
         infinitive: 'eat',
         past: 'ate',
         participle: 'eaten',
       };
       const selectedVerbs = ['eat', 'drink', 'swim'];
-      const verbs:VerbEntityGlobal[] = [
+      const verbs: VerbEntityGlobal[] = [
         {
           translation: 'comer',
           infinitive: 'eat',
@@ -37,10 +54,10 @@ describe('Test multiple choice business specs', () => {
           translation: 'nadar',
           infinitive: 'swim',
           past: 'swam',
-          participle: 'swum'
-        }
+          participle: 'swum',
+        },
       ];
-      
+
       //Act
       const options = pickOtherOptions(rightOption, selectedVerbs, verbs);
 
@@ -59,14 +76,14 @@ describe('Test multiple choice business specs', () => {
   describe('answerIsCorrect function', () => {
     it('Should return false when answer is not correct', () => {
       //Arrange
-      const verb:Verb = {
+      const verb: Verb = {
         translation: 'comer',
         infinitive: 'eat',
         past: 'ate',
         participle: 'eaten',
       };
-      const quiz:VerbQuiz = {
-        response: 'drink'
+      const quiz: VerbQuiz = {
+        response: 'drink',
       };
 
       //Act
@@ -78,14 +95,14 @@ describe('Test multiple choice business specs', () => {
 
     it('Should return true when answer is correct', () => {
       //Arrange
-      const verb:Verb = {
+      const verb: Verb = {
         translation: 'comer',
         infinitive: 'eat',
         past: 'ate',
         participle: 'eaten',
       };
-      const quiz:VerbQuiz = {
-        response: 'eat'
+      const quiz: VerbQuiz = {
+        response: 'eat',
       };
 
       //Act
