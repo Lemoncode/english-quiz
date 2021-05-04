@@ -32,7 +32,7 @@ export const RouterComponent: React.FunctionComponent = () => {
           path={switchRoutes.testMultipleChoice}
           component={TestMultipleChoiceScene}
         />
-        <Route
+        <AuthRoute
           exact={true}
           path={switchRoutes.testFillGap}
           component={TestFillGapScene}
