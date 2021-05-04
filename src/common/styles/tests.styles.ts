@@ -88,6 +88,26 @@ export const logoHome = css`
   width: 300px;
 `
 
+export const optionsList = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: ${spacing(2)} 0 0;
+  height: 85%;
+  list-style: none;
+`;
+
+export const optionItem = css`
+  display: flex;
+  padding: ${spacing(1)} 0;
+  & label span {
+    text-transform: capitalize;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+`;
+
 export const inputContainer = css`
   display: flex;
   flex-direction: column;
@@ -159,7 +179,7 @@ export const nextBtn = css`
 export const homeButton = css`
   display: flex;
   border-radius: 1.4rem;
-  width: ${spacing(26.5)};
+  width: ${spacing(26.6)};
   margin: ${spacing(3)} auto 0 auto;
   padding: ${spacing(1.5)} ${spacing(3)};
   font-family: 'M PLUS Rounded 1c', sans-serif;
@@ -219,7 +239,7 @@ export const buttonRight = css`
   background-color: #33cc33;
   transition: all 0.2s;
   --webkit-transition: all 0.2s;
-  @media (min-width: ${breakpoints.values.xs}px) {
+  @media (min-width: ${breakpoints.values.sm}px) {
     width: ${spacing(30)};
     justify-content: flex-end;
   }
@@ -238,7 +258,7 @@ export const buttonWrong = css`
   background-color: ${color.primaryMain};
   transition: all 0.2s;
   --webkit-transition: all 0.2s;
-  @media (min-width: ${breakpoints.values.xs}px) {
+  @media (min-width: ${breakpoints.values.sm}px) {
     width: ${spacing(30)};
     justify-content: flex-end;
   }

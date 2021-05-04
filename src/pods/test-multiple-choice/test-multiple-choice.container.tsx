@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { TestFillGapComponent } from './test-fill-gap.component';
+import { TestMultipleChoiceComponent } from './test-multiple-choice.component';
 import { Verb, createDefaultVerb } from 'common/model';
 import { globalVerbsContext } from 'core/verbs';
 import { pickRandomVerb } from 'common/business';
+import { pickOtherOptions } from './test-multiple-choice.business';
 import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
 import { scoreContext } from 'core/score';
@@ -11,18 +12,23 @@ import { settingsContext } from 'core/settings';
 const INITIAL_ANSWERED_CORRECTLY = 0;
 const INITIAL_CURRENT_QUESTION = 1;
 
-export const TestFillGapContainer = () => {
+export const TestMultipleChoiceContainer = () => {
   const history = useHistory();
-  const { selectedVerbs, verbCollection } = React.useContext(
-    globalVerbsContext
-  );
+  const { selectedVerbs, verbCollection } = React.useContext(globalVerbsContext);
   const { setScore } = React.useContext(scoreContext);
   const { userSettings } = React.useContext(settingsContext);
   const [totalQuestions] = React.useState(userSettings.numberQuestions);
+
   const [currentQuestion, setCurrentQuestion] = React.useState(
     INITIAL_CURRENT_QUESTION
   );
   const [currentVerb, setCurrentVerb] = React.useState<Verb>(
+    createDefaultVerb()
+  );
+  const [otherOption1, setOtherOption1] = React.useState<Verb>(
+    createDefaultVerb()
+  );
+  const [otherOption2, setOtherOption2] = React.useState<Verb>(
     createDefaultVerb()
   );
   const [currentScore, setCurrentScore] = React.useState(
@@ -37,6 +43,9 @@ export const TestFillGapContainer = () => {
     if (currentQuestion <= totalQuestions) {
       const randomVerb = pickRandomVerb(selectedVerbs, verbCollection);
       setCurrentVerb(randomVerb);
+      const otherOptions = pickOtherOptions(randomVerb, selectedVerbs, verbCollection);
+      setOtherOption1(otherOptions[0]);
+      setOtherOption2(otherOptions[1]);
     }
   }, [currentQuestion]);
 
@@ -50,11 +59,13 @@ export const TestFillGapContainer = () => {
   };
 
   return (
-    <TestFillGapComponent
+    <TestMultipleChoiceComponent
       currentQuestion={currentQuestion}
       totalQuestions={totalQuestions}
       onNextQuestion={handleSetNextQuestion}
       verb={currentVerb}
+      otherOption1={otherOption1}
+      otherOption2={otherOption2}
       score={currentScore}
       setScore={setCurrentScore}
     />

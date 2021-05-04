@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TestVerbFormComponent } from './test-verb-forms.component';
 import { Verb } from 'common/model';
 import { globalVerbsContext } from 'core/verbs';
-import { pickRandomVerb } from './test-verb-forms.business';
+import { pickRandomVerb } from 'common/business';
 import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
 import { scoreContext } from 'core/score';

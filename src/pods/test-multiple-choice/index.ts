@@ -1,0 +1,1 @@
+export * from './test-multiple-choice.container';
