@@ -669,7 +669,7 @@ export const defaultFullVerbs = [
     infinitive: 'spend',
     past: 'spent',
     participle: 'spent',
-    translation: 'pasar, gastar',
+    translation: 'pagar, gastar',
   },
   {
     infinitive: 'spill',
