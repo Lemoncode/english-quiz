@@ -669,7 +669,7 @@ export const defaultFullVerbs = [
     infinitive: 'spend',
     past: 'spent',
     participle: 'spent',
-    translation: 'pasar, gastar',
+    translation: 'pagar, gastar',
   },
   {
     infinitive: 'spill',
@@ -828,9 +828,9 @@ export const defaultFullVerbs = [
     translation: 'afligir',
   },
   {
-    infinitive: 'wake',
-    past: 'woke',
-    participle: 'woken',
+    infinitive: 'wake up',
+    past: 'woke up',
+    participle: 'woken up',
     translation: 'despertar(se)',
   },
   {
@@ -981,7 +981,7 @@ export const defaultSelectedVerbs = [
   'think',
   'throw',
   'understand',
-  'wake',
+  'wake up',
   'wear',
   'win',
   'write',
