@@ -1,10 +1,9 @@
-import { generatePath } from 'react-router-dom';
-
 interface SwitchRoutes {
   root: string;
   testVerbForms: string;
   testFillGap: string;
   testMultipleChoice: string;
+  testChooseTenses: string;
   finalScore: string;
   configureVerbs: string;
   userSettings: string;
@@ -15,6 +14,7 @@ export const switchRoutes: SwitchRoutes = {
   testVerbForms: '/test-forms',
   testFillGap: '/test-fill-gap',
   testMultipleChoice: '/test-multiple-choice',
+  testChooseTenses: '/test-choose-tenses',
   finalScore: '/final-score',
   configureVerbs: '/configure-verbs',
   userSettings: '/user-settings',
