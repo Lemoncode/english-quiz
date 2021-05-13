@@ -7,8 +7,7 @@ import {
   createDefaultVerbQuiz,
 } from './test-fill-gap.vm';
 import { Formik, Form } from 'formik';
-import { GapComponent } from './components';
-import { ShowResults } from 'common/components/show-results';
+import { GapComponent, ShowResults } from 'common/components';
 import { Verb, VerbCorrect, createDefaultVerbCorrect } from 'common/model';
 import { answerIsCorrect } from './test-fill-gap.business';
 import * as styles from 'common/styles/tests.styles';

@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Field } from "formik";
+import * as React from 'react';
+import { Field } from 'formik';
 import * as styles from 'common/styles/tests.styles';
 
 interface Props {
@@ -14,14 +14,11 @@ export const GapComponent: React.FC<Props> = props => {
   return isGap ? (
     <div className={inputField}>
       <label>{tense}</label>
-      <Field
-        type="text"
-        name="response"
-        id="response"
-        autoComplete="off"
-      />
+      <Field type="text" name="response" id="response" autoComplete="off" />
     </div>
   ) : (
-    <span className={verbsForm}>{tense}: {text}</span>
+    <span className={verbsForm}>
+      {tense}: {text}
+    </span>
   );
-}
+};
