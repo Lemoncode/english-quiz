@@ -6,15 +6,16 @@ interface Props {
   isGap: boolean;
   text: string;
   tense: string;
+  fieldName: string;
 }
 
 export const GapComponent: React.FC<Props> = props => {
-  const { isGap, text, tense } = props;
+  const { isGap, text, tense, fieldName } = props;
   const { inputField, verbsForm } = styles;
   return isGap ? (
     <div className={inputField}>
       <label>{tense}</label>
-      <Field type="text" name="response" id="response" autoComplete="off" />
+      <Field type="text" name={fieldName} id={fieldName} autoComplete="off" />
     </div>
   ) : (
     <span className={verbsForm}>

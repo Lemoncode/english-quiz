@@ -105,16 +105,19 @@ export const TestFillGapComponent: React.FC<Props> = props => {
                     isGap={initialQuiz.tense === VerbTenses.infinitive}
                     text={verb.infinitive}
                     tense={'Infinitive'}
+                    fieldName="response"
                   />
                   <GapComponent
                     isGap={initialQuiz.tense === VerbTenses.past}
                     text={verb.past}
                     tense={'Past'}
+                    fieldName="response"
                   />
                   <GapComponent
                     isGap={initialQuiz.tense === VerbTenses.participle}
                     text={verb.participle}
                     tense={'Participle'}
+                    fieldName="response"
                   />
                 </div>
                 <Pronunciation text={textToSpeech()} />
