@@ -108,7 +108,7 @@ export const ChooseTensesComponent: React.FC<Props> = props => {
           variant="contained"
           disableElevation
         >
-          No
+          Cancel
         </Button>
         <Button
           className={yesBtn}
@@ -117,7 +117,7 @@ export const ChooseTensesComponent: React.FC<Props> = props => {
           disableElevation
           disabled={error}
         >
-          Yes
+          Continue
         </Button>
       </DialogActions>
     </Dialog>
