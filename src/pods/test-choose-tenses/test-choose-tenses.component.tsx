@@ -8,6 +8,7 @@ import { Verb, VerbCorrect, createDefaultVerbCorrect } from 'common/model';
 import { answerIsCorrect } from './test-choose-tenses.business';
 import * as styles from 'common/styles/tests.styles';
 import { Pronunciation, TestsNavbar } from 'common/components';
+import { ChooseTenses } from 'core/choose-tenses';
 
 interface Props {
   currentQuestion: number;
@@ -16,6 +17,7 @@ interface Props {
   verb: Verb;
   score: number;
   setScore: (value: number) => void;
+  chooseTenses: ChooseTenses;
 }
 
 export const TestChooseTensesComponent: React.FC<Props> = props => {
@@ -26,6 +28,7 @@ export const TestChooseTensesComponent: React.FC<Props> = props => {
     verb,
     score,
     setScore,
+    chooseTenses,
   } = props;
 
   const [verbCorrect, setVerbCorrect] = React.useState<VerbCorrect>(
@@ -78,7 +81,7 @@ export const TestChooseTensesComponent: React.FC<Props> = props => {
       </h1>
       <Formik
         onSubmit={(values, actions) => {
-          const isCorrect = answerIsCorrect(verb, values);
+          const isCorrect = answerIsCorrect(verb, values, chooseTenses);
           handleValidateAnswer(isCorrect);
           const reset = createDefaultVerbQuiz();
           actions.resetForm({ values: reset });
@@ -98,19 +101,22 @@ export const TestChooseTensesComponent: React.FC<Props> = props => {
                 </div>
                 <div className={inputContainer}>
                   <GapComponent
-                    isGap={initialQuiz.hasInfinitive}
+                    isGap={chooseTenses.hasInfinitive}
                     text={verb.infinitive}
                     tense={'Infinitive'}
+                    fieldName="infinitive"
                   />
                   <GapComponent
-                    isGap={initialQuiz.hasPast}
+                    isGap={chooseTenses.hasPast}
                     text={verb.past}
                     tense={'Past'}
+                    fieldName="past"
                   />
                   <GapComponent
-                    isGap={initialQuiz.hasParticiple}
+                    isGap={chooseTenses.hasParticiple}
                     text={verb.participle}
                     tense={'Participle'}
+                    fieldName="participle"
                   />
                 </div>
                 <Pronunciation text={textToSpeech()} />

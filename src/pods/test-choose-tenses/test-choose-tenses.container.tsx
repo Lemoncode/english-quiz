@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
 import { scoreContext } from 'core/score';
 import { settingsContext } from 'core/settings';
+import { chooseTensesContext } from 'core/choose-tenses';
 
 const INITIAL_ANSWERED_CORRECTLY = 0;
 const INITIAL_CURRENT_QUESTION = 1;
@@ -18,6 +19,7 @@ export const TestChooseTensesContainer = () => {
   );
   const { setScore } = React.useContext(scoreContext);
   const { userSettings } = React.useContext(settingsContext);
+  const { chooseTenses } = React.useContext(chooseTensesContext);
   const [totalQuestions] = React.useState(userSettings.numberQuestions);
   const [currentQuestion, setCurrentQuestion] = React.useState(
     INITIAL_CURRENT_QUESTION
@@ -57,6 +59,7 @@ export const TestChooseTensesContainer = () => {
       verb={currentVerb}
       score={currentScore}
       setScore={setCurrentScore}
+      chooseTenses={chooseTenses}
     />
   );
 };

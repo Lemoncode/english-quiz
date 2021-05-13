@@ -12,6 +12,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
+import { chooseTensesContext } from 'core/choose-tenses';
 import * as classes from './choose-tenses.styles';
 
 interface Props {
@@ -20,14 +21,16 @@ interface Props {
 }
 
 export const ChooseTensesComponent: React.FC<Props> = props => {
+  const { setChooseTenses } = React.useContext(chooseTensesContext);
   const { open, setOpen } = props;
   const [state, setState] = React.useState({
-    infinitive: false,
-    past: false,
-    participle: false,
+    hasInfinitive: false,
+    hasPast: false,
+    hasParticiple: false,
   });
-  const { infinitive, past, participle } = state;
-  const error = [infinitive, past, participle].filter(v => v).length < 1;
+  const { hasInfinitive, hasPast, hasParticiple } = state;
+  const error =
+    [hasInfinitive, hasPast, hasParticiple].filter(v => v).length < 1;
   const history = useHistory();
   const { title, noBtn, yesBtn } = classes;
 
@@ -40,9 +43,15 @@ export const ChooseTensesComponent: React.FC<Props> = props => {
   };
 
   const handleNavigateToTest = () => {
-    console.log(state);
-    if (infinitive && past && participle) {
+    if (hasInfinitive && hasPast && hasParticiple) {
       history.push(routes.testVerbForms);
+    } else {
+      setChooseTenses({
+        hasInfinitive,
+        hasPast,
+        hasParticiple,
+      });
+      history.push(routes.testChooseTenses);
     }
   };
 
@@ -56,9 +65,9 @@ export const ChooseTensesComponent: React.FC<Props> = props => {
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={infinitive}
+                  checked={hasInfinitive}
                   onChange={handleChange}
-                  name="infinitive"
+                  name="hasInfinitive"
                   color="primary"
                 />
               }
@@ -66,16 +75,22 @@ export const ChooseTensesComponent: React.FC<Props> = props => {
             />
             <FormControlLabel
               control={
-                <Checkbox checked={past} onChange={handleChange} name="past" />
+                <Checkbox
+                  checked={hasPast}
+                  onChange={handleChange}
+                  name="hasPast"
+                  color="primary"
+                />
               }
               label="Past"
             />
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={participle}
+                  checked={hasParticiple}
                   onChange={handleChange}
-                  name="participle"
+                  name="hasParticiple"
+                  color="primary"
                 />
               }
               label="Participle"
