@@ -8,6 +8,7 @@ interface SwitchRoutes {
   finalScore: string;
   configureVerbs: string;
   userSettings: string;
+  testSentenceFillGap: string;
 }
 
 export const switchRoutes: SwitchRoutes = {
@@ -18,6 +19,7 @@ export const switchRoutes: SwitchRoutes = {
   finalScore: '/final-score',
   configureVerbs: '/configure-verbs',
   userSettings: '/user-settings',
+  testSentenceFillGap: '/test-sentence-fill-gap',
 };
 
 interface Routes extends Omit<SwitchRoutes, 'editEmployee'> {}

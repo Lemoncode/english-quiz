@@ -24,17 +24,30 @@ export const HomeComponent = () => {
         </div>
         <Button className={homeButton} variant="contained">
           <Link to={routes.testMultipleChoice} className={homeLink}>
-            Start Test<br/>'Multiple choice'
+            Start Test
+            <br />
+            'Multiple choice'
           </Link>
         </Button>
         <Button className={homeButton} variant="contained">
           <Link to={routes.testFillGap} className={homeLink}>
-            Start Test<br/>'Fill the gap'
+            Start Test
+            <br />
+            'Fill the gap'
           </Link>
         </Button>
         <Button className={homeButton} variant="contained">
           <Link to={routes.testVerbForms} className={homeLink}>
-            Start Test<br/>'Irregular verbs'
+            Start Test
+            <br />
+            'Irregular verbs'
+          </Link>
+        </Button>
+        <Button className={homeButton} variant="contained">
+          <Link to={routes.testSentenceFillGap} className={homeLink}>
+            Start Test
+            <br />
+            'Sentence fill the gap'
           </Link>
         </Button>
         <Button className={homeButton} variant="contained">

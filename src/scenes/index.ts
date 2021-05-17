@@ -5,3 +5,4 @@ export * from './test-multiple-choice.scene';
 export * from './test-fill-gap.scene';
 export * from './test-verb-forms.scene';
 export * from './user-settings.scene';
+export * from './test-sentence-fill-gap.secene';

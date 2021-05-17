@@ -9,6 +9,7 @@ import {
   TestFillGapScene,
   TestVerbFormsScene,
   UserSettingsScene,
+  TestSentenceFillGapScene,
 } from 'scenes';
 import { AuthRoute } from './authroute';
 
@@ -46,6 +47,11 @@ export const RouterComponent: React.FunctionComponent = () => {
           exact={true}
           path={switchRoutes.userSettings}
           component={UserSettingsScene}
+        />
+        <AuthRoute
+          exact={true}
+          path={switchRoutes.testSentenceFillGap}
+          component={TestSentenceFillGapScene}
         />
       </Switch>
     </Router>
