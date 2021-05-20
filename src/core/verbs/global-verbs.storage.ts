@@ -126,12 +126,6 @@ export const defaultFullVerbs = [
     translation: 'comprar',
   },
   {
-    infinitive: 'can',
-    past: 'could',
-    participle: 'been able',
-    translation: 'poder',
-  },
-  {
     infinitive: 'cast',
     past: 'cast',
     participle: 'cast',
@@ -897,7 +891,6 @@ export const defaultSelectedVerbs = [
   'burn',
   'burst',
   'buy',
-  'can',
   'catch',
   'choose',
   'come',
