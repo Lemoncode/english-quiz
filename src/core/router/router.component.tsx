@@ -8,6 +8,7 @@ import {
   TestMultipleChoiceScene,
   TestFillGapScene,
   TestVerbFormsScene,
+  TestChooseTensesScene,
   UserSettingsScene,
 } from 'scenes';
 import { AuthRoute } from './authroute';
@@ -41,6 +42,11 @@ export const RouterComponent: React.FunctionComponent = () => {
           exact={true}
           path={switchRoutes.testVerbForms}
           component={TestVerbFormsScene}
+        />
+        <AuthRoute
+          exact={true}
+          path={switchRoutes.testChooseTenses}
+          component={TestChooseTensesScene}
         />
         <AuthRoute
           exact={true}

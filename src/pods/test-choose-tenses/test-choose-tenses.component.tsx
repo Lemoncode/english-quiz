@@ -1,17 +1,14 @@
 import * as React from 'react';
 import Button from '@material-ui/core/Button';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import {
-  VerbTenses,
-  VerbQuiz,
-  createDefaultVerbQuiz,
-} from './test-fill-gap.vm';
+import { VerbQuiz, createDefaultVerbQuiz } from './test-choose-tenses.vm';
 import { Formik, Form } from 'formik';
 import { GapComponent, ShowResults } from 'common/components';
 import { Verb, VerbCorrect, createDefaultVerbCorrect } from 'common/model';
-import { answerIsCorrect } from './test-fill-gap.business';
+import { answerIsCorrect } from './test-choose-tenses.business';
 import * as styles from 'common/styles/tests.styles';
 import { Pronunciation, TestsNavbar } from 'common/components';
+import { ChooseTenses } from 'core/choose-tenses';
 
 interface Props {
   currentQuestion: number;
@@ -20,9 +17,10 @@ interface Props {
   verb: Verb;
   score: number;
   setScore: (value: number) => void;
+  chooseTenses: ChooseTenses;
 }
 
-export const TestFillGapComponent: React.FC<Props> = props => {
+export const TestChooseTensesComponent: React.FC<Props> = props => {
   const {
     currentQuestion,
     totalQuestions,
@@ -30,6 +28,7 @@ export const TestFillGapComponent: React.FC<Props> = props => {
     verb,
     score,
     setScore,
+    chooseTenses,
   } = props;
 
   const [verbCorrect, setVerbCorrect] = React.useState<VerbCorrect>(
@@ -82,7 +81,7 @@ export const TestFillGapComponent: React.FC<Props> = props => {
       </h1>
       <Formik
         onSubmit={(values, actions) => {
-          const isCorrect = answerIsCorrect(verb, values);
+          const isCorrect = answerIsCorrect(verb, values, chooseTenses);
           handleValidateAnswer(isCorrect);
           const reset = createDefaultVerbQuiz();
           actions.resetForm({ values: reset });
@@ -102,22 +101,22 @@ export const TestFillGapComponent: React.FC<Props> = props => {
                 </div>
                 <div className={inputContainer}>
                   <GapComponent
-                    isGap={initialQuiz.tense === VerbTenses.infinitive}
+                    isGap={chooseTenses.hasInfinitive}
                     text={verb.infinitive}
                     tense={'Infinitive'}
-                    fieldName="response"
+                    fieldName="infinitive"
                   />
                   <GapComponent
-                    isGap={initialQuiz.tense === VerbTenses.past}
+                    isGap={chooseTenses.hasPast}
                     text={verb.past}
                     tense={'Past'}
-                    fieldName="response"
+                    fieldName="past"
                   />
                   <GapComponent
-                    isGap={initialQuiz.tense === VerbTenses.participle}
+                    isGap={chooseTenses.hasParticiple}
                     text={verb.participle}
                     tense={'Participle'}
-                    fieldName="response"
+                    fieldName="participle"
                   />
                 </div>
                 <Pronunciation text={textToSpeech()} />
