@@ -11,6 +11,8 @@ export const HomeContainer = () => {
     verbsContext.setVerbCollection(fullVerbCollection);
 
     const selectedVerbs: string[] = await loadSelectedVerbCollection();
+    // [Dorado] añadimos un metodo que se llame sanitizeVerbList
+    // selectedVerbs = sanitizeList(selecteVerbs);
     verbsContext.setSelectedVerbs(selectedVerbs);
   };
 
