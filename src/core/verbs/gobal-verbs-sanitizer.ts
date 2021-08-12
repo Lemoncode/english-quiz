@@ -1,2 +1,4 @@
-export const sanitizeVerbSelectionList = (...selectedList: string[][]) =>
-  selectedList.reduce((acc, item) => acc.filter(x => item.indexOf(x) > -1));
+export const sanitizeVerbSelectionList = (
+  ...selectedList: string[][]
+): string[] =>
+  selectedList.reduce((acc, item) => acc.filter(x => item.indexOf(x) > -1)) ?? [];
