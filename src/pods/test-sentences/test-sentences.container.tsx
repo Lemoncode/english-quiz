@@ -9,13 +9,9 @@ export const TestSentencesContainer: React.FC = () => {
     title,
     mainContainer,
     buttonGroupContainer,
-    inputContainer,
     backContainer,
     pictureContainer,
     picture,
-    insideBtnContainer,
-    nextBtn,
-    arrowIcon,
   } = styles;
 
   return (
