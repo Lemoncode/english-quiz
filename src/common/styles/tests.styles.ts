@@ -116,6 +116,13 @@ export const inputContainer = css`
   height: 85%;
 `;
 
+export const buttonGroupContainer = css`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: ${spacing(4)};
+`
+
 export const inputField = css`
   width: 100%;
   display: flex;
