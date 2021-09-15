@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as styles from 'common/styles/tests.styles';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { Typography, Button } from '@material-ui/core';
 
 export const TestSentencesContainer: React.FC = () => {
