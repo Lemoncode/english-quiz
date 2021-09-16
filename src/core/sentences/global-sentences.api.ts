@@ -7,5 +7,10 @@ export interface SentenceEntityApi {
   rigthAnswer: string;
 }
 
-export const loadFullSentencesCollection = async (): Promise<SentenceEntityApi[]> =>
-  Promise.resolve(mapSentenceCollectionFromApiToVm(defaultSentences));
+export const loadFullSentencesCollection = async (): Promise<SentenceEntityApi[]> => {
+  try {
+    return await mapSentenceCollectionFromApiToVm(defaultSentences);
+  } catch (error) {
+    console.error(error);
+  }
+};
