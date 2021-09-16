@@ -6,12 +6,16 @@ import { SentenceEntityApi } from 'core/sentences';
 import { VerbEntityGlobal } from 'core/verbs';
 
 interface Props {
-  sentence: SentenceEntityApi;
+  sentenceSelected: SentenceEntityApi;
   selectedVerb: VerbEntityGlobal;
+  splitSentence: (sentence: string) => string[];
 }
 
 export const TestSentencesComponent: React.FC<Props> = props => {
-  const { sentence, selectedVerb } = props;
+  const { sentenceSelected, selectedVerb, splitSentence } = props;
+  const [firstSentencePart, secondSentencePart] = splitSentence(
+    sentenceSelected.sentence
+  );
 
   const {
     title,
@@ -43,7 +47,9 @@ export const TestSentencesComponent: React.FC<Props> = props => {
         </div>
         <div>
           <Typography className={title} variant="body1" component="h5">
-            {sentence.sentence}
+            <span> {firstSentencePart}</span>
+            <span style={{color: "red"}}> {selectedVerb.participle}</span>
+            <span> {secondSentencePart}</span>
           </Typography>
         </div>
       </div>

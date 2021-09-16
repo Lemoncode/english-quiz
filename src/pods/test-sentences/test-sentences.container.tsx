@@ -42,7 +42,14 @@ export const TestSentencesContainer: React.FC = () => {
     setsentenceSelected(randomSentence);
   }, [sentencesCollection]);
 
+  const splitSentence = (sentence: string): string[] =>
+    sentence.split(/_+/g) ?? [];
+
   return (
-    <TestSentencesComponent sentence={sentenceSelected} selectedVerb={selectedVerb} />
+    <TestSentencesComponent
+      sentenceSelected={sentenceSelected}
+      selectedVerb={selectedVerb}
+      splitSentence={splitSentence}
+    />
   );
 };
