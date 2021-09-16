@@ -3,13 +3,15 @@ import * as styles from 'common/styles/tests.styles';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Typography, Button } from '@material-ui/core';
 import { SentenceEntityApi } from 'core/sentences';
+import { VerbEntityGlobal } from 'core/verbs';
 
 interface Props {
   sentence: SentenceEntityApi;
+  selectedVerb: VerbEntityGlobal;
 }
 
 export const TestSentencesComponent: React.FC<Props> = props => {
-  const { sentence } = props;
+  const { sentence, selectedVerb } = props;
 
   const {
     title,
@@ -22,7 +24,7 @@ export const TestSentencesComponent: React.FC<Props> = props => {
 
   return (
     <main className={mainContainer}>
-      <h1 className={title}>{sentence.verb.toUpperCase()}</h1>
+      <h1 className={title}>{selectedVerb.translation.toUpperCase()}</h1>
       <div className={backContainer}>
         <div className={pictureContainer}>
           <img className={picture} src={`/assets/verb-images/buy.png`} />
@@ -34,9 +36,9 @@ export const TestSentencesComponent: React.FC<Props> = props => {
             size="large"
             aria-label="contained primary button group"
           >
-            <Button>Buy</Button>
-            <Button>Bought</Button>
-            <Button>Bought</Button>
+            <Button>{selectedVerb.infinitive}</Button>
+            <Button>{selectedVerb.past}</Button>
+            <Button>{selectedVerb.participle}</Button>
           </ButtonGroup>
         </div>
         <div>

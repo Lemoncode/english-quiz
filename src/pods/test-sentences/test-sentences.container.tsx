@@ -3,10 +3,14 @@ import { loadFullSentencesCollection } from 'core/sentences';
 import { SentenceEntityApi } from 'core/sentences';
 import { pickRandomSentence } from './test-sentences.business';
 import { TestSentencesComponent } from './test-sentences.component';
-import { selectedVerb } from 'core/sentences';
 import { VerbEntityGlobal } from 'core/verbs';
 
-
+export const verb: VerbEntityGlobal = {
+  infinitive: 'win',
+  past: 'won',
+  participle: 'won',
+  translation: 'ganar',
+};
 
 export const TestSentencesContainer: React.FC = () => {
   const [sentencesCollection, setSentencesCollection] = React.useState<
@@ -30,15 +34,15 @@ export const TestSentencesContainer: React.FC = () => {
     loadFullSentencesCollection().then(sentence =>
       setSentencesCollection(sentence)
     );
+    setSelectedVerb(verb);
   }, []);
 
   React.useEffect(() => {
     const randomSentence = pickRandomSentence(sentencesCollection);
     setsentenceSelected(randomSentence);
-    console.log(selectedVerb)
   }, [sentencesCollection]);
 
-  // const { verb, sentence, rigthAnswer } = sentenceSelected;
-
-  return <TestSentencesComponent sentence={sentenceSelected} />;
+  return (
+    <TestSentencesComponent sentence={sentenceSelected} selectedVerb={selectedVerb} />
+  );
 };

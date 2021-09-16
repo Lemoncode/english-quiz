@@ -1,37 +1,29 @@
 import { SentenceEntityGlobal } from './global-sentences.model';
-import { VerbEntityGlobal } from '../verbs';
-
-export const selectedVerb: VerbEntityGlobal = {
-  infinitive: 'win',
-  past: 'won',
-  participle: 'won',
-  translation: 'ganar',
-};
 
 export const defaultSentences: SentenceEntityGlobal[] = [
   {
-    verb: selectedVerb.infinitive,
+    verb: 'win',
     sentence: `Brazil _______ five world cups, it’s incredible!`,
-    rigthAnswer: selectedVerb.past,
+    rigthAnswer: 'won',
   },
   {
-    verb: selectedVerb.infinitive,
+    verb: 'win',
     sentence: `I only want to see whether you will let me _______ this ten, or beat it.`,
-    rigthAnswer: selectedVerb.infinitive,
+    rigthAnswer: 'win',
   },
   {
-    verb: selectedVerb.infinitive,
+    verb: 'win',
     sentence: `You won't _______ this one, so give up now.`,
-    rigthAnswer: selectedVerb.infinitive,
+    rigthAnswer: 'win',
   },
   {
-    verb: selectedVerb.infinitive,
+    verb: 'win',
     sentence: `Oliver had _______ the game in overtime.`,
-    rigthAnswer: selectedVerb.participle,
+    rigthAnswer: 'won',
   },
   {
-    verb: selectedVerb.infinitive,
+    verb: 'win',
     sentence: `He had _______ this game against his school rival.`,
-    rigthAnswer: selectedVerb.participle,
+    rigthAnswer: 'won',
   },
 ];
