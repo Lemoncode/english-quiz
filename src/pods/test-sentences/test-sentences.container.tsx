@@ -21,7 +21,7 @@ export const TestSentencesContainer: React.FC = () => {
   >({
     verb: '',
     sentence: '',
-    rigthAnswer: '',
+    rigthAnswer: 'Present',
   });
   const [selectedVerb, setSelectedVerb] = React.useState<VerbEntityGlobal>({
     infinitive: '',
@@ -42,14 +42,10 @@ export const TestSentencesContainer: React.FC = () => {
     setsentenceSelected(randomSentence);
   }, [sentencesCollection]);
 
-  const splitSentence = (sentence: string): string[] =>
-    sentence.split(/_+/g) ?? [];
-
   return (
     <TestSentencesComponent
       sentenceSelected={sentenceSelected}
       selectedVerb={selectedVerb}
-      splitSentence={splitSentence}
     />
   );
 };

@@ -9,28 +9,28 @@ export const verb = {
 
 export const defaultSentences: SentenceEntityGlobal[] = [
   {
-    verb: verb.infinitive,
-    sentence: `Brazil _______ five world cups, it’s incredible!`,
-    rigthAnswer: 'past',
+    verb: 'win',
+    sentence: `Brazil {verb} five world cups, it’s incredible!`,
+    rigthAnswer: 'Past',
   },
   {
     verb: 'win',
-    sentence: `I only want to see whether you will let me _______ this ten, or beat it.`,
-    rigthAnswer: 'win',
+    sentence: `I only want to see whether you will let me {verb} this ten, or beat it.`,
+    rigthAnswer: 'Present',
   },
   {
     verb: 'win',
-    sentence: `You won't _______ this one, so give up now.`,
-    rigthAnswer: 'win',
+    sentence: `You won't {verb} this one, so give up now.`,
+    rigthAnswer: 'Present',
   },
   {
     verb: 'win',
-    sentence: `Oliver had _______ the game in overtime.`,
-    rigthAnswer: 'won',
+    sentence: `Oliver had {verb} the game in overtime.`,
+    rigthAnswer: 'Participle',
   },
   {
-    verb: 'win',
-    sentence: `He had _______ this game against his school rival.`,
-    rigthAnswer: 'won',
+    verb: verb.translation,
+    sentence: `He had {verb} this game against his school rival.`,
+    rigthAnswer: 'Participle',
   },
 ];

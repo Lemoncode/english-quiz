@@ -39,7 +39,7 @@ describe('core/global-sentences.api.vm', () => {
       {
         verb: 'test-verb',
         sentence: 'test-sentence',
-        rigthAnswer: 'test-rigthAnswer',
+        rigthAnswer: 'Present',
       },
     ];
     // Act
@@ -51,7 +51,7 @@ describe('core/global-sentences.api.vm', () => {
       {
         verb: 'test-verb',
         sentence: 'test-sentence',
-        rigthAnswer: 'test-rigthAnswer',
+        rigthAnswer: 'Present',
       },
     ]);
   });
