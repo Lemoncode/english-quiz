@@ -1,6 +1,6 @@
 import * as model from 'core/sentences';
 import * as apiModel from './global-sentences.api';
-import { mapSentenceCollectionFromModelToApi } from './global-sentences.api.vm';
+import { mapSentenceCollectionFromModelToApi } from './global-sentences.api.mappers';
 
 describe('core/global-sentences.api.vm', () => {
   it('should return empty array when it feed sentence equals undefined', () => {

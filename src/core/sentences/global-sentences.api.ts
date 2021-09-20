@@ -1,5 +1,5 @@
 import { defaultSentences } from './global-sentences.storage';
-import { mapSentenceCollectionFromModelToApi } from './global-sentences.api.vm';
+import { mapSentenceCollectionFromModelToApi } from './global-sentences.api.mappers';
 
 export interface SentenceEntityApi {
   verb: string;
