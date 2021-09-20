@@ -10,3 +10,12 @@ export interface SentenceEntityVm {
   translation: string;
 }
 
+export const emptySentence = (): SentenceEntityVm => ({
+  prefixSentence: '',
+  sufixSentence: '',
+  rightAnswer: 'Present',
+  present: '',
+  past: '',
+  participle: '',
+  translation: '',
+});
