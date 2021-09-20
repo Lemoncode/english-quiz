@@ -17,4 +17,4 @@ export const pickRandomSentence = (
 };
 
 export const splitSentence = (sentence: string): string[] =>
-    sentence.split(/{verb}/g) ?? [];
+  sentence ? sentence.split(/{verb}/g) : [];
