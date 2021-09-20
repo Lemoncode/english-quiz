@@ -12,7 +12,7 @@ export const pickRandomSentence = (
   return {
     verb: '',
     sentence: '',
-    rigthAnswer: 'Present',
+    rightAnswer: 'Present',
   };
 };
 

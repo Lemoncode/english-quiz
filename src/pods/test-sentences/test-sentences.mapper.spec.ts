@@ -27,7 +27,7 @@ describe('test-sentences.mapper.spec', () => {
     const sentenceApi: sentenceApi.SentenceEntityApi = {
       verb: 'test-verb',
       sentence: `{verb} test-sufixSentence`,
-      rigthAnswer: 'Present',
+      rightAnswer: 'Present',
     };
     const verbApi: verbApi.VerbEntityApi = {
       infinitive: 'test-verb-infinitive',
@@ -53,7 +53,7 @@ describe('test-sentences.mapper.spec', () => {
     const sentenceApi: sentenceApi.SentenceEntityApi = {
       verb: 'test-verb',
       sentence: `test-prefixSentence {verb}`,
-      rigthAnswer: 'Present',
+      rightAnswer: 'Present',
     };
     const verbApi: verbApi.VerbEntityApi = {
       infinitive: 'test-verb-infinitive',
@@ -79,7 +79,7 @@ describe('test-sentences.mapper.spec', () => {
     const sentenceApi: sentenceApi.SentenceEntityApi = {
       verb: 'test-verb',
       sentence: 'test-prefixSentence {verb} test-sufixSentence',
-      rigthAnswer: 'Present',
+      rightAnswer: 'Present',
     };
     const verbApi: verbApi.VerbEntityApi = {
       infinitive: 'test-verb-infinitive',

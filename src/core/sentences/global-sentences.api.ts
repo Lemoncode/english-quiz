@@ -6,7 +6,7 @@ type TensesEntityApi = 'Present' | 'Past' | 'Participle';
 export interface SentenceEntityApi {
   verb: string;
   sentence: string;
-  rigthAnswer: TensesEntityApi;
+  rightAnswer: TensesEntityApi;
 }
 
 export const loadFullSentencesCollection = async (): Promise<SentenceEntityApi[]> => {
