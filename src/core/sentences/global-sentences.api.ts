@@ -1,5 +1,5 @@
 import { defaultSentences } from './global-sentences.storage';
-import { mapSentenceCollectionFromApiToVm } from './global-sentences.api.vm';
+import { mapSentenceCollectionFromModelToApi } from './global-sentences.api.vm';
 
 export interface SentenceEntityApi {
   verb: string;
@@ -9,7 +9,7 @@ export interface SentenceEntityApi {
 
 export const loadFullSentencesCollection = async (): Promise<SentenceEntityApi[]> => {
   try {
-    return await mapSentenceCollectionFromApiToVm(defaultSentences);
+    return await mapSentenceCollectionFromModelToApi(defaultSentences);
   } catch (error) {
     console.error(error);
   }

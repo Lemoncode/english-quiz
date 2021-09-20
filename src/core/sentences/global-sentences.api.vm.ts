@@ -1,12 +1,13 @@
-import * as vm from 'core/sentences';
-import * as api from './global-sentences.api';
+import * as model from 'core/sentences';
+import * as apiModel from './global-sentences.api';
 
-const mapSentenceFromApiToVm = (
-  apiEntry: api.SentenceEntityApi
-): vm.SentenceEntityGlobal => ({ ...apiEntry });
+const mapSentenceFromModelToApi = (
+  modelSentence: model.SentenceEntityGlobal
+): apiModel.SentenceEntityApi => ({ ...modelSentence });
 
-export const mapSentenceCollectionFromApiToVm = (
-  apiSentenceCollection: api.SentenceEntityApi[]
-): vm.SentenceEntityGlobal[] =>
-  apiSentenceCollection.map(mapSentenceFromApiToVm);
-
+export const mapSentenceCollectionFromModelToApi = (
+  modelSentenceList: model.SentenceEntityGlobal[]
+): apiModel.SentenceEntityApi[] =>
+  Array.isArray(modelSentenceList)
+    ? modelSentenceList.map(sentence => mapSentenceFromModelToApi(sentence))
+    : [];
