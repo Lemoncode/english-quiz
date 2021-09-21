@@ -3,16 +3,18 @@ import * as styles from 'common/styles/tests.styles';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Typography, Button } from '@material-ui/core';
 import { SentenceEntityApi } from 'core/sentences';
+
 import { VerbEntityGlobal } from 'core/verbs';
+import { SentenceEntityVm } from './test.sentences.vm';
 
 interface Props {
-  sentenceSelected: SentenceEntityApi;
+  sentenceSelected: SentenceEntityVm;
   selectedVerb: VerbEntityGlobal;
 }
 
 export const TestSentencesComponent: React.FC<Props> = props => {
   const { sentenceSelected, selectedVerb } = props;
-  const [firstSentencePart, secondSentencePart] = sentenceSelected.sentence;
+  // const [firstSentencePart, secondSentencePart] = sentenceSelected.sentence;
 
   const {
     title,
@@ -44,9 +46,9 @@ export const TestSentencesComponent: React.FC<Props> = props => {
         </div>
         <div>
           <Typography className={title} variant="body1" component="h5">
-            <span> {firstSentencePart}</span>
+            {/* <span> {firstSentencePart}</span> */}
             <span style={{ color: 'red' }}> {selectedVerb.participle}</span>
-            <span> {secondSentencePart}</span>
+            {/* <span> {secondSentencePart}</span> */}
           </Typography>
         </div>
       </div>

@@ -3,7 +3,7 @@ import * as apiModel from './global-sentences.api';
 
 const mapSentenceFromModelToApi = (
   modelSentence: model.SentenceEntityGlobal
-): apiModel.SentenceEntityApi => ({ ...modelSentence });
+): apiModel.SentenceEntityApi => ({ ... modelSentence });
 
 export const mapSentenceCollectionFromModelToApi = (
   modelSentenceList: model.SentenceEntityGlobal[]

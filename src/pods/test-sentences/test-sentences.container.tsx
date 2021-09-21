@@ -4,6 +4,8 @@ import { SentenceEntityApi } from 'core/sentences';
 import { pickRandomSentence } from './test-sentences.business';
 import { TestSentencesComponent } from './test-sentences.component';
 import { VerbEntityGlobal } from 'core/verbs';
+import { emptySentence, SentenceEntityVm } from './test.sentences.vm';
+import { mapFromSentenceApiToSentenceVm } from './test-sentences.mappers';
 
 export const verb: VerbEntityGlobal = {
   infinitive: 'win',
@@ -17,12 +19,8 @@ export const TestSentencesContainer: React.FC = () => {
     SentenceEntityApi[]
   >([]);
   const [sentenceSelected, setsentenceSelected] = React.useState<
-    SentenceEntityApi
-  >({
-    verb: '',
-    sentence: '',
-    rigthAnswer: 'Present',
-  });
+    SentenceEntityVm
+  >(emptySentence);
   const [selectedVerb, setSelectedVerb] = React.useState<VerbEntityGlobal>({
     infinitive: '',
     past: '',
@@ -39,7 +37,7 @@ export const TestSentencesContainer: React.FC = () => {
 
   React.useEffect(() => {
     const randomSentence = pickRandomSentence(sentencesCollection);
-    setsentenceSelected(randomSentence);
+    setsentenceSelected(mapFromSentenceApiToSentenceVm(randomSentence, verb));
   }, [sentencesCollection]);
 
   return (

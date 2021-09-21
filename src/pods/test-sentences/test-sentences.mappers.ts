@@ -11,7 +11,7 @@ export const mapFromSentenceApiToSentenceVm = (
     ? {
         prefixSentence: splitSentence(sentenceApi.sentence)[0],
         sufixSentence: splitSentence(sentenceApi.sentence)[1],
-        rightAnswer: sentenceApi.rigthAnswer,
+        rightAnswer: sentenceApi.rightAnswer,
         present: verbApi.infinitive,
         past: verbApi.past,
         participle: verbApi.participle,
