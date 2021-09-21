@@ -49,7 +49,7 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
         <div>
           <Typography className={title} variant="body1" component="h5">
             <span> {prefixSentence}</span>
-            <span style={{ color: 'red' }}> {past}</span>
+            <span> _____ </span>
             <span> {sufixSentence}</span>
           </Typography>
         </div>
