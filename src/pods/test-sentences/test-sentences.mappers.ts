@@ -4,18 +4,25 @@ import * as verbApi from 'core/verbs/global-verbs.api';
 import { splitSentence } from './test-sentences.business';
 
 export const mapFromSentenceApiToSentenceVm = (
-  sentenceApi: sentenceApi.SentenceEntityApi,
-  verbApi: verbApi.VerbEntityApi
+  sentenceEntityApi: sentenceApi.SentenceEntityApi,
+  verbCollection: verbApi.VerbEntityApi[]
 ): sentenceVm.SentenceEntityVm => {
-  return sentenceApi
-    ? {
-        prefixSentence: splitSentence(sentenceApi.sentence)[0],
-        sufixSentence: splitSentence(sentenceApi.sentence)[1],
-        rightAnswer: sentenceApi.rightAnswer,
-        present: verbApi.infinitive,
-        past: verbApi.past,
-        participle: verbApi.participle,
-        translation: verbApi.translation,
-      }
-    : sentenceVm.emptySentence();
+  if (sentenceEntityApi && Array.isArray(verbCollection)) {
+    const [prefixSentence, sufixSentence] = splitSentence(
+      sentenceEntityApi.sentence
+    );
+    const verbWithTenses: verbApi.VerbEntityApi = verbCollection.find(
+      verb => verb.infinitive === sentenceEntityApi.verb
+    );
+
+    return {
+      prefixSentence: prefixSentence,
+      sufixSentence: sufixSentence,
+      rightAnswer: sentenceEntityApi.rightAnswer,
+      present: verbWithTenses.infinitive,
+      past: verbWithTenses.past,
+      participle: verbWithTenses.participle,
+      translation: verbWithTenses.translation,
+    };
+  } else return sentenceVm.emptySentence();
 };
