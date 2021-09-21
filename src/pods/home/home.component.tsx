@@ -30,13 +30,6 @@ export const HomeComponent = () => {
           <img className={picture} src={logo}></img>
         </div>
         <Button className={homeButton} variant="contained">
-          <Link to={routes.testSentences} className={homeLink}>
-            Start Test
-            <br />
-            'Sentences'
-          </Link>
-        </Button>
-        <Button className={homeButton} variant="contained">
           <Link to={routes.testMultipleChoice} className={homeLink}>
             Start Test
             <br />
@@ -65,6 +58,13 @@ export const HomeComponent = () => {
           Start Test
           <br />
           'Choose tenses'
+        </Button>
+        <Button className={homeButton} variant="contained">
+          <Link to={routes.testSentences} className={homeLink}>
+            Start Test
+            <br />
+            'Sentences'
+          </Link>
         </Button>
         <ChooseTensesComponent open={open} setOpen={setOpen} />
         <Button className={homeButton} variant="contained">
