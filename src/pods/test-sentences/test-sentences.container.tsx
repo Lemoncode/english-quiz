@@ -21,18 +21,11 @@ export const TestSentencesContainer: React.FC = () => {
   const [sentenceSelected, setsentenceSelected] = React.useState<
     SentenceEntityVm
   >(emptySentence);
-  const [selectedVerb, setSelectedVerb] = React.useState<VerbEntityGlobal>({
-    infinitive: '',
-    past: '',
-    participle: '',
-    translation: '',
-  });
-
+  
   React.useEffect(() => {
     loadFullSentencesCollection().then(sentence =>
       setSentencesCollection(sentence)
     );
-    setSelectedVerb(verb);
   }, []);
 
   React.useEffect(() => {
