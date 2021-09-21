@@ -1,13 +1,17 @@
-import * as sentenceApi from 'core/sentences';
-import * as sentenceVm from './test.sentences.vm';
+import { SentenceEntityApi } from 'core/sentences';
+import { SentenceEntityVm, emptySentence } from './test.sentences.vm';
 import * as verbApi from 'core/verbs/global-verbs.api';
 import { splitSentence } from './test-sentences.business';
 
 export const mapFromSentenceApiToSentenceVm = (
-  sentenceEntityApi: sentenceApi.SentenceEntityApi,
+  sentenceEntityApi: SentenceEntityApi,
   verbCollection: verbApi.VerbEntityApi[]
-): sentenceVm.SentenceEntityVm => {
-  if (sentenceEntityApi && Array.isArray(verbCollection)) {
+): SentenceEntityVm => {
+  if (
+    sentenceEntityApi !== null &&
+    sentenceEntityApi !== undefined &&
+    Array.isArray(verbCollection)
+  ) {
     const [prefixSentence, sufixSentence] = splitSentence(
       sentenceEntityApi.sentence
     );
@@ -24,5 +28,5 @@ export const mapFromSentenceApiToSentenceVm = (
       participle: verbWithTenses.participle,
       translation: verbWithTenses.translation,
     };
-  } else return sentenceVm.emptySentence();
+  } else return emptySentence();
 };

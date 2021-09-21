@@ -1,12 +1,5 @@
 import { SentenceEntityGlobal } from './global-sentences.model';
 
-export const verb = {
-  infinitive: 'win',
-  past: 'won',
-  participle: 'won',
-  translation: 'ganar',
-};
-
 export const defaultSentences: SentenceEntityGlobal[] = [
   {
     verb: 'win',
@@ -29,7 +22,7 @@ export const defaultSentences: SentenceEntityGlobal[] = [
     rightAnswer: 'Participle',
   },
   {
-    verb: verb.translation,
+    verb: 'win',
     sentence: `He had {verb} this game against his school rival.`,
     rightAnswer: 'Participle',
   },

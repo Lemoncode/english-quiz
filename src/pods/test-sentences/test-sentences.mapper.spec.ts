@@ -66,12 +66,14 @@ describe('test-sentences.mapper.spec', () => {
       sentence: `test-prefixSentence {verb}`,
       rightAnswer: 'Present',
     };
-    const verbCollection: verbApi.VerbEntityApi[] = [{
-      infinitive: 'test-verb',
-      past: 'test-verb-past',
-      participle: 'test-verb-participle',
-      translation: 'test-verb-translation',
-    }];
+    const verbCollection: verbApi.VerbEntityApi[] = [
+      {
+        infinitive: 'test-verb',
+        past: 'test-verb-past',
+        participle: 'test-verb-participle',
+        translation: 'test-verb-translation',
+      },
+    ];
     // Act
     const result = mapFromSentenceApiToSentenceVm(
       sentenceEntityApi,
@@ -118,7 +120,8 @@ describe('test-sentences.mapper.spec', () => {
       participle: 'test-verb-participle',
       translation: 'test-verb-translation',
     });
-  });it('should return one mapped sentence when it feeds with one sentence and two verbs', () => {
+  });
+  it('should return one mapped sentence when it feeds with one sentence and two verbs', () => {
     // Arrange
     const sentenceEntityApi: sentenceApi.SentenceEntityApi = {
       verb: 'test-verb',

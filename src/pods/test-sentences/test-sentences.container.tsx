@@ -7,12 +7,14 @@ import { VerbEntityGlobal } from 'core/verbs';
 import { emptySentence, SentenceEntityVm } from './test.sentences.vm';
 import { mapFromSentenceApiToSentenceVm } from './test-sentences.mappers';
 
-export const verb: VerbEntityGlobal = {
-  infinitive: 'win',
-  past: 'won',
-  participle: 'won',
-  translation: 'ganar',
-};
+export const verb: VerbEntityGlobal[] = [
+  {
+    infinitive: 'win',
+    past: 'won',
+    participle: 'won',
+    translation: 'ganar',
+  },
+];
 
 export const TestSentencesContainer: React.FC = () => {
   const [sentencesCollection, setSentencesCollection] = React.useState<
@@ -21,7 +23,7 @@ export const TestSentencesContainer: React.FC = () => {
   const [sentenceSelected, setsentenceSelected] = React.useState<
     SentenceEntityVm
   >(emptySentence);
-  
+
   React.useEffect(() => {
     loadFullSentencesCollection().then(sentence =>
       setSentencesCollection(sentence)
@@ -29,8 +31,14 @@ export const TestSentencesContainer: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    const randomSentence = pickRandomSentence(sentencesCollection);
-    setsentenceSelected(mapFromSentenceApiToSentenceVm(randomSentence, verb));
+    if (sentencesCollection.length > 0) {
+      const randomSentence = pickRandomSentence(sentencesCollection);
+      const mapRandomSentence = mapFromSentenceApiToSentenceVm(
+        randomSentence,
+        verb
+      );
+      setsentenceSelected(mapRandomSentence);
+    }
   }, [sentencesCollection]);
 
   return (
