@@ -43,7 +43,6 @@ export const TestSentencesContainer: React.FC = () => {
   return (
     <TestSentencesComponent
       sentenceSelected={sentenceSelected}
-      selectedVerb={selectedVerb}
     />
   );
 };
