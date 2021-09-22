@@ -12,9 +12,7 @@ export const TestSentencesContainer: React.FC = () => {
     globalVerbsContext
   );
 
-  // I do not know if this filter to leave me only the selected 
-  // verbs is necessary or is it in another site already done
-  const selectedVerbsObject = verbCollection.filter(
+  const selectedVerbsWithInfo = verbCollection.filter(
     x => selectedVerbs.indexOf(x.infinitive) > -1
   );
 
@@ -36,7 +34,7 @@ export const TestSentencesContainer: React.FC = () => {
       const randomSentence = pickRandomSentence(sentencesCollection);
       const mapRandomSentence = mapFromSentenceApiToSentenceVm(
         randomSentence,
-        selectedVerbsObject
+        selectedVerbsWithInfo
       );
       setsentenceSelected(mapRandomSentence);
     }
