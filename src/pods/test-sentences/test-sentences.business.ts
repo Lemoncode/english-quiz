@@ -4,8 +4,8 @@ export const pickRandomSentence = (
   sentenceCollection: SentenceEntityApi[]
 ): SentenceEntityApi => {
   if (Array.isArray(sentenceCollection) && sentenceCollection.length > 0) {
-    const sentenceCollectionLenght = sentenceCollection.length;
-    const index = Math.floor(Math.random() * sentenceCollectionLenght);
+    const sentenceCollectionLength = sentenceCollection.length;
+    const index = Math.floor(Math.random() * sentenceCollectionLength);
 
     return sentenceCollection[index];
   }
