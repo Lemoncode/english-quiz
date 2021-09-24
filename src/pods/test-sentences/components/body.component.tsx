@@ -24,6 +24,7 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
     mainContainer,
     buttonGroupContainer,
     backContainer,
+    decoracionUnderLine,
     pictureContainer,
     picture,
   } = styles;
@@ -49,7 +50,7 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
         <div>
           <Typography className={title} variant="body1" component="h5">
             <span> {prefixSentence}</span>
-            <span> _____ </span>
+            <span className={decoracionUnderLine}> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
             <span> {sufixSentence}</span>
           </Typography>
         </div>
