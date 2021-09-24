@@ -36,7 +36,7 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
 
   const handleButtonValue = e => {
     e.currentTarget.value === rightAnswer ? setRightAnswerValue(true) : setRightAnswerValue(false);
-    setVerbsForms(e.currentTarget.value);
+    setVerbsForms(rightAnswer);
   };
 
   const switchVerbForms = state => {
