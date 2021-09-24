@@ -59,7 +59,6 @@ export const HomeComponent = () => {
           <br />
           'Choose tenses'
         </Button>
-        <ChooseTensesComponent open={open} setOpen={setOpen} />
         <Button className={homeButton} variant="contained">
           <Link to={routes.testSentences} className={homeLink}>
             Start Test
@@ -67,6 +66,7 @@ export const HomeComponent = () => {
             'Sentences'
           </Link>
         </Button>
+        <ChooseTensesComponent open={open} setOpen={setOpen} />
         <Button className={homeButton} variant="contained">
           <Link to={routes.configureVerbs} className={homeLink}>
             Choose your verbs
