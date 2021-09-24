@@ -24,7 +24,17 @@ export const title = css`
 `;
 
 export const decoracionUnderLine = css`
-text-decoration-line: underline;
+  text-decoration-line: underline;
+`;
+
+export const incorrectSpanStyle = css`
+  color: #ff0000;
+  font-weight: bold;
+`;
+
+export const correctSpanStyle = css`
+  color: #8acc26;
+  font-weight: bold;
 `;
 
 export const backContainer = css`

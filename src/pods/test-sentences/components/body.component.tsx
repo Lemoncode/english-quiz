@@ -25,9 +25,31 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
     buttonGroupContainer,
     backContainer,
     decoracionUnderLine,
+    correctSpanStyle,
+    incorrectSpanStyle,
     pictureContainer,
     picture,
   } = styles;
+
+  const [rightAnswerValue, setRightAnswerValue] = React.useState(null);
+  const [verbForms, setVerbsForms] = React.useState('');
+
+  const handleButtonValue = e => {
+    e.currentTarget.value === rightAnswer ? setRightAnswerValue(true) : setRightAnswerValue(false);
+    setVerbsForms(e.currentTarget.value);
+  };
+
+  const switchVerbForms = state => {
+    switch (state) {
+      case 'Present':
+        return present;
+      case 'Past':
+        return past;
+      default:
+        return participle;
+    }
+  };
+
   return (
     <main className={mainContainer}>
       <h1 className={title}>{translation.toUpperCase()}</h1>
@@ -42,15 +64,34 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
             size="large"
             aria-label="contained primary button group"
           >
-            <Button>{present}</Button>
-            <Button>{past}</Button>
-            <Button>{participle}</Button>
+            <Button onClick={handleButtonValue} value="Present">
+              {present}
+            </Button>
+            <Button onClick={handleButtonValue} value="Past">
+              {past}
+            </Button>
+            <Button onClick={handleButtonValue} value="Participle">
+              {participle}
+            </Button>
           </ButtonGroup>
         </div>
         <div>
           <Typography className={title} variant="body1" component="h5">
             <span> {prefixSentence}</span>
-            <span className={decoracionUnderLine}> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            {rightAnswerValue === null ? (
+              <span className={decoracionUnderLine}>
+                {' '}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </span>
+            ) : rightAnswerValue ? (
+              <span className={correctSpanStyle}>
+                {switchVerbForms(verbForms)}
+              </span>
+            ) : (
+              <span className={incorrectSpanStyle}>
+                {switchVerbForms(verbForms)}
+              </span>
+            )}
             <span> {sufixSentence}</span>
           </Typography>
         </div>
