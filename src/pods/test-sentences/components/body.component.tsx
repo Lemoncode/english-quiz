@@ -36,7 +36,7 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
       : setRightAnswerValue(false);
     setVerbsForms(e.currentTarget.value);
   };
-  console.log(verbForms);
+
   return (
     <main className={mainContainer}>
       <h1 className={title}>{translation.toUpperCase()}</h1>
