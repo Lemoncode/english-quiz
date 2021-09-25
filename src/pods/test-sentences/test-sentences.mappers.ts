@@ -19,11 +19,22 @@ export const mapFromSentenceApiToSentenceVm = (
       verb => verb.infinitive === sentenceEntityApi.verb
     );
 
+    const thirdPersonValue = (sentenceEntity: SentenceEntityApi) => {
+      const sentenceProperties = Object.keys(sentenceEntity);
+
+      if (sentenceProperties.includes('thirdPerson')) {
+        return `${verbWithTenses.infinitive}s`;
+      } else {
+        return verbWithTenses.infinitive;
+      }
+    };
+
     return {
       prefixSentence: prefixSentence,
       sufixSentence: sufixSentence,
       rightAnswer: sentenceEntityApi.rightAnswer,
-      present: verbWithTenses.infinitive,
+      present: thirdPersonValue(sentenceEntityApi),
+      presentButton: verbWithTenses.infinitive,
       past: verbWithTenses.past,
       participle: verbWithTenses.participle,
       translation: verbWithTenses.translation,

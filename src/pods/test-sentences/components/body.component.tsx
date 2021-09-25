@@ -14,6 +14,7 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
   const {
     rightAnswer,
     present,
+    presentButton,
     past,
     participle,
     translation,
@@ -52,7 +53,7 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
             aria-label="contained primary button group"
           >
             <Button onClick={handleButtonValue} value="Present">
-              {present}
+              {presentButton}
             </Button>
             <Button onClick={handleButtonValue} value="Past">
               {past}

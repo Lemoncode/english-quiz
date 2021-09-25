@@ -5,6 +5,7 @@ export interface SentenceEntityVm {
   sufixSentence: string;
   rightAnswer: TensesViewModel;
   present: string;
+  presentButton: string;
   past: string;
   participle: string;
   translation: string;
@@ -15,6 +16,7 @@ export const emptySentence = (): SentenceEntityVm => ({
   sufixSentence: '',
   rightAnswer: 'Present',
   present: '',
+  presentButton: '',
   past: '',
   participle: '',
   translation: '',

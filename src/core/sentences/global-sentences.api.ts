@@ -7,6 +7,7 @@ export interface SentenceEntityApi {
   verb: string;
   sentence: string;
   rightAnswer: TensesEntityApi;
+  thirdPerson?: string;
 }
 
 export const loadFullSentencesCollection = async (): Promise<SentenceEntityApi[]> => {
