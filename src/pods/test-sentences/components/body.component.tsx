@@ -1,8 +1,9 @@
 import React from 'react';
 import * as styles from 'common/styles/tests.styles';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { Typography, Button } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { SentenceEntityVm } from '../test.sentences.vm';
+import { SpanComponent } from './span.component';
 
 interface Props {
   sentenceSelected: SentenceEntityVm;
@@ -11,8 +12,6 @@ interface Props {
 export const BodyComponent: React.FunctionComponent<Props> = props => {
   const { sentenceSelected } = props;
   const {
-    prefixSentence,
-    sufixSentence,
     rightAnswer,
     present,
     past,
@@ -24,9 +23,6 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
     mainContainer,
     buttonGroupContainer,
     backContainer,
-    decoracionUnderLine,
-    correctSpanStyle,
-    incorrectSpanStyle,
     pictureContainer,
     picture,
   } = styles;
@@ -35,19 +31,10 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
   const [verbForms, setVerbsForms] = React.useState('');
 
   const handleButtonValue = e => {
-    e.currentTarget.value === rightAnswer ? setRightAnswerValue(true) : setRightAnswerValue(false);
+    e.currentTarget.value === rightAnswer
+      ? setRightAnswerValue(true)
+      : setRightAnswerValue(false);
     setVerbsForms(rightAnswer);
-  };
-
-  const switchVerbForms = state => {
-    switch (state) {
-      case 'Present':
-        return present;
-      case 'Past':
-        return past;
-      default:
-        return participle;
-    }
   };
 
   return (
@@ -76,24 +63,11 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
           </ButtonGroup>
         </div>
         <div>
-          <Typography className={title} variant="body1" component="h5">
-            <span> {prefixSentence}</span>
-            {rightAnswerValue === null ? (
-              <span className={decoracionUnderLine}>
-                {' '}
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              </span>
-            ) : rightAnswerValue ? (
-              <span className={correctSpanStyle}>
-                {switchVerbForms(verbForms)}
-              </span>
-            ) : (
-              <span className={incorrectSpanStyle}>
-                {switchVerbForms(verbForms)}
-              </span>
-            )}
-            <span> {sufixSentence}</span>
-          </Typography>
+          <SpanComponent
+            sentenceSelected={sentenceSelected}
+            rightAnswerValue={rightAnswerValue}
+            verbForms={verbForms}
+          />
         </div>
       </div>
     </main>
