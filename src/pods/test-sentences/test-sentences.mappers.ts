@@ -23,7 +23,11 @@ export const mapFromSentenceApiToSentenceVm = (
       const sentenceProperties = Object.keys(sentenceEntity);
 
       if (sentenceProperties.includes('thirdPerson')) {
-        return `${verbWithTenses.infinitive}s`;
+        if (/(\b(does\snot|doesn't)\b)/i.test(sentenceEntity.sentence)) {
+          return verbWithTenses.infinitive;
+        } else {
+          return sentenceEntity.thirdPerson;
+        }
       } else {
         return verbWithTenses.infinitive;
       }
