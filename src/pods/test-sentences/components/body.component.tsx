@@ -13,7 +13,6 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
   const { sentenceSelected } = props;
   const {
     rightAnswer,
-    present,
     presentButton,
     past,
     participle,
@@ -35,9 +34,9 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
     e.currentTarget.value === rightAnswer
       ? setRightAnswerValue(true)
       : setRightAnswerValue(false);
-    setVerbsForms(rightAnswer);
+    setVerbsForms(e.currentTarget.value);
   };
-
+  console.log(verbForms);
   return (
     <main className={mainContainer}>
       <h1 className={title}>{translation.toUpperCase()}</h1>

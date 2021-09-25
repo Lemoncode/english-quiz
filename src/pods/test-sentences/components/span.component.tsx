@@ -36,6 +36,8 @@ export const SpanComponent: React.FunctionComponent<Props> = props => {
     }
   };
 
+  // console.log(switchVerbForms(verbForms));
+
   return (
     <Typography className={title} variant="body1" component="h5">
       <span> {prefixSentence}</span>
