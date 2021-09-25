@@ -21,11 +21,13 @@ export const defaultSentences: SentenceEntityGlobal[] = [
     verb: 'win',
     sentence: `Oliver had {verb} the game in overtime.`,
     rightAnswer: 'Participle',
+    thirdPerson: 'wins',
   },
   {
     verb: 'win',
     sentence: `He had {verb} this game against his school rival.`,
     rightAnswer: 'Participle',
+    thirdPerson: 'wins',
   },
   {
     verb: 'win',
