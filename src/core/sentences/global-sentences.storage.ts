@@ -5,7 +5,6 @@ export const defaultSentences: SentenceEntityGlobal[] = [
     verb: 'win',
     sentence: `Brazil {verb} five world cups, it’s incredible!`,
     rightAnswer: 'Past',
-    thirdPerson: 'wins',
   },
   {
     verb: 'win',
@@ -21,13 +20,11 @@ export const defaultSentences: SentenceEntityGlobal[] = [
     verb: 'win',
     sentence: `Oliver had {verb} the game in overtime.`,
     rightAnswer: 'Participle',
-    thirdPerson: 'wins',
   },
   {
     verb: 'win',
     sentence: `He had {verb} this game against his school rival.`,
     rightAnswer: 'Participle',
-    thirdPerson: 'wins',
   },
   {
     verb: 'win',
@@ -39,6 +36,5 @@ export const defaultSentences: SentenceEntityGlobal[] = [
     verb: 'win',
     sentence: `He doesn't {verb} any game of cricket.`,
     rightAnswer: 'Present',
-    thirdPerson: 'wins',
   },
 ];

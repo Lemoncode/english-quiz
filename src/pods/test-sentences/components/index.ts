@@ -1,2 +1,2 @@
 export * from './body.component';
-export * from './span.component';
+export * from './sentence.component';

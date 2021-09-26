@@ -1,7 +1,7 @@
 import { defaultSentences } from './global-sentences.storage';
 import { mapSentenceCollectionFromModelToApi } from './global-sentences.api.mappers';
 
-type TensesEntityApi = 'Present' | 'Past' | 'Participle';
+export type TensesEntityApi = 'Present' | 'Past' | 'Participle';
 
 export interface SentenceEntityApi {
   verb: string;

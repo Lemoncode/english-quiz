@@ -3,7 +3,7 @@ import * as styles from 'common/styles/tests.styles';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Button } from '@material-ui/core';
 import { SentenceEntityVm } from '../test.sentences.vm';
-import { SpanComponent } from './span.component';
+import { SentenceComponent } from './sentence.component';
 
 interface Props {
   sentenceSelected: SentenceEntityVm;
@@ -12,11 +12,11 @@ interface Props {
 export const BodyComponent: React.FunctionComponent<Props> = props => {
   const { sentenceSelected } = props;
   const {
-    rightAnswer,
-    presentButton,
+    present,
     past,
     participle,
     translation,
+    rightTenseAnswer,
   } = sentenceSelected;
   const {
     title,
@@ -27,13 +27,21 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
     picture,
   } = styles;
 
-  const [rightAnswerValue, setRightAnswerValue] = React.useState(null);
+  enum QuestionStatus {
+    notAnsweredYet,
+    correct,
+    incorrect,
+  }
+
+  const [rightAnswerValue, setRightAnswerValue] = React.useState(
+    QuestionStatus.notAnsweredYet
+  );
   const [verbForms, setVerbsForms] = React.useState('');
 
   const handleButtonValue = e => {
-    e.currentTarget.value === rightAnswer
-      ? setRightAnswerValue(true)
-      : setRightAnswerValue(false);
+    e.currentTarget.value === rightTenseAnswer
+      ? setRightAnswerValue(QuestionStatus.correct)
+      : setRightAnswerValue(QuestionStatus.incorrect);
     setVerbsForms(e.currentTarget.value);
   };
 
@@ -52,7 +60,7 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
             aria-label="contained primary button group"
           >
             <Button onClick={handleButtonValue} value="Present">
-              {presentButton}
+              {present}
             </Button>
             <Button onClick={handleButtonValue} value="Past">
               {past}
@@ -63,7 +71,7 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
           </ButtonGroup>
         </div>
         <div>
-          <SpanComponent
+          <SentenceComponent
             sentenceSelected={sentenceSelected}
             rightAnswerValue={rightAnswerValue}
             verbForms={verbForms}
