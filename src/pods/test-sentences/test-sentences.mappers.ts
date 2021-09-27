@@ -1,5 +1,5 @@
 import { SentenceEntityApi } from 'core/sentences';
-import { SentenceEntityVm, emptySentence } from './test.sentences.vm';
+import { SentenceEntityVm, emptySentence } from './test-sentences.vm';
 import * as verbApi from 'core/verbs/global-verbs.api';
 import { splitSentence } from './test-sentences.business';
 import { TensesEntityApi } from 'core/sentences';
@@ -40,7 +40,7 @@ export const mapFromSentenceApiToSentenceVm = (
   sentenceEntityApi: SentenceEntityApi,
   verbCollection: verbApi.VerbEntityApi[]
 ): SentenceEntityVm => {
-  if (isAllDataInformed) {
+  if (isAllDataInformed(sentenceEntityApi, verbCollection)) {
     const [prefixSentence, sufixSentence] = splitSentence(
       sentenceEntityApi.sentence
     );

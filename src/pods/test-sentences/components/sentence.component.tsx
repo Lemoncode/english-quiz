@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { QuestionStatus, SentenceEntityVm } from '../test.sentences.vm';
+import { QuestionStatus, SentenceEntityVm } from '../test-sentences.vm';
 import * as styles from 'common/styles/tests.styles';
 
 const VerbGapComponent = () => {
