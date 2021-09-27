@@ -5,19 +5,49 @@ import { Button } from '@material-ui/core';
 import { QuestionStatus, SentenceEntityVm } from '../test-sentences.vm';
 import { SentenceComponent } from './sentence.component';
 
+interface ButtonGroupProps {
+  sentenceSelected: SentenceEntityVm;
+  setRightAnswerValue: (number) => void;
+  setVerbsForms: (string) => void;
+}
+
+const TensesButtonGroup: React.FunctionComponent<ButtonGroupProps> = props => {
+  const { sentenceSelected, setRightAnswerValue, setVerbsForms } = props;
+  const { present, past, participle, rightTenseAnswer } = sentenceSelected;
+
+  const handleButtonValue = e => {
+    e.currentTarget.value === rightTenseAnswer
+      ? setRightAnswerValue(QuestionStatus.correct)
+      : setRightAnswerValue(QuestionStatus.incorrect);
+    setVerbsForms(e.currentTarget.value);
+  };
+  return (
+    <ButtonGroup
+      variant="contained"
+      color="primary"
+      size="large"
+      aria-label="contained primary button group"
+    >
+      <Button onClick={handleButtonValue} value="Present">
+        {present}
+      </Button>
+      <Button onClick={handleButtonValue} value="Past">
+        {past}
+      </Button>
+      <Button onClick={handleButtonValue} value="Participle">
+        {participle}
+      </Button>
+    </ButtonGroup>
+  );
+};
+
 interface Props {
   sentenceSelected: SentenceEntityVm;
 }
 
 export const BodyComponent: React.FunctionComponent<Props> = props => {
   const { sentenceSelected } = props;
-  const {
-    present,
-    past,
-    participle,
-    translation,
-    rightTenseAnswer,
-  } = sentenceSelected;
+  const { translation } = sentenceSelected;
   const {
     title,
     mainContainer,
@@ -32,13 +62,6 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
   );
   const [verbForms, setVerbsForms] = React.useState('');
 
-  const handleButtonValue = e => {
-    e.currentTarget.value === rightTenseAnswer
-      ? setRightAnswerValue(QuestionStatus.correct)
-      : setRightAnswerValue(QuestionStatus.incorrect);
-    setVerbsForms(e.currentTarget.value);
-  };
-
   return (
     <main className={mainContainer}>
       <h1 className={title}>{translation.toUpperCase()}</h1>
@@ -47,22 +70,11 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
           <img className={picture} src={`/assets/verb-images/buy.png`} />
         </div>
         <div className={buttonGroupContainer}>
-          <ButtonGroup
-            variant="contained"
-            color="primary"
-            size="large"
-            aria-label="contained primary button group"
-          >
-            <Button onClick={handleButtonValue} value="Present">
-              {present}
-            </Button>
-            <Button onClick={handleButtonValue} value="Past">
-              {past}
-            </Button>
-            <Button onClick={handleButtonValue} value="Participle">
-              {participle}
-            </Button>
-          </ButtonGroup>
+          <TensesButtonGroup
+            sentenceSelected={sentenceSelected}
+            setRightAnswerValue={setRightAnswerValue}
+            setVerbsForms={setVerbsForms}
+          />
         </div>
         <div>
           <SentenceComponent
