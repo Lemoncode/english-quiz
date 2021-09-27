@@ -1,8 +1,9 @@
 import React from 'react';
 import * as styles from 'common/styles/tests.styles';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { Typography, Button } from '@material-ui/core';
-import { SentenceEntityVm } from '../test.sentences.vm';
+import { Button } from '@material-ui/core';
+import { QuestionStatus, SentenceEntityVm } from '../test-sentences.vm';
+import { SentenceComponent } from './sentence.component';
 
 interface Props {
   sentenceSelected: SentenceEntityVm;
@@ -11,13 +12,11 @@ interface Props {
 export const BodyComponent: React.FunctionComponent<Props> = props => {
   const { sentenceSelected } = props;
   const {
-    prefixSentence,
-    sufixSentence,
-    rightAnswer,
     present,
     past,
     participle,
     translation,
+    rightTenseAnswer,
   } = sentenceSelected;
   const {
     title,
@@ -27,6 +26,19 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
     pictureContainer,
     picture,
   } = styles;
+
+  const [rightAnswerValue, setRightAnswerValue] = React.useState(
+    QuestionStatus.notAnsweredYet
+  );
+  const [verbForms, setVerbsForms] = React.useState('');
+
+  const handleButtonValue = e => {
+    e.currentTarget.value === rightTenseAnswer
+      ? setRightAnswerValue(QuestionStatus.correct)
+      : setRightAnswerValue(QuestionStatus.incorrect);
+    setVerbsForms(e.currentTarget.value);
+  };
+
   return (
     <main className={mainContainer}>
       <h1 className={title}>{translation.toUpperCase()}</h1>
@@ -41,17 +53,23 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
             size="large"
             aria-label="contained primary button group"
           >
-            <Button>{present}</Button>
-            <Button>{past}</Button>
-            <Button>{participle}</Button>
+            <Button onClick={handleButtonValue} value="Present">
+              {present}
+            </Button>
+            <Button onClick={handleButtonValue} value="Past">
+              {past}
+            </Button>
+            <Button onClick={handleButtonValue} value="Participle">
+              {participle}
+            </Button>
           </ButtonGroup>
         </div>
         <div>
-          <Typography className={title} variant="body1" component="h5">
-            <span> {prefixSentence}</span>
-            <span> _____ </span>
-            <span> {sufixSentence}</span>
-          </Typography>
+          <SentenceComponent
+            sentenceSelected={sentenceSelected}
+            rightAnswerValue={rightAnswerValue}
+            verbForms={verbForms}
+          />
         </div>
       </div>
     </main>

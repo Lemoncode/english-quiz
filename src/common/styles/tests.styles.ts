@@ -23,6 +23,20 @@ export const title = css`
   }
 `;
 
+export const decoracionUnderLine = css`
+  text-decoration-line: underline;
+`;
+
+export const incorrectSpanStyle = css`
+  color: #ff0000;
+  font-weight: bold;
+`;
+
+export const correctSpanStyle = css`
+  color: #8acc26;
+  font-weight: bold;
+`;
+
 export const backContainer = css`
   margin-top: ${spacing(19)};
   margin-bottom: ${spacing(6)};
@@ -45,15 +59,15 @@ export const homeBackContainer = css`
 `;
 
 export const backgroundResult1 = css`
-  background-color: #9BDE7E;
+  background-color: #9bde7e;
 `;
 
 export const backgroundResult2 = css`
-  background-color: #F9F871;
+  background-color: #f9f871;
 `;
 
 export const backgroundResult3 = css`
-  background-color: #FFD180;
+  background-color: #ffd180;
 `;
 
 export const backgroundResult4 = css`
@@ -82,11 +96,11 @@ export const picture = css`
 
 export const ballons = css`
   margin-top: 2rem;
-`
+`;
 
 export const logoHome = css`
   width: 300px;
-`
+`;
 
 export const optionsList = css`
   display: flex;
@@ -121,7 +135,7 @@ export const buttonGroupContainer = css`
   justify-content: center;
   align-items: flex-start;
   padding-top: ${spacing(4)};
-`
+`;
 
 export const inputField = css`
   width: 100%;
@@ -206,12 +220,12 @@ export const homeButton = css`
     width: ${spacing(30)};
     justify-content: center;
   }
-`
+`;
 
 export const homeLink = css`
   color: #ffffff;
   text-decoration: none;
-`
+`;
 
 export const arrowIcon = css`
   margin-left: ${spacing(1)};
@@ -281,7 +295,7 @@ export const buttonSecondChance = css`
   font-weight: 700;
   font-size: 1.2rem;
   color: ${color.lightWhite};
-  background-color: #ED7432;
+  background-color: #ed7432;
   transition: all 0.2s;
   --webkit-transition: all 0.2s;
   @media (min-width: ${breakpoints.values.xs}px) {

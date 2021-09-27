@@ -3,7 +3,7 @@ import { loadFullSentencesCollection } from 'core/sentences';
 import { SentenceEntityApi } from 'core/sentences';
 import { pickRandomSentence } from './test-sentences.business';
 import { TestSentencesComponent } from './test-sentences.component';
-import { emptySentence, SentenceEntityVm } from './test.sentences.vm';
+import { emptySentence, SentenceEntityVm } from './test-sentences.vm';
 import { mapFromSentenceApiToSentenceVm } from './test-sentences.mappers';
 import { globalVerbsContext } from 'core/verbs';
 

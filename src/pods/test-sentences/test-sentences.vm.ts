@@ -1,9 +1,16 @@
 type TensesViewModel = 'Present' | 'Past' | 'Participle';
 
+export enum QuestionStatus {
+  notAnsweredYet,
+  correct,
+  incorrect,
+}
+
 export interface SentenceEntityVm {
   prefixSentence: string;
   sufixSentence: string;
-  rightAnswer: TensesViewModel;
+  rightTenseAnswer: TensesViewModel;
+  rightTextAnswer: string;
   present: string;
   past: string;
   participle: string;
@@ -13,7 +20,8 @@ export interface SentenceEntityVm {
 export const emptySentence = (): SentenceEntityVm => ({
   prefixSentence: '',
   sufixSentence: '',
-  rightAnswer: 'Present',
+  rightTenseAnswer: 'Present',
+  rightTextAnswer: '',
   present: '',
   past: '',
   participle: '',
