@@ -2,7 +2,7 @@ import React from 'react';
 import * as styles from 'common/styles/tests.styles';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Button } from '@material-ui/core';
-import { SentenceEntityVm } from '../test.sentences.vm';
+import { QuestionStatus, SentenceEntityVm } from '../test.sentences.vm';
 import { SentenceComponent } from './sentence.component';
 
 interface Props {
@@ -26,12 +26,6 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
     pictureContainer,
     picture,
   } = styles;
-
-  enum QuestionStatus {
-    notAnsweredYet,
-    correct,
-    incorrect,
-  }
 
   const [rightAnswerValue, setRightAnswerValue] = React.useState(
     QuestionStatus.notAnsweredYet

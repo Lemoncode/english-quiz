@@ -1,5 +1,11 @@
 type TensesViewModel = 'Present' | 'Past' | 'Participle';
 
+export enum QuestionStatus {
+  notAnsweredYet,
+  correct,
+  incorrect,
+}
+
 export interface SentenceEntityVm {
   prefixSentence: string;
   sufixSentence: string;

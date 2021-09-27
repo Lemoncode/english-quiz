@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { SentenceEntityVm } from '../test.sentences.vm';
+import { QuestionStatus, SentenceEntityVm } from '../test.sentences.vm';
 import * as styles from 'common/styles/tests.styles';
 
 const VerbGapComponent = () => {
@@ -47,11 +47,11 @@ const VerbComponent: React.FC<VerbComponentProps> = (
     <>
       {(() => {
         switch (rightAnswerValue) {
-          case 0:
+          case QuestionStatus.notAnsweredYet:
             return <VerbGapComponent />;
-          case 1:
+          case QuestionStatus.correct:
             return <span className={correctSpanStyle}>{rightTextAnswer}</span>;
-          case 2:
+          case QuestionStatus.incorrect:
             return (
               <span className={incorrectSpanStyle}>
                 {switchVerbForms(verbForms)}
