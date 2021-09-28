@@ -173,24 +173,30 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
         )}
         {showSentenceResult && (
           <>
+            <SentenceComponent
+              sentenceSelected={sentenceSelected}
+              rightAnswerValue={rightAnswerValue}
+              verbForms={verbForms}
+            />
             <ShowResultsSentence
               sentenceSelected={sentenceSelected}
               rightAnswerValue={rightAnswerValue}
             />
-
-            <Button
-              className={nextBtn}
-              onClick={handleNextQuestion}
-              variant="contained"
-            >
-              <div className={insideBtnContainer}>
-                <span>Next</span>
-                <ArrowForwardIcon className={arrowIcon} />
-              </div>
-            </Button>
           </>
         )}
       </div>
+      {showSentenceResult && (
+        <Button
+          className={nextBtn}
+          onClick={handleNextQuestion}
+          variant="contained"
+        >
+          <div className={insideBtnContainer}>
+            <span>Next</span>
+            <ArrowForwardIcon className={arrowIcon} />
+          </div>
+        </Button>
+      )}
     </main>
   );
 };
