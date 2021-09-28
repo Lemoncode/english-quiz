@@ -115,6 +115,88 @@ const ShowResultsSentence: React.FunctionComponent<ShowResultsProps> = props => 
   );
 };
 
+interface QuestionComponentProps {
+  sentenceSelected: SentenceEntityVm;
+  rightAnswerValue: number;
+  setRightAnswerValue: (number) => void;
+  setVerbsForms: (string) => void;
+  verbForms: string;
+  setShowSetenceResult: (boolean) => void;
+}
+
+const QuestionComponent: React.FunctionComponent<QuestionComponentProps> = props => {
+  const {
+    sentenceSelected,
+    rightAnswerValue,
+    setRightAnswerValue,
+    setVerbsForms,
+    verbForms,
+    setShowSetenceResult,
+  } = props;
+  const { buttonGroupContainer } = styles;
+  return (
+    <>
+      <div className={buttonGroupContainer}>
+        <TensesButtonGroup
+          sentenceSelected={sentenceSelected}
+          setRightAnswerValue={setRightAnswerValue}
+          setVerbsForms={setVerbsForms}
+          setShowSetenceResult={setShowSetenceResult}
+        />
+      </div>
+      <SentenceComponent
+        sentenceSelected={sentenceSelected}
+        rightAnswerValue={rightAnswerValue}
+        verbForms={verbForms}
+      />
+    </>
+  );
+};
+
+interface ResultComponentProps {
+  sentenceSelected: SentenceEntityVm;
+  rightAnswerValue: number;
+  verbForms: string;
+}
+
+const ResultComponent: React.FunctionComponent<ResultComponentProps> = props => {
+  const { sentenceSelected, rightAnswerValue, verbForms } = props;
+  return (
+    <>
+      <SentenceComponent
+        sentenceSelected={sentenceSelected}
+        rightAnswerValue={rightAnswerValue}
+        verbForms={verbForms}
+      />
+      <ShowResultsSentence
+        sentenceSelected={sentenceSelected}
+        rightAnswerValue={rightAnswerValue}
+      />
+    </>
+  );
+};
+
+interface NextVerbButtonProps {
+  handleNextQuestion: () => void;
+}
+
+const NextVerbButton: React.FunctionComponent<NextVerbButtonProps> = props => {
+  const { handleNextQuestion } = props;
+  const { nextBtn, insideBtnContainer, arrowIcon } = styles;
+  return (
+    <Button
+      className={nextBtn}
+      onClick={handleNextQuestion}
+      variant="contained"
+    >
+      <div className={insideBtnContainer}>
+        <span>Next</span>
+        <ArrowForwardIcon className={arrowIcon} />
+      </div>
+    </Button>
+  );
+};
+
 interface Props {
   sentenceSelected: SentenceEntityVm;
 }
@@ -123,13 +205,9 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
   const { sentenceSelected } = props;
   const { translation } = sentenceSelected;
   const {
-    arrowIcon,
     backContainer,
-    buttonGroupContainer,
     backContainerSentence,
-    insideBtnContainer,
     mainContainer,
-    nextBtn,
     picture,
     pictureContainer,
     title,
@@ -154,48 +232,25 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
         <div className={pictureContainer}>
           <img className={picture} src={`/assets/verb-images/buy.png`} />
         </div>
-        {!showSentenceResult && (
-          <>
-            <div className={buttonGroupContainer}>
-              <TensesButtonGroup
-                sentenceSelected={sentenceSelected}
-                setRightAnswerValue={setRightAnswerValue}
-                setVerbsForms={setVerbsForms}
-                setShowSetenceResult={setShowSetenceResult}
-              />
-            </div>
-            <SentenceComponent
-              sentenceSelected={sentenceSelected}
-              rightAnswerValue={rightAnswerValue}
-              verbForms={verbForms}
-            />
-          </>
-        )}
-        {showSentenceResult && (
-          <>
-            <SentenceComponent
-              sentenceSelected={sentenceSelected}
-              rightAnswerValue={rightAnswerValue}
-              verbForms={verbForms}
-            />
-            <ShowResultsSentence
-              sentenceSelected={sentenceSelected}
-              rightAnswerValue={rightAnswerValue}
-            />
-          </>
+        {!showSentenceResult ? (
+          <QuestionComponent
+            sentenceSelected={sentenceSelected}
+            setRightAnswerValue={setRightAnswerValue}
+            setVerbsForms={setVerbsForms}
+            setShowSetenceResult={setShowSetenceResult}
+            rightAnswerValue={rightAnswerValue}
+            verbForms={verbForms}
+          />
+        ) : (
+          <ResultComponent
+            sentenceSelected={sentenceSelected}
+            rightAnswerValue={rightAnswerValue}
+            verbForms={verbForms}
+          />
         )}
       </div>
       {showSentenceResult && (
-        <Button
-          className={nextBtn}
-          onClick={handleNextQuestion}
-          variant="contained"
-        >
-          <div className={insideBtnContainer}>
-            <span>Next</span>
-            <ArrowForwardIcon className={arrowIcon} />
-          </div>
-        </Button>
+        <NextVerbButton handleNextQuestion={handleNextQuestion} />
       )}
     </main>
   );
