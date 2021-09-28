@@ -1,18 +1,25 @@
 import React from 'react';
-import * as styles from 'common/styles/tests.styles';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Button } from '@material-ui/core';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { QuestionStatus, SentenceEntityVm } from '../test-sentences.vm';
 import { SentenceComponent } from './sentence.component';
+import * as styles from 'common/styles/tests.styles';
 
 interface ButtonGroupProps {
   sentenceSelected: SentenceEntityVm;
   setRightAnswerValue: (number) => void;
   setVerbsForms: (string) => void;
+  setShowSetenceResult: (boolean) => void;
 }
 
 const TensesButtonGroup: React.FunctionComponent<ButtonGroupProps> = props => {
-  const { sentenceSelected, setRightAnswerValue, setVerbsForms } = props;
+  const {
+    sentenceSelected,
+    setRightAnswerValue,
+    setVerbsForms,
+    setShowSetenceResult,
+  } = props;
   const { present, past, participle, rightTenseAnswer } = sentenceSelected;
 
   const handleButtonValue = e => {
@@ -20,6 +27,7 @@ const TensesButtonGroup: React.FunctionComponent<ButtonGroupProps> = props => {
       ? setRightAnswerValue(QuestionStatus.correct)
       : setRightAnswerValue(QuestionStatus.incorrect);
     setVerbsForms(e.currentTarget.value);
+    setShowSetenceResult(true);
   };
   return (
     <ButtonGroup
@@ -47,14 +55,31 @@ interface Props {
 
 export const BodyComponent: React.FunctionComponent<Props> = props => {
   const { sentenceSelected } = props;
-  const { translation } = sentenceSelected;
   const {
-    title,
-    mainContainer,
-    buttonGroupContainer,
+    translation,
+    rightTextAnswer,
+    prefixSentence,
+    sufixSentence,
+  } = sentenceSelected;
+  const {
+    answer,
+    arrowIcon,
+    ballons,
     backContainer,
-    pictureContainer,
+    buttonGroupContainer,
+    backContainerSentence,
+    buttonWrong,
+    buttonRight,
+    correctSpanStyle,
+    insideBtn,
+    insideBtnContainer,
+    insideRightAnswer,
+    mainContainer,
+    nextBtn,
     picture,
+    pictureContainer,
+    title,
+    verbsForm,
   } = styles;
 
   const [rightAnswerValue, setRightAnswerValue] = React.useState(
@@ -62,28 +87,98 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
   );
   const [verbForms, setVerbsForms] = React.useState('');
 
+  const [showSentenceResult, setShowSetenceResult] = React.useState(false);
+
+  const handleNextQuestion = () => {
+    setShowSetenceResult(false);
+  };
   return (
     <main className={mainContainer}>
       <h1 className={title}>{translation.toUpperCase()}</h1>
-      <div className={backContainer}>
+      <div className={!showSentenceResult ? backContainer: backContainerSentence}>
         <div className={pictureContainer}>
           <img className={picture} src={`/assets/verb-images/buy.png`} />
         </div>
-        <div className={buttonGroupContainer}>
-          <TensesButtonGroup
-            sentenceSelected={sentenceSelected}
-            setRightAnswerValue={setRightAnswerValue}
-            setVerbsForms={setVerbsForms}
-          />
-        </div>
-        <div>
-          <SentenceComponent
-            sentenceSelected={sentenceSelected}
-            rightAnswerValue={rightAnswerValue}
-            verbForms={verbForms}
-          />
-        </div>
+        {!showSentenceResult && (
+          <>
+            <div className={buttonGroupContainer}>
+              <TensesButtonGroup
+                sentenceSelected={sentenceSelected}
+                setRightAnswerValue={setRightAnswerValue}
+                setVerbsForms={setVerbsForms}
+                setShowSetenceResult={setShowSetenceResult}
+              />
+            </div>
+            <SentenceComponent
+              sentenceSelected={sentenceSelected}
+              rightAnswerValue={rightAnswerValue}
+              verbForms={verbForms}
+            />
+          </>
+        )}
+        {showSentenceResult && (
+          <>
+            <SentenceComponent
+              sentenceSelected={sentenceSelected}
+              rightAnswerValue={rightAnswerValue}
+              verbForms={verbForms}
+            />
+            {(() => {
+              switch (rightAnswerValue) {
+                case QuestionStatus.correct:
+                  return (
+                    <div className={insideRightAnswer}>
+                      <div className={buttonRight}>
+                        <span>RIGHT !!!!</span>
+                      </div>
+                      <div>
+                        <img
+                          className={`${picture} ${ballons}`}
+                          src={`/assets/right-answer/right.png`}
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  );
+                case QuestionStatus.incorrect:
+                  return (
+                    <div className={insideRightAnswer}>
+                      <div>
+                        <div className={buttonWrong}>
+                          <div className={insideBtn}>
+                            <span>Oops... nope</span>
+                          </div>
+                        </div>
+                        <span className={answer}>Answer</span>
+                        <span className={verbsForm}>
+                          <span>{prefixSentence}</span>{' '}
+                          <span className={correctSpanStyle}>
+                            {rightTextAnswer}
+                          </span>{' '}
+                          <span>{sufixSentence}</span>
+                        </span>
+                      </div>
+                    </div>
+                  );
+                default:
+                  return null;
+              }
+            })()}
+          </>
+        )}
       </div>
+      {showSentenceResult && (
+        <Button
+          className={nextBtn}
+          onClick={handleNextQuestion}
+          variant="contained"
+        >
+          <div className={insideBtnContainer}>
+            <span>Next Verb</span>
+            <ArrowForwardIcon className={arrowIcon} />
+          </div>
+        </Button>
+      )}
     </main>
   );
 };
