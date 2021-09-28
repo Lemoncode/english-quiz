@@ -49,37 +49,90 @@ const TensesButtonGroup: React.FunctionComponent<ButtonGroupProps> = props => {
   );
 };
 
+interface ShowResultsProps {
+  sentenceSelected: SentenceEntityVm;
+  rightAnswerValue: number;
+}
+
+const ShowResultsSentence: React.FunctionComponent<ShowResultsProps> = props => {
+  const { sentenceSelected, rightAnswerValue } = props;
+  const { rightTextAnswer, prefixSentence, sufixSentence } = sentenceSelected;
+
+  const {
+    answer,
+    ballons,
+    buttonWrong,
+    buttonRight,
+    correctSpanStyle,
+    insideBtn,
+    insideRightAnswer,
+    picture,
+    verbsForm,
+  } = styles;
+
+  return (
+    <>
+      {(() => {
+        switch (rightAnswerValue) {
+          case QuestionStatus.correct:
+            return (
+              <div className={insideRightAnswer}>
+                <div className={buttonRight}>
+                  <span>RIGHT !!!!</span>
+                </div>
+                <div>
+                  <img
+                    className={`${picture} ${ballons}`}
+                    src={`/assets/right-answer/right.png`}
+                    alt=""
+                  />
+                </div>
+              </div>
+            );
+          case QuestionStatus.incorrect:
+            return (
+              <div className={insideRightAnswer}>
+                <div>
+                  <div className={buttonWrong}>
+                    <div className={insideBtn}>
+                      <span>Oops... nope</span>
+                    </div>
+                  </div>
+                  <span className={answer}>Answer</span>
+                  <span className={verbsForm}>
+                    <span>{prefixSentence}</span>{' '}
+                    <span className={correctSpanStyle}>{rightTextAnswer}</span>{' '}
+                    <span>{sufixSentence}</span>
+                  </span>
+                </div>
+              </div>
+            );
+          default:
+            return null;
+        }
+      })()}
+    </>
+  );
+};
+
 interface Props {
   sentenceSelected: SentenceEntityVm;
 }
 
 export const BodyComponent: React.FunctionComponent<Props> = props => {
   const { sentenceSelected } = props;
+  const { translation } = sentenceSelected;
   const {
-    translation,
-    rightTextAnswer,
-    prefixSentence,
-    sufixSentence,
-  } = sentenceSelected;
-  const {
-    answer,
     arrowIcon,
-    ballons,
     backContainer,
     buttonGroupContainer,
     backContainerSentence,
-    buttonWrong,
-    buttonRight,
-    correctSpanStyle,
-    insideBtn,
     insideBtnContainer,
-    insideRightAnswer,
     mainContainer,
     nextBtn,
     picture,
     pictureContainer,
     title,
-    verbsForm,
   } = styles;
 
   const [rightAnswerValue, setRightAnswerValue] = React.useState(
@@ -95,7 +148,9 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
   return (
     <main className={mainContainer}>
       <h1 className={title}>{translation.toUpperCase()}</h1>
-      <div className={!showSentenceResult ? backContainer: backContainerSentence}>
+      <div
+        className={!showSentenceResult ? backContainer : backContainerSentence}
+      >
         <div className={pictureContainer}>
           <img className={picture} src={`/assets/verb-images/buy.png`} />
         </div>
@@ -118,67 +173,24 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
         )}
         {showSentenceResult && (
           <>
-            <SentenceComponent
+            <ShowResultsSentence
               sentenceSelected={sentenceSelected}
               rightAnswerValue={rightAnswerValue}
-              verbForms={verbForms}
             />
-            {(() => {
-              switch (rightAnswerValue) {
-                case QuestionStatus.correct:
-                  return (
-                    <div className={insideRightAnswer}>
-                      <div className={buttonRight}>
-                        <span>RIGHT !!!!</span>
-                      </div>
-                      <div>
-                        <img
-                          className={`${picture} ${ballons}`}
-                          src={`/assets/right-answer/right.png`}
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  );
-                case QuestionStatus.incorrect:
-                  return (
-                    <div className={insideRightAnswer}>
-                      <div>
-                        <div className={buttonWrong}>
-                          <div className={insideBtn}>
-                            <span>Oops... nope</span>
-                          </div>
-                        </div>
-                        <span className={answer}>Answer</span>
-                        <span className={verbsForm}>
-                          <span>{prefixSentence}</span>{' '}
-                          <span className={correctSpanStyle}>
-                            {rightTextAnswer}
-                          </span>{' '}
-                          <span>{sufixSentence}</span>
-                        </span>
-                      </div>
-                    </div>
-                  );
-                default:
-                  return null;
-              }
-            })()}
+
+            <Button
+              className={nextBtn}
+              onClick={handleNextQuestion}
+              variant="contained"
+            >
+              <div className={insideBtnContainer}>
+                <span>Next</span>
+                <ArrowForwardIcon className={arrowIcon} />
+              </div>
+            </Button>
           </>
         )}
       </div>
-      {showSentenceResult && (
-        <Button
-          className={nextBtn}
-          onClick={handleNextQuestion}
-          variant="contained"
-        >
-          <div className={insideBtnContainer}>
-            <span>Next Verb</span>
-            <ArrowForwardIcon className={arrowIcon} />
-          </div>
-        </Button>
-      )}
     </main>
   );
 };
