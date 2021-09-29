@@ -5,6 +5,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { QuestionStatus, SentenceEntityVm } from '../test-sentences.vm';
 import { SentenceComponent } from './sentence.component';
 import * as styles from 'common/styles/tests.styles';
+import { SentenceEntityApi } from '../../../core/sentences/global-sentences.api';
 
 interface ButtonGroupProps {
   sentenceSelected: SentenceEntityVm;
@@ -199,10 +200,20 @@ const NextVerbButton: React.FunctionComponent<NextVerbButtonProps> = props => {
 
 interface Props {
   sentenceSelected: SentenceEntityVm;
+  mapRandomSentence: (
+    sentencesCollection: SentenceEntityApi[]
+  ) => SentenceEntityVm;
+  sentencesCollection: SentenceEntityApi[];
+  setsentenceSelected: (sentence: SentenceEntityVm) => void;
 }
 
 export const BodyComponent: React.FunctionComponent<Props> = props => {
-  const { sentenceSelected } = props;
+  const {
+    sentenceSelected,
+    mapRandomSentence,
+    sentencesCollection,
+    setsentenceSelected,
+  } = props;
   const { translation } = sentenceSelected;
   const {
     backContainer,
@@ -222,6 +233,8 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
 
   const handleNextQuestion = () => {
     setShowSetenceResult(false);
+    setsentenceSelected(mapRandomSentence(sentencesCollection));
+    setRightAnswerValue(QuestionStatus.notAnsweredYet);
   };
   return (
     <main className={mainContainer}>

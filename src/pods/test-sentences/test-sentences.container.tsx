@@ -29,16 +29,26 @@ export const TestSentencesContainer: React.FC = () => {
     );
   }, []);
 
+  const mapRandomSentence = (
+    sentencesCollection: SentenceEntityApi[]
+  ): SentenceEntityVm =>
+    mapFromSentenceApiToSentenceVm(
+      pickRandomSentence(sentencesCollection),
+      selectedVerbsWithInfo
+    );
+
   React.useEffect(() => {
     if (sentencesCollection.length > 0) {
-      const randomSentence = pickRandomSentence(sentencesCollection);
-      const mapRandomSentence = mapFromSentenceApiToSentenceVm(
-        randomSentence,
-        selectedVerbsWithInfo
-      );
-      setsentenceSelected(mapRandomSentence);
+      setsentenceSelected(mapRandomSentence(sentencesCollection));
     }
   }, [sentencesCollection]);
 
-  return <TestSentencesComponent sentenceSelected={sentenceSelected} />;
+  return (
+    <TestSentencesComponent
+      sentenceSelected={sentenceSelected}
+      mapRandomSentence={mapRandomSentence}
+      sentencesCollection={sentencesCollection}
+      setsentenceSelected={setsentenceSelected}
+    />
+  );
 };
