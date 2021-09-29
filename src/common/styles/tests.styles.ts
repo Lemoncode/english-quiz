@@ -47,6 +47,16 @@ export const backContainer = css`
   border-radius: 2rem;
 `;
 
+export const backContainerSentence = css`
+  margin-top: ${spacing(19)};
+  margin-bottom: ${spacing(6)};
+  padding: ${spacing(10)} ${spacing(5)} ${spacing(1)};
+  height: 32rem;
+  position: relative;
+  background-color: ${color.lightWhite};
+  border-radius: 2rem;
+`;
+
 export const homeBackContainer = css`
   margin-top: ${spacing(19)};
   margin-bottom: ${spacing(6)};
@@ -326,4 +336,10 @@ export const secondChanceText = css`
   @media (min-width: ${breakpoints.values.sm}px) {
     font-size: 1.3rem;
   }
+`;
+
+export const sentenceStyle = css`
+  padding-top: .8rem;
+  text-align: center;
+  font-size: 1.5rem;
 `;

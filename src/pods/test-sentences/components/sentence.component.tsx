@@ -75,10 +75,10 @@ export const SentenceComponent: React.FunctionComponent<Props> = props => {
   const { sentenceSelected, verbForms, rightAnswerValue } = props;
 
   const { prefixSentence, sufixSentence, rightTextAnswer } = sentenceSelected;
-  const { title } = styles;
+  const { sentenceStyle } = styles;
 
   return (
-    <Typography className={title} variant="body1" component="h5">
+    <Typography className={sentenceStyle} variant="body1" component="h5">
       <span> {prefixSentence}</span>
       <VerbComponent
         sentenceSelected={sentenceSelected}
