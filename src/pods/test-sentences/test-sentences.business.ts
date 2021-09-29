@@ -13,7 +13,7 @@ export const pickRandomSentence = (
     verb: '',
     sentence: '',
     rightAnswer: 'Present',
-    thirdPerson: '',
+    specialForm: '',
   };
 };
 

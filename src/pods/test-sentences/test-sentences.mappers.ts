@@ -32,8 +32,8 @@ const getRightTextAnswer = (
   sentence: SentenceEntityApi,
   verb: verbApi.VerbEntityApi
 ) =>
-  sentence.thirdPerson
-    ? sentence.thirdPerson
+  sentence.specialForm
+    ? sentence.specialForm
     : getRightAnswerStandardCase(sentence.rightAnswer, verb);
 
 export const mapFromSentenceApiToSentenceVm = (
