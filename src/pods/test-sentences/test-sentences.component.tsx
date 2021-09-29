@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { SentenceEntityVm } from './test-sentences.vm';
 import { BodyComponent } from './components';
-import { SentenceEntityApi } from '../../core/sentences/global-sentences.api';
+import { SentenceEntityApi } from 'core/sentences';
 
 interface Props {
   sentenceSelected: SentenceEntityVm;
@@ -10,6 +10,11 @@ interface Props {
   ) => SentenceEntityVm;
   sentencesCollection: SentenceEntityApi[];
   setsentenceSelected: (sentence: SentenceEntityVm) => void;
+  currentQuestion: number;
+  totalQuestions: number;
+  onNextQuestion: () => void;
+  score: number;
+  setScore: (value: number) => void;
 }
 
 export const TestSentencesComponent: React.FC<Props> = props => {
@@ -18,6 +23,11 @@ export const TestSentencesComponent: React.FC<Props> = props => {
     mapRandomSentence,
     sentencesCollection,
     setsentenceSelected,
+    currentQuestion,
+    totalQuestions,
+    onNextQuestion,
+    score,
+    setScore
   } = props;
 
   return (
@@ -26,6 +36,11 @@ export const TestSentencesComponent: React.FC<Props> = props => {
       mapRandomSentence={mapRandomSentence}
       sentencesCollection={sentencesCollection}
       setsentenceSelected={setsentenceSelected}
+      currentQuestion={currentQuestion}
+      totalQuestions={totalQuestions}
+      onNextQuestion={onNextQuestion}
+      score={score}
+      setScore={setScore}
     />
   );
 };

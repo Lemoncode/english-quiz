@@ -5,13 +5,16 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { QuestionStatus, SentenceEntityVm } from '../test-sentences.vm';
 import { SentenceComponent } from './sentence.component';
 import * as styles from 'common/styles/tests.styles';
-import { SentenceEntityApi } from '../../../core/sentences/global-sentences.api';
+import { SentenceEntityApi } from 'core/sentences';
+import { TestsNavbar } from 'common/components/tests-navbar';
 
 interface ButtonGroupProps {
   sentenceSelected: SentenceEntityVm;
   setRightAnswerValue: (number) => void;
   setVerbsForms: (string) => void;
   setShowSetenceResult: (boolean) => void;
+  score: number;
+  setScore: (value: number) => void;
 }
 
 const TensesButtonGroup: React.FunctionComponent<ButtonGroupProps> = props => {
@@ -20,13 +23,18 @@ const TensesButtonGroup: React.FunctionComponent<ButtonGroupProps> = props => {
     setRightAnswerValue,
     setVerbsForms,
     setShowSetenceResult,
+    score,
+    setScore,
   } = props;
   const { present, past, participle, rightTenseAnswer } = sentenceSelected;
 
   const handleButtonValue = e => {
-    e.currentTarget.value === rightTenseAnswer
-      ? setRightAnswerValue(QuestionStatus.correct)
-      : setRightAnswerValue(QuestionStatus.incorrect);
+    if (e.currentTarget.value === rightTenseAnswer) {
+      setRightAnswerValue(QuestionStatus.correct);
+      setScore(score + 1);
+    } else {
+      setRightAnswerValue(QuestionStatus.incorrect);
+    }
     setVerbsForms(e.currentTarget.value);
     setShowSetenceResult(true);
   };
@@ -123,6 +131,8 @@ interface QuestionComponentProps {
   setVerbsForms: (string) => void;
   verbForms: string;
   setShowSetenceResult: (boolean) => void;
+  score: number;
+  setScore: (value: number) => void;
 }
 
 const QuestionComponent: React.FunctionComponent<QuestionComponentProps> = props => {
@@ -133,6 +143,8 @@ const QuestionComponent: React.FunctionComponent<QuestionComponentProps> = props
     setVerbsForms,
     verbForms,
     setShowSetenceResult,
+    score,
+    setScore,
   } = props;
   const { buttonGroupContainer } = styles;
   return (
@@ -143,6 +155,8 @@ const QuestionComponent: React.FunctionComponent<QuestionComponentProps> = props
           setRightAnswerValue={setRightAnswerValue}
           setVerbsForms={setVerbsForms}
           setShowSetenceResult={setShowSetenceResult}
+          score={score}
+          setScore={setScore}
         />
       </div>
       <SentenceComponent
@@ -205,6 +219,11 @@ interface Props {
   ) => SentenceEntityVm;
   sentencesCollection: SentenceEntityApi[];
   setsentenceSelected: (sentence: SentenceEntityVm) => void;
+  currentQuestion: number;
+  totalQuestions: number;
+  onNextQuestion: () => void;
+  score: number;
+  setScore: (value: number) => void;
 }
 
 export const BodyComponent: React.FunctionComponent<Props> = props => {
@@ -213,6 +232,11 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
     mapRandomSentence,
     sentencesCollection,
     setsentenceSelected,
+    currentQuestion,
+    totalQuestions,
+    onNextQuestion,
+    score,
+    setScore,
   } = props;
   const { translation } = sentenceSelected;
   const {
@@ -235,15 +259,22 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
     setShowSetenceResult(false);
     setsentenceSelected(mapRandomSentence(sentencesCollection));
     setRightAnswerValue(QuestionStatus.notAnsweredYet);
+    onNextQuestion();
   };
   return (
     <main className={mainContainer}>
-      <h1 className={title}>{translation.toUpperCase()}</h1>
+      <TestsNavbar score={score} currentQuestion={currentQuestion} />
+      <h1 className={title}>
+        {translation.toUpperCase()} ({`${currentQuestion} / ${totalQuestions}`})
+      </h1>
       <div
         className={!showSentenceResult ? backContainer : backContainerSentence}
       >
         <div className={pictureContainer}>
-          <img className={picture} src={`/assets/verb-images/buy.png`} />
+          <img
+            className={picture}
+            src={`/assets/verb-images/${sentenceSelected.present}.png`}
+          />
         </div>
         {!showSentenceResult ? (
           <QuestionComponent
@@ -253,6 +284,8 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
             setShowSetenceResult={setShowSetenceResult}
             rightAnswerValue={rightAnswerValue}
             verbForms={verbForms}
+            score={score}
+            setScore={setScore}
           />
         ) : (
           <ResultComponent
