@@ -30,7 +30,7 @@ export const defaultSentences: SentenceEntityGlobal[] = [
     verb: 'win',
     sentence: `She {verb} every match.`,
     rightAnswer: 'Present',
-    thirdPerson: 'wins',
+    specialForm: 'wins',
   },
   {
     verb: 'win',

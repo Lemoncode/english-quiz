@@ -168,7 +168,7 @@ describe('test-sentences.mapper.spec', () => {
       verb: 'test-verb',
       sentence: 'test-prefixSentence {verb} test-sufixSentence',
       rightAnswer: 'Present',
-      thirdPerson: 'Test-third-person'
+      specialForm: 'Test-third-person'
     };
     const verbCollection: verbApi.VerbEntityApi[] = [
       {

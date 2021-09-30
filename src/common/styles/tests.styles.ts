@@ -144,7 +144,30 @@ export const buttonGroupContainer = css`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  padding-top: ${spacing(2)};
+`;
+
+export const verbTensesGroup = css`
+  display: flex;
+  width: 100%;
+  justify-content: center;
   padding-top: ${spacing(4)};
+`;
+
+export const verbTensesItem = css`
+  font-weight: 700;
+  padding: 0 ${spacing(2)};
+`;
+
+export const rightTenseSelected = css`
+  display: flex;
+  justify-content: center;
+  color: #8acc26;
+  font-weight: bold;
+  font-size: 1.3rem;
+  padding-top: .5rem;
+  margin-top: -1.5rem;
+  margin-bottom: 1rem;
 `;
 
 export const inputField = css`
@@ -339,7 +362,7 @@ export const secondChanceText = css`
 `;
 
 export const sentenceStyle = css`
-  padding-top: .8rem;
+  padding-top: 0.8rem;
   text-align: center;
   font-size: 1.5rem;
 `;
