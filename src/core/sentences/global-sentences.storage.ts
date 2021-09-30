@@ -37,4 +37,44 @@ export const defaultSentences: SentenceEntityGlobal[] = [
     sentence: `He doesn't {verb} any game of cricket.`,
     rightAnswer: 'Present',
   },
+  {
+    verb: 'begin',
+    sentence: `Pierre was about to {verb} reading.`,
+    rightAnswer: 'Present',
+  },
+  {
+    verb: 'begin',
+    sentence: `He stopped when he saw her {verb} to shudder.`,
+    rightAnswer: 'Present',
+  },
+  {
+    verb: 'begin',
+    sentence: `He was never human to {verb} with.`,
+    rightAnswer: 'Present',
+  },
+  {
+    verb: 'bend',
+    sentence: `Every part of his body ached and he could only {verb} his elbow halfway.`,
+    rightAnswer: 'Present',
+  },
+  {
+    verb: 'bend',
+    sentence: `Nothing could {verb} that cast iron will.`,
+    rightAnswer: 'Present',
+  },
+  {
+    verb: 'bend',
+    sentence: `With each {verb} of the highway they found breathtaking views.`,
+    rightAnswer: 'Present',
+  },
+  {
+    verb: 'buy',
+    sentence: `Deidre {verb} the lights she'd wanted for years.`,
+    rightAnswer: 'Past',
+  },
+  {
+    verb: 'buy',
+    sentence: `He {verb} a ton of stuff.`,
+    rightAnswer: 'Past',
+  },
 ];

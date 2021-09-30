@@ -52,11 +52,15 @@ export const TestSentencesContainer: React.FC = () => {
 
   const mapRandomSentence = (
     sentencesCollection: SentenceEntityApi[]
-  ): SentenceEntityVm =>
-    mapFromSentenceApiToSentenceVm(
-      pickRandomSentence(sentencesCollection),
+  ): SentenceEntityVm => {
+    const sentencesCollectionSelected = sentencesCollection.filter(
+      x => selectedVerbs.indexOf(x.verb) > -1
+    );
+    return mapFromSentenceApiToSentenceVm(
+      pickRandomSentence(sentencesCollectionSelected),
       selectedVerbsWithInfo
     );
+  };
 
   React.useEffect(() => {
     if (sentencesCollection.length > 0) {
