@@ -159,6 +159,16 @@ export const verbTensesItem = css`
   padding: 0 ${spacing(2)};
 `;
 
+export const rightTenseSelected = css`
+  display: flex;
+  justify-content: center;
+  color: #8acc26;
+  font-weight: bold;
+  font-size: 1.3rem;
+  padding-top: .5rem;
+  margin-bottom: -1rem;
+`;
+
 export const inputField = css`
   width: 100%;
   display: flex;

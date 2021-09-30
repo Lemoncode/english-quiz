@@ -65,7 +65,12 @@ interface ShowResultsProps {
 
 const ShowResultsSentence: React.FunctionComponent<ShowResultsProps> = props => {
   const { sentenceSelected, rightAnswerValue } = props;
-  const { rightTextAnswer, prefixSentence, sufixSentence } = sentenceSelected;
+  const {
+    rightTextAnswer,
+    prefixSentence,
+    sufixSentence,
+    rightTenseAnswer,
+  } = sentenceSelected;
 
   const {
     answer,
@@ -76,9 +81,21 @@ const ShowResultsSentence: React.FunctionComponent<ShowResultsProps> = props => 
     insideBtn,
     insideRightAnswer,
     picture,
+    rightTenseSelected,
     verbsForm,
   } = styles;
 
+  const verbTenseCorrect = tense => {
+    switch (tense) {
+      case 'Present':
+        return 'Present';
+      case 'Past':
+        return 'Past';
+      case 'Participle':
+        return 'Past Participle';
+    }
+  };
+  
   return (
     <>
       {(() => {
@@ -106,6 +123,9 @@ const ShowResultsSentence: React.FunctionComponent<ShowResultsProps> = props => 
                     <div className={insideBtn}>
                       <span>Oops... nope</span>
                     </div>
+                  </div>
+                  <div className={rightTenseSelected}>
+                    <span>({verbTenseCorrect(rightTenseAnswer)})</span>
                   </div>
                   <span className={answer}>Answer</span>
                   <span className={verbsForm}>
