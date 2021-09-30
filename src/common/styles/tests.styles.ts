@@ -166,7 +166,8 @@ export const rightTenseSelected = css`
   font-weight: bold;
   font-size: 1.3rem;
   padding-top: .5rem;
-  margin-bottom: -1rem;
+  margin-top: -1.5rem;
+  margin-bottom: 1rem;
 `;
 
 export const inputField = css`

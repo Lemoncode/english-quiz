@@ -95,7 +95,7 @@ const ShowResultsSentence: React.FunctionComponent<ShowResultsProps> = props => 
         return 'Past Participle';
     }
   };
-  
+
   return (
     <>
       {(() => {
@@ -124,10 +124,10 @@ const ShowResultsSentence: React.FunctionComponent<ShowResultsProps> = props => 
                       <span>Oops... nope</span>
                     </div>
                   </div>
+                  <span className={answer}>Answer</span>
                   <div className={rightTenseSelected}>
                     <span>({verbTenseCorrect(rightTenseAnswer)})</span>
                   </div>
-                  <span className={answer}>Answer</span>
                   <span className={verbsForm}>
                     <span>{prefixSentence}</span>{' '}
                     <span className={correctSpanStyle}>{rightTextAnswer}</span>{' '}
