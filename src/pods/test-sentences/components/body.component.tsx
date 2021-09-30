@@ -246,6 +246,8 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
     picture,
     pictureContainer,
     title,
+    verbTensesGroup,
+    verbTensesItem,
   } = styles;
 
   const [rightAnswerValue, setRightAnswerValue] = React.useState(
@@ -277,16 +279,23 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
           />
         </div>
         {!showSentenceResult ? (
-          <QuestionComponent
-            sentenceSelected={sentenceSelected}
-            setRightAnswerValue={setRightAnswerValue}
-            setVerbsForms={setVerbsForms}
-            setShowSetenceResult={setShowSetenceResult}
-            rightAnswerValue={rightAnswerValue}
-            verbForms={verbForms}
-            score={score}
-            setScore={setScore}
-          />
+          <>
+            <div className={verbTensesGroup}>
+              <div className={verbTensesItem}>Present</div>
+              <div className={verbTensesItem}>Past</div>
+              <div className={verbTensesItem}>Participle</div>
+            </div>
+            <QuestionComponent
+              sentenceSelected={sentenceSelected}
+              setRightAnswerValue={setRightAnswerValue}
+              setVerbsForms={setVerbsForms}
+              setShowSetenceResult={setShowSetenceResult}
+              rightAnswerValue={rightAnswerValue}
+              verbForms={verbForms}
+              score={score}
+              setScore={setScore}
+            />
+          </>
         ) : (
           <ResultComponent
             sentenceSelected={sentenceSelected}
