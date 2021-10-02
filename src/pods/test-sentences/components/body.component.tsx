@@ -235,7 +235,7 @@ const NextVerbButton: React.FunctionComponent<NextVerbButtonProps> = props => {
 interface Props {
   sentenceSelected: SentenceEntityVm;
   mapRandomSentence: (
-    sentencesCollection: SentenceEntityApi[]
+    sentencesCollection: SentenceEntityApi[],
   ) => SentenceEntityVm;
   sentencesCollection: SentenceEntityApi[];
   setsentenceSelected: (sentence: SentenceEntityVm) => void;

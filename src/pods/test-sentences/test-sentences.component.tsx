@@ -2,11 +2,12 @@ import * as React from 'react';
 import { SentenceEntityVm } from './test-sentences.vm';
 import { BodyComponent } from './components';
 import { SentenceEntityApi } from 'core/sentences';
+import { VerbEntityApi } from 'core/verbs/global-verbs.api';
 
 interface Props {
   sentenceSelected: SentenceEntityVm;
   mapRandomSentence: (
-    sentencesCollection: SentenceEntityApi[]
+    sentencesCollection: SentenceEntityApi[],
   ) => SentenceEntityVm;
   sentencesCollection: SentenceEntityApi[];
   setsentenceSelected: (sentence: SentenceEntityVm) => void;
@@ -27,7 +28,7 @@ export const TestSentencesComponent: React.FC<Props> = props => {
     totalQuestions,
     onNextQuestion,
     score,
-    setScore
+    setScore,
   } = props;
 
   return (

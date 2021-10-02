@@ -6,11 +6,11 @@ import { TensesEntityApi } from 'core/sentences';
 
 const isAllDataInformed = (
   sentenceEntityApi: SentenceEntityApi,
-  verbCollection: verbApi.VerbEntityApi[]
+  verbSelected: verbApi.VerbEntityApi
 ) =>
   sentenceEntityApi !== null &&
   sentenceEntityApi !== undefined &&
-  Array.isArray(verbCollection);
+  Object.keys(verbSelected).length > 0;
 
 const getRightAnswerStandardCase = (
   rightAnswer: TensesEntityApi,
@@ -38,25 +38,22 @@ const getRightTextAnswer = (
 
 export const mapFromSentenceApiToSentenceVm = (
   sentenceEntityApi: SentenceEntityApi,
-  verbCollection: verbApi.VerbEntityApi[]
+  verbSelected: verbApi.VerbEntityApi
 ): SentenceEntityVm => {
-  if (isAllDataInformed(sentenceEntityApi, verbCollection)) {
+  if (isAllDataInformed(sentenceEntityApi, verbSelected)) {
     const [prefixSentence, sufixSentence] = splitSentence(
       sentenceEntityApi.sentence
-    );
-    const verbWithTenses: verbApi.VerbEntityApi = verbCollection.find(
-      verb => verb.infinitive === sentenceEntityApi.verb
     );
 
     return {
       prefixSentence: prefixSentence,
       sufixSentence: sufixSentence,
       rightTenseAnswer: sentenceEntityApi.rightAnswer,
-      rightTextAnswer: getRightTextAnswer(sentenceEntityApi, verbWithTenses),
-      present: verbWithTenses.infinitive,
-      past: verbWithTenses.past,
-      participle: verbWithTenses.participle,
-      translation: verbWithTenses.translation,
+      rightTextAnswer: getRightTextAnswer(sentenceEntityApi, verbSelected),
+      present: verbSelected.infinitive,
+      past: verbSelected.past,
+      participle: verbSelected.participle,
+      translation: verbSelected.translation,
     };
   } else return emptySentence();
 };

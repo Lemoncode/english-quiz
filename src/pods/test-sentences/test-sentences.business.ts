@@ -1,4 +1,5 @@
 import { SentenceEntityApi } from 'core/sentences';
+import { VerbEntityGlobal } from '../../core/verbs/global-verbs.model';
 
 export const pickRandomSentence = (
   sentenceCollection: SentenceEntityApi[]

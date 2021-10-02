@@ -7,7 +7,7 @@ describe('test-sentences.mapper.spec', () => {
   it('should return empty sentence when sentence and verb are null', () => {
     // Arrange
     const sentenceEntityApi: sentenceApi.SentenceEntityApi = null;
-    const verbCollection: verbApi.VerbEntityApi[] = null;
+    const verbCollection: verbApi.VerbEntityApi = null;
     // Act
     const result = mapFromSentenceApiToSentenceVm(
       sentenceEntityApi,
@@ -19,7 +19,7 @@ describe('test-sentences.mapper.spec', () => {
   it('should return empty sentence when sentence and verb are undefined', () => {
     // Arrange
     const sentenceEntityApi: sentenceApi.SentenceEntityApi = undefined;
-    const verbCollection: verbApi.VerbEntityApi[] = undefined;
+    const verbCollection: verbApi.VerbEntityApi = undefined;
     // Act
     const result = mapFromSentenceApiToSentenceVm(
       sentenceEntityApi,
@@ -35,14 +35,12 @@ describe('test-sentences.mapper.spec', () => {
       sentence: `{verb} test-sufixSentence`,
       rightAnswer: 'Present',
     };
-    const verbCollection: verbApi.VerbEntityApi[] = [
-      {
-        infinitive: 'test-verb',
-        past: 'test-verb-past',
-        participle: 'test-verb-participle',
-        translation: 'test-verb-translation',
-      },
-    ];
+    const verbCollection: verbApi.VerbEntityApi = {
+      infinitive: 'test-verb',
+      past: 'test-verb-past',
+      participle: 'test-verb-participle',
+      translation: 'test-verb-translation',
+    };
     // Act
     const result = mapFromSentenceApiToSentenceVm(
       sentenceEntityApi,
@@ -67,14 +65,12 @@ describe('test-sentences.mapper.spec', () => {
       sentence: `test-prefixSentence {verb}`,
       rightAnswer: 'Present',
     };
-    const verbCollection: verbApi.VerbEntityApi[] = [
-      {
-        infinitive: 'test-verb',
-        past: 'test-verb-past',
-        participle: 'test-verb-participle',
-        translation: 'test-verb-translation',
-      },
-    ];
+    const verbCollection: verbApi.VerbEntityApi = {
+      infinitive: 'test-verb',
+      past: 'test-verb-past',
+      participle: 'test-verb-participle',
+      translation: 'test-verb-translation',
+    };
     // Act
     const result = mapFromSentenceApiToSentenceVm(
       sentenceEntityApi,
@@ -99,52 +95,12 @@ describe('test-sentences.mapper.spec', () => {
       sentence: 'test-prefixSentence {verb} test-sufixSentence',
       rightAnswer: 'Present',
     };
-    const verbCollection: verbApi.VerbEntityApi[] = [
-      {
-        infinitive: 'test-verb',
-        past: 'test-verb-past',
-        participle: 'test-verb-participle',
-        translation: 'test-verb-translation',
-      },
-    ];
-    // Act
-    const result = mapFromSentenceApiToSentenceVm(
-      sentenceEntityApi,
-      verbCollection
-    );
-    // Assert
-    expect(result).toEqual({
-      prefixSentence: 'test-prefixSentence ',
-      sufixSentence: ' test-sufixSentence',
-      rightTenseAnswer: 'Present',
-      rightTextAnswer: 'test-verb',
-      present: 'test-verb',
+    const verbCollection: verbApi.VerbEntityApi = {
+      infinitive: 'test-verb',
       past: 'test-verb-past',
       participle: 'test-verb-participle',
       translation: 'test-verb-translation',
-    });
-  });
-  it('should return one mapped sentence when it feeds with one sentence and two verbs', () => {
-    // Arrange
-    const sentenceEntityApi: sentenceApi.SentenceEntityApi = {
-      verb: 'test-verb',
-      sentence: 'test-prefixSentence {verb} test-sufixSentence',
-      rightAnswer: 'Present',
     };
-    const verbCollection: verbApi.VerbEntityApi[] = [
-      {
-        infinitive: 'test-verb',
-        past: 'test-verb-past',
-        participle: 'test-verb-participle',
-        translation: 'test-verb-translation',
-      },
-      {
-        infinitive: 'test-verb2',
-        past: 'test-verb-past',
-        participle: 'test-verb-participle',
-        translation: 'test-verb-translation',
-      },
-    ];
     // Act
     const result = mapFromSentenceApiToSentenceVm(
       sentenceEntityApi,
@@ -168,16 +124,14 @@ describe('test-sentences.mapper.spec', () => {
       verb: 'test-verb',
       sentence: 'test-prefixSentence {verb} test-sufixSentence',
       rightAnswer: 'Present',
-      specialForm: 'Test-third-person'
+      specialForm: 'Test-third-person',
     };
-    const verbCollection: verbApi.VerbEntityApi[] = [
-      {
-        infinitive: 'test-verb',
-        past: 'test-verb-past',
-        participle: 'test-verb-participle',
-        translation: 'test-verb-translation',
-      },
-    ];
+    const verbCollection: verbApi.VerbEntityApi = {
+      infinitive: 'test-verb',
+      past: 'test-verb-past',
+      participle: 'test-verb-participle',
+      translation: 'test-verb-translation',
+    };
     // Act
     const result = mapFromSentenceApiToSentenceVm(
       sentenceEntityApi,
