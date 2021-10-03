@@ -2,12 +2,14 @@ import * as React from 'react';
 import { SentenceEntityVm } from './test-sentences.vm';
 import { BodyComponent } from './components';
 import { SentenceEntityApi } from 'core/sentences';
-import { VerbEntityApi } from 'core/verbs/global-verbs.api';
+import { VerbEntityGlobal } from 'core/verbs';
 
 interface Props {
   sentenceSelected: SentenceEntityVm;
   mapRandomSentence: (
     sentencesCollection: SentenceEntityApi[],
+    selectedVerbs: string[],
+    verbCollection: VerbEntityGlobal[]
   ) => SentenceEntityVm;
   sentencesCollection: SentenceEntityApi[];
   setsentenceSelected: (sentence: SentenceEntityVm) => void;

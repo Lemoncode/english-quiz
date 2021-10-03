@@ -1,6 +1,8 @@
 import { SentenceEntityApi } from 'core/sentences';
 import { VerbEntityApi } from 'core/verbs/global-verbs.api';
 import { VerbEntityGlobal } from 'core/verbs';
+import { SentenceEntityVm } from './test-sentences.vm';
+import { mapFromSentenceApiToSentenceVm } from './test-sentences.mappers';
 
 export const pickRandomSentence = (
   sentenceCollection: SentenceEntityApi[]
@@ -41,3 +43,23 @@ export const pickRandomVerb = (
 
 export const splitSentence = (sentence: string): string[] =>
   sentence ? sentence.split(/{verb}/g) : [];
+
+export const mapRandomSentence = (
+  sentencesCollection: SentenceEntityApi[],
+  selectedVerbs: string[],
+  verbCollection: VerbEntityGlobal[]
+): SentenceEntityVm => {
+  const randomVerb = pickRandomVerb(selectedVerbs, verbCollection);
+
+  const sentencesWithVerbSelected = sentencesCollection.filter(
+    sentence => sentence.verb === randomVerb.infinitive
+  );
+  const randomSentenceWithVerbSelected = pickRandomSentence(
+    sentencesWithVerbSelected
+  );
+
+  return mapFromSentenceApiToSentenceVm(
+    randomSentenceWithVerbSelected,
+    randomVerb
+  );
+};

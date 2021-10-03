@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { loadFullSentencesCollection } from 'core/sentences';
 import { SentenceEntityApi } from 'core/sentences';
-import { pickRandomSentence, pickRandomVerb } from './test-sentences.business';
+import { mapRandomSentence } from './test-sentences.business';
 import { TestSentencesComponent } from './test-sentences.component';
 import { emptySentence, SentenceEntityVm } from './test-sentences.vm';
-import { mapFromSentenceApiToSentenceVm } from './test-sentences.mappers';
 import { globalVerbsContext } from 'core/verbs';
 import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
@@ -46,27 +45,11 @@ export const TestSentencesContainer: React.FC = () => {
     );
   }, []);
 
-  const randomVerb = pickRandomVerb(selectedVerbs, verbCollection);
-
-  const mapRandomSentence = (
-    sentencesCollection: SentenceEntityApi[]
-  ): SentenceEntityVm => {
-    const sentencesWithVerbSelected = sentencesCollection.filter(
-      sentence => sentence.verb === randomVerb.infinitive
-    );
-    const randomSentenceWithVerbSelected = pickRandomSentence(
-      sentencesWithVerbSelected
-    );
-
-    return mapFromSentenceApiToSentenceVm(
-      randomSentenceWithVerbSelected,
-      randomVerb
-    );
-  };
-
   React.useEffect(() => {
     if (sentencesCollection.length > 0) {
-      setsentenceSelected(mapRandomSentence(sentencesCollection));
+      setsentenceSelected(
+        mapRandomSentence(sentencesCollection, selectedVerbs, verbCollection)
+      );
     }
   }, [sentencesCollection]);
 
