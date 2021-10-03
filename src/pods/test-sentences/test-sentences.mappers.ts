@@ -1,16 +1,21 @@
 import { SentenceEntityApi } from 'core/sentences';
 import { SentenceEntityVm, emptySentence } from './test-sentences.vm';
 import * as verbApi from 'core/verbs/global-verbs.api';
-import { splitSentence } from './test-sentences.business';
 import { TensesEntityApi } from 'core/sentences';
+import { VerbEntityGlobal } from 'core/verbs';
+import {
+  splitSentence,
+  pickRandomVerb,
+  pickRandomSentence,
+} from './test-sentences.business';
 
 const isAllDataInformed = (
   sentenceEntityApi: SentenceEntityApi,
-  verbCollection: verbApi.VerbEntityApi[]
-) =>
+  verbSelected: verbApi.VerbEntityApi
+): boolean =>
   sentenceEntityApi !== null &&
   sentenceEntityApi !== undefined &&
-  Array.isArray(verbCollection);
+  Object.keys(verbSelected).length > 0;
 
 const getRightAnswerStandardCase = (
   rightAnswer: TensesEntityApi,
@@ -38,25 +43,57 @@ const getRightTextAnswer = (
 
 export const mapFromSentenceApiToSentenceVm = (
   sentenceEntityApi: SentenceEntityApi,
-  verbCollection: verbApi.VerbEntityApi[]
+  verbSelected: verbApi.VerbEntityApi
 ): SentenceEntityVm => {
-  if (isAllDataInformed(sentenceEntityApi, verbCollection)) {
+  if (isAllDataInformed(sentenceEntityApi, verbSelected)) {
     const [prefixSentence, sufixSentence] = splitSentence(
       sentenceEntityApi.sentence
-    );
-    const verbWithTenses: verbApi.VerbEntityApi = verbCollection.find(
-      verb => verb.infinitive === sentenceEntityApi.verb
     );
 
     return {
       prefixSentence: prefixSentence,
       sufixSentence: sufixSentence,
       rightTenseAnswer: sentenceEntityApi.rightAnswer,
-      rightTextAnswer: getRightTextAnswer(sentenceEntityApi, verbWithTenses),
-      present: verbWithTenses.infinitive,
-      past: verbWithTenses.past,
-      participle: verbWithTenses.participle,
-      translation: verbWithTenses.translation,
+      rightTextAnswer: getRightTextAnswer(sentenceEntityApi, verbSelected),
+      present: verbSelected.infinitive,
+      past: verbSelected.past,
+      participle: verbSelected.participle,
+      translation: verbSelected.translation,
     };
   } else return emptySentence();
+};
+
+const isAllMapDataCorrect = (
+  sentencesCollection: SentenceEntityApi[],
+  selectedVerbs: string[],
+  verbCollection: VerbEntityGlobal[]
+): boolean =>
+  Array.isArray(sentencesCollection) &&
+  sentencesCollection.length > 0 &&
+  Array.isArray(selectedVerbs) &&
+  selectedVerbs.length > 0 &&
+  Array.isArray(verbCollection) &&
+  verbCollection.length > 0;
+
+export const mapRandomSentence = (
+  sentencesCollection: SentenceEntityApi[],
+  selectedVerbs: string[],
+  verbCollection: VerbEntityGlobal[]
+): SentenceEntityVm => {
+  if (isAllMapDataCorrect(sentencesCollection, selectedVerbs, verbCollection)) {
+    const randomVerb = pickRandomVerb(selectedVerbs, verbCollection);
+    const sentencesWithVerbSelected = sentencesCollection.filter(
+      sentence => sentence.verb === randomVerb.infinitive
+    );
+    const randomSentenceWithVerbSelected = pickRandomSentence(
+      sentencesWithVerbSelected
+    );
+
+    return mapFromSentenceApiToSentenceVm(
+      randomSentenceWithVerbSelected,
+      randomVerb
+    );
+  }
+
+  return emptySentence();
 };

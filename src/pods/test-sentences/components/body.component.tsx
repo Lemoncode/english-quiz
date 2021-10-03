@@ -7,6 +7,8 @@ import { SentenceComponent } from './sentence.component';
 import * as styles from 'common/styles/tests.styles';
 import { SentenceEntityApi } from 'core/sentences';
 import { TestsNavbar } from 'common/components/tests-navbar';
+import { VerbEntityGlobal } from 'core/verbs';
+import { globalVerbsContext } from 'core/verbs';
 
 interface ButtonGroupProps {
   sentenceSelected: SentenceEntityVm;
@@ -235,7 +237,9 @@ const NextVerbButton: React.FunctionComponent<NextVerbButtonProps> = props => {
 interface Props {
   sentenceSelected: SentenceEntityVm;
   mapRandomSentence: (
-    sentencesCollection: SentenceEntityApi[]
+    sentencesCollection: SentenceEntityApi[],
+    selectedVerbs: string[],
+    verbCollection: VerbEntityGlobal[]
   ) => SentenceEntityVm;
   sentencesCollection: SentenceEntityApi[];
   setsentenceSelected: (sentence: SentenceEntityVm) => void;
@@ -247,6 +251,9 @@ interface Props {
 }
 
 export const BodyComponent: React.FunctionComponent<Props> = props => {
+  const { verbCollection, selectedVerbs } = React.useContext(
+    globalVerbsContext
+  );
   const {
     sentenceSelected,
     mapRandomSentence,
@@ -279,7 +286,9 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
 
   const handleNextQuestion = () => {
     setShowSetenceResult(false);
-    setsentenceSelected(mapRandomSentence(sentencesCollection));
+    setsentenceSelected(
+      mapRandomSentence(sentencesCollection, selectedVerbs, verbCollection)
+    );
     setRightAnswerValue(QuestionStatus.notAnsweredYet);
     onNextQuestion();
   };

@@ -149,7 +149,7 @@ export const buttonGroupContainer = css`
 
 export const verbTensesGroup = css`
   display: flex;
-  width: 100%;
+  width: 103%;
   justify-content: center;
   padding-top: ${spacing(4)};
 `;

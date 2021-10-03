@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { loadFullSentencesCollection } from 'core/sentences';
 import { SentenceEntityApi } from 'core/sentences';
-import { pickRandomSentence } from './test-sentences.business';
 import { TestSentencesComponent } from './test-sentences.component';
 import { emptySentence, SentenceEntityVm } from './test-sentences.vm';
-import { mapFromSentenceApiToSentenceVm } from './test-sentences.mappers';
 import { globalVerbsContext } from 'core/verbs';
 import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
 import { scoreContext } from 'core/score';
 import { settingsContext } from 'core/settings';
+import { mapRandomSentence } from './test-sentences.mappers';
 
 const INITIAL_ANSWERED_CORRECTLY = 0;
 const INITIAL_CURRENT_QUESTION = 1;
@@ -33,10 +32,6 @@ export const TestSentencesContainer: React.FC = () => {
     setScore({ totalQuestions, answeredCorrectly: INITIAL_ANSWERED_CORRECTLY });
   }, []);
 
-  const selectedVerbsWithInfo = verbCollection.filter(
-    x => selectedVerbs.indexOf(x.infinitive) > -1
-  );
-
   const [sentencesCollection, setSentencesCollection] = React.useState<
     SentenceEntityApi[]
   >([]);
@@ -50,17 +45,11 @@ export const TestSentencesContainer: React.FC = () => {
     );
   }, []);
 
-  const mapRandomSentence = (
-    sentencesCollection: SentenceEntityApi[]
-  ): SentenceEntityVm =>
-    mapFromSentenceApiToSentenceVm(
-      pickRandomSentence(sentencesCollection),
-      selectedVerbsWithInfo
-    );
-
   React.useEffect(() => {
     if (sentencesCollection.length > 0) {
-      setsentenceSelected(mapRandomSentence(sentencesCollection));
+      setsentenceSelected(
+        mapRandomSentence(sentencesCollection, selectedVerbs, verbCollection)
+      );
     }
   }, [sentencesCollection]);
 
