@@ -7,7 +7,7 @@ import { TensesEntityApi } from 'core/sentences';
 const isAllDataInformed = (
   sentenceEntityApi: SentenceEntityApi,
   verbSelected: verbApi.VerbEntityApi
-) =>
+): boolean =>
   sentenceEntityApi !== null &&
   sentenceEntityApi !== undefined &&
   Object.keys(verbSelected).length > 0;

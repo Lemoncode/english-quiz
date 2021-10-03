@@ -1,5 +1,6 @@
 import * as business from './test-sentences.business';
 import * as sentenceApiModel from 'core/sentences';
+import * as verbGlobal from 'core/verbs';
 
 describe('test-sentences.business', () => {
   describe('splitSentence', () => {
@@ -117,6 +118,106 @@ describe('test-sentences.business', () => {
         sentence: 'test-sentence',
         rightAnswer: 'Present',
       });
+    });
+  });
+  describe('pickRandomVerb', () => {
+    it('should return empty verbEntity when selectedVerbs and verCollection are null and the function is called', () => {
+      // Arrange
+      const selectedVerbs: string[] = null;
+      const verbCollection: verbGlobal.VerbEntityGlobal[] = null;
+      const pickRandomSentence = jest.spyOn(business, 'pickRandomVerb');
+      // Act
+      const result = business.pickRandomVerb(selectedVerbs, verbCollection);
+      // Assert
+      expect(pickRandomSentence).toHaveBeenCalled();
+      expect(result).toEqual({
+        infinitive: '',
+        participle: '',
+        past: '',
+        translation: '',
+      });
+    });
+  });
+  it('should return empty verbEntity when selectedVerbs and verCollection are undefined', () => {
+    // Arrange
+    const selectedVerbs: string[] = undefined;
+    const verbCollection: verbGlobal.VerbEntityGlobal[] = undefined;
+    const pickRandomVerb = jest.spyOn(business, 'pickRandomVerb');
+    // Act
+    const result = business.pickRandomVerb(selectedVerbs, verbCollection);
+    // Assert
+    expect(result).toEqual({
+      infinitive: '',
+      participle: '',
+      past: '',
+      translation: '',
+    });
+  });
+  it('should return empty verbEntity when selectedVerbs and verCollection are empty array', () => {
+    // Arrange
+    const selectedVerbs: string[] = [];
+    const verbCollection: verbGlobal.VerbEntityGlobal[] = [];
+    const pickRandomVerb = jest.spyOn(business, 'pickRandomVerb');
+    // Act
+    const result = business.pickRandomVerb(selectedVerbs, verbCollection);
+    // Assert
+    expect(result).toEqual({
+      infinitive: '',
+      participle: '',
+      past: '',
+      translation: '',
+    });
+  });
+  it('should return one verbEntity when selectedVerbs with one item and verCollection with one item', () => {
+    // Arrange
+    const selectedVerbs: string[] = ['test-verb'];
+    const verbCollection: verbGlobal.VerbEntityGlobal[] = [
+      {
+        infinitive: 'test-verb',
+        past: 'test-verb-past',
+        participle: 'test-verb-participle',
+        translation: 'test-verb-translation',
+      },
+    ];
+    const pickRandomVerb = jest.spyOn(business, 'pickRandomVerb');
+    // Act
+    const result = business.pickRandomVerb(selectedVerbs, verbCollection);
+    
+    // Assert
+    expect(result).toEqual({
+      infinitive: 'test-verb',
+      past: 'test-verb-past',
+      participle: 'test-verb-participle',
+      translation: 'test-verb-translation',
+    });
+  });
+  it('should return one verbEntity when selectedVerbs with one item and verCollection with two item', () => {
+    // Arrange
+    const selectedVerbs: string[] = ['test-verb'];
+    const verbCollection: verbGlobal.VerbEntityGlobal[] = [
+      {
+        infinitive: 'test-verb',
+        past: 'test-verb-past',
+        participle: 'test-verb-participle',
+        translation: 'test-verb-translation',
+      },
+      {
+        infinitive: 'test-verb',
+        past: 'test-verb-past',
+        participle: 'test-verb-participle',
+        translation: 'test-verb-translation',
+      },
+    ];
+    const pickRandomVerb = jest.spyOn(business, 'pickRandomVerb');
+    // Act
+    const result = business.pickRandomVerb(selectedVerbs, verbCollection);
+    
+    // Assert
+    expect(result).toEqual({
+      infinitive: 'test-verb',
+      past: 'test-verb-past',
+      participle: 'test-verb-participle',
+      translation: 'test-verb-translation',
     });
   });
 });

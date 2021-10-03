@@ -17,17 +17,24 @@ export const pickRandomSentence = (
     verb: '',
     sentence: '',
     rightAnswer: 'Present',
-    specialForm: '',
   };
 };
+
+const isAllDataInformed = (
+  selectedVerbs: string[],
+  verbCollection: VerbEntityGlobal[]
+): boolean =>
+  Array.isArray(selectedVerbs) &&
+  Array.isArray(verbCollection) &&
+  selectedVerbs.length > 0 &&
+  verbCollection.length > 0;
 
 export const pickRandomVerb = (
   selectedVerbs: string[],
   verbCollection: VerbEntityGlobal[]
 ): VerbEntityApi => {
-  if (Array.isArray(selectedVerbs)) {
-    const selectedVerbsLength = selectedVerbs.length;
-    const index = Math.floor(Math.random() * selectedVerbsLength);
+  if (isAllDataInformed(selectedVerbs, verbCollection)) {
+    const index = Math.floor(Math.random() * selectedVerbs.length);
     const [selectedVerbWithInfo] = verbCollection.filter(
       verb => verb.infinitive === selectedVerbs[index]
     );
