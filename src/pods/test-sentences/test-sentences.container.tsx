@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { loadFullSentencesCollection } from 'core/sentences';
 import { SentenceEntityApi } from 'core/sentences';
-import { pickRandomSentence } from './test-sentences.business';
+import { pickRandomSentence, pickRandomVerb } from './test-sentences.business';
 import { TestSentencesComponent } from './test-sentences.component';
 import { emptySentence, SentenceEntityVm } from './test-sentences.vm';
 import { mapFromSentenceApiToSentenceVm } from './test-sentences.mappers';
@@ -10,7 +10,6 @@ import { useHistory } from 'react-router-dom';
 import { routes } from 'core/router';
 import { scoreContext } from 'core/score';
 import { settingsContext } from 'core/settings';
-import { VerbEntityApi } from 'core/verbs/global-verbs.api';
 
 const INITIAL_ANSWERED_CORRECTLY = 0;
 const INITIAL_CURRENT_QUESTION = 1;
@@ -47,24 +46,7 @@ export const TestSentencesContainer: React.FC = () => {
     );
   }, []);
 
-  const pickRandomVerb = (selectedVerbs: string[]): VerbEntityApi => {
-    if (Array.isArray(selectedVerbs)) {
-      const selectedVerbsLength = selectedVerbs.length;
-      const index = Math.floor(Math.random() * selectedVerbsLength);
-      const [selectedVerbWithInfo] = verbCollection.filter(
-        verb => verb.infinitive === selectedVerbs[index]
-      );
-      return selectedVerbWithInfo;
-    }
-    return {
-      infinitive: '',
-      past: '',
-      participle: '',
-      translation: '',
-    };
-  };
-
-  const randomVerb = pickRandomVerb(selectedVerbs);
+  const randomVerb = pickRandomVerb(selectedVerbs, verbCollection);
 
   const mapRandomSentence = (
     sentencesCollection: SentenceEntityApi[]
