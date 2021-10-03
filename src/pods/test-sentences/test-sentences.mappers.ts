@@ -1,8 +1,13 @@
 import { SentenceEntityApi } from 'core/sentences';
 import { SentenceEntityVm, emptySentence } from './test-sentences.vm';
 import * as verbApi from 'core/verbs/global-verbs.api';
-import { splitSentence } from './test-sentences.business';
 import { TensesEntityApi } from 'core/sentences';
+import { VerbEntityGlobal } from 'core/verbs';
+import {
+  splitSentence,
+  pickRandomVerb,
+  pickRandomSentence,
+} from './test-sentences.business';
 
 const isAllDataInformed = (
   sentenceEntityApi: SentenceEntityApi,
@@ -56,4 +61,39 @@ export const mapFromSentenceApiToSentenceVm = (
       translation: verbSelected.translation,
     };
   } else return emptySentence();
+};
+
+const isAllMapDataCorrect = (
+  sentencesCollection: SentenceEntityApi[],
+  selectedVerbs: string[],
+  verbCollection: VerbEntityGlobal[]
+): boolean =>
+  Array.isArray(sentencesCollection) &&
+  sentencesCollection.length > 0 &&
+  Array.isArray(selectedVerbs) &&
+  selectedVerbs.length > 0 &&
+  Array.isArray(verbCollection) &&
+  verbCollection.length > 0;
+
+export const mapRandomSentence = (
+  sentencesCollection: SentenceEntityApi[],
+  selectedVerbs: string[],
+  verbCollection: VerbEntityGlobal[]
+): SentenceEntityVm => {
+  if (isAllMapDataCorrect(sentencesCollection, selectedVerbs, verbCollection)) {
+    const randomVerb = pickRandomVerb(selectedVerbs, verbCollection);
+    const sentencesWithVerbSelected = sentencesCollection.filter(
+      sentence => sentence.verb === randomVerb.infinitive
+    );
+    const randomSentenceWithVerbSelected = pickRandomSentence(
+      sentencesWithVerbSelected
+    );
+
+    return mapFromSentenceApiToSentenceVm(
+      randomSentenceWithVerbSelected,
+      randomVerb
+    );
+  }
+
+  return emptySentence();
 };
