@@ -63,7 +63,7 @@ export const mapFromSentenceApiToSentenceVm = (
   } else return emptySentence();
 };
 
-const isAllMapDataCorrect = (
+const areParametersInformed = (
   sentencesCollection: SentenceEntityApi[],
   selectedVerbs: string[],
   verbCollection: VerbEntityGlobal[]
@@ -73,17 +73,44 @@ const isAllMapDataCorrect = (
   Array.isArray(selectedVerbs) &&
   selectedVerbs.length > 0 &&
   Array.isArray(verbCollection) &&
-  verbCollection.length > 0;
+  verbCollection.length > 0 
+
+export const sentencesWithVerb = (
+  sentencesCollection: SentenceEntityApi[],
+  selectedVerbs: string[],
+  verbCollection: VerbEntityGlobal[]
+) => {
+  let randomVerb: VerbEntityGlobal = {
+    infinitive: '',
+    past: '',
+    participle: '',
+    translation: '',
+  };
+  let sentencesWithVerbSelected: SentenceEntityApi[] = [];
+  if (
+    areParametersInformed(sentencesCollection, selectedVerbs, verbCollection)
+  ) {
+    do {
+      randomVerb = pickRandomVerb(selectedVerbs, verbCollection);
+      sentencesWithVerbSelected = sentencesCollection.filter(
+        sentence => sentence.verb === randomVerb.infinitive
+      );
+    } while (sentencesWithVerbSelected.length === 0);
+    return { randomVerb, sentencesWithVerbSelected };
+  }
+  return { randomVerb, sentencesWithVerbSelected };
+};
 
 export const mapRandomSentence = (
   sentencesCollection: SentenceEntityApi[],
   selectedVerbs: string[],
   verbCollection: VerbEntityGlobal[]
 ): SentenceEntityVm => {
-  if (isAllMapDataCorrect(sentencesCollection, selectedVerbs, verbCollection)) {
-    const randomVerb = pickRandomVerb(selectedVerbs, verbCollection);
-    const sentencesWithVerbSelected = sentencesCollection.filter(
-      sentence => sentence.verb === randomVerb.infinitive
+  if (areParametersInformed(sentencesCollection, selectedVerbs, verbCollection)) {
+    const { randomVerb, sentencesWithVerbSelected } = sentencesWithVerb(
+      sentencesCollection,
+      selectedVerbs,
+      verbCollection
     );
     const randomSentenceWithVerbSelected = pickRandomSentence(
       sentencesWithVerbSelected

@@ -284,4 +284,130 @@ describe('test-sentences.mapper.spec', () => {
       });
     });
   });
+  describe('sentencesWithVerb', () => {
+    it('should return randomVerb and sentencesWithVerbSelected when selectedCollection, selectedVerbs and verbCollection are null and the function is called', () => {
+      // Arrange
+      const selectedCollection: SentenceEntityApi[] = null;
+      const selectedVerbs: string[] = null;
+      const verbCollection: VerbEntityGlobal[] = null;
+      const sentencesWithVerb = jest.spyOn(mappers, 'sentencesWithVerb');
+
+      // Act
+      const result = mappers.sentencesWithVerb(
+        selectedCollection,
+        selectedVerbs,
+        verbCollection
+      );
+      // Assert
+      let randomVerb: VerbEntityGlobal = {
+        infinitive: '',
+        past: '',
+        participle: '',
+        translation: '',
+      };
+      let sentencesWithVerbSelected: SentenceEntityApi[] = [];
+
+      expect(sentencesWithVerb).toHaveBeenCalled();
+      expect(result).toEqual({
+        randomVerb,
+        sentencesWithVerbSelected,
+      });
+    });
+    it('should return randomVerb and sentencesWithVerbSelected when selectedCollection, selectedVerbs and verbCollection are undefined', () => {
+      // Arrange
+      const selectedCollection: SentenceEntityApi[] = undefined;
+      const selectedVerbs: string[] = undefined;
+      const verbCollection: VerbEntityGlobal[] = undefined;
+      const sentencesWithVerb = jest.spyOn(mappers, 'sentencesWithVerb');
+      // Act
+      const result = mappers.sentencesWithVerb(
+        selectedCollection,
+        selectedVerbs,
+        verbCollection
+      );
+      // Assert
+      let randomVerb: VerbEntityGlobal = {
+        infinitive: '',
+        past: '',
+        participle: '',
+        translation: '',
+      };
+      let sentencesWithVerbSelected: SentenceEntityApi[] = [];
+
+      expect(sentencesWithVerb).toHaveBeenCalled();
+      expect(result).toEqual({
+        randomVerb,
+        sentencesWithVerbSelected,
+      });
+    });
+    it('should return randomVerb and sentencesWithVerbSelected when selectedCollection, selectedVerbs and verbCollection are empty arrays', () => {
+      // Arrange
+      const selectedCollection: SentenceEntityApi[] = [];
+      const selectedVerbs: string[] = [];
+      const verbCollection: VerbEntityGlobal[] = [];
+      // Act
+      const result = mappers.sentencesWithVerb(
+        selectedCollection,
+        selectedVerbs,
+        verbCollection
+      );
+      // Assert
+      let randomVerb: VerbEntityGlobal = {
+        infinitive: '',
+        past: '',
+        participle: '',
+        translation: '',
+      };
+      let sentencesWithVerbSelected: SentenceEntityApi[] = [];
+
+      expect(result).toEqual({
+        randomVerb,
+        sentencesWithVerbSelected,
+      });
+    });
+    it('should return randomVerb and sentencesWithVerbSelected when selectedCollection, selectedVerbs and verbCollection are one item', () => {
+      // Arrange
+      const selectedCollection: SentenceEntityApi[] = [
+        {
+          verb: 'test-verb',
+          sentence: 'test-sentence',
+          rightAnswer: 'Present',
+        },
+      ];
+      const selectedVerbs: string[] = ['test-verb'];
+      const verbCollection: VerbEntityGlobal[] = [
+        {
+          infinitive: 'test-verb',
+          past: 'test-verb-past',
+          participle: 'test-verb-participle',
+          translation: 'test-verb-translation',
+        },
+      ];
+      // Act
+      const result = mappers.sentencesWithVerb(
+        selectedCollection,
+        selectedVerbs,
+        verbCollection
+      );
+      // Assert
+      let randomVerb: VerbEntityGlobal = {
+        infinitive: 'test-verb',
+        past: 'test-verb-past',
+        participle: 'test-verb-participle',
+        translation: 'test-verb-translation',
+      };
+      let sentencesWithVerbSelected: SentenceEntityApi[] = [
+        {
+          verb: 'test-verb',
+          sentence: 'test-sentence',
+          rightAnswer: 'Present',
+        },
+      ];
+
+      expect(result).toEqual({
+        randomVerb,
+        sentencesWithVerbSelected,
+      });
+    });
+  });
 });
