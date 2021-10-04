@@ -63,6 +63,41 @@ export const mapFromSentenceApiToSentenceVm = (
   } else return emptySentence();
 };
 
+const areParametersInformed = (
+  sentencesCollection: SentenceEntityApi[],
+  selectedVerbs: string[],
+  verbCollection: VerbEntityGlobal[]
+): boolean =>
+  Array.isArray(sentencesCollection) &&
+  Array.isArray(selectedVerbs) &&
+  Array.isArray(verbCollection);
+
+export const sentencesWithVerb = (
+  sentencesCollection: SentenceEntityApi[],
+  selectedVerbs: string[],
+  verbCollection: VerbEntityGlobal[]
+) => {
+  let randomVerb: VerbEntityGlobal = {
+    infinitive: '',
+    past: '',
+    participle: '',
+    translation: '',
+  };
+  let sentencesWithVerbSelected: SentenceEntityApi[] = [];
+  if (
+    areParametersInformed(sentencesCollection, selectedVerbs, verbCollection)
+  ) {
+    do {
+      randomVerb = pickRandomVerb(selectedVerbs, verbCollection);
+      sentencesWithVerbSelected = sentencesCollection.filter(
+        sentence => sentence.verb === randomVerb.infinitive
+      );
+    } while (sentencesWithVerbSelected === []);
+    return { randomVerb, sentencesWithVerbSelected };
+  }
+  return { randomVerb, sentencesWithVerbSelected };
+};
+
 const isAllMapDataCorrect = (
   sentencesCollection: SentenceEntityApi[],
   selectedVerbs: string[],
@@ -81,9 +116,10 @@ export const mapRandomSentence = (
   verbCollection: VerbEntityGlobal[]
 ): SentenceEntityVm => {
   if (isAllMapDataCorrect(sentencesCollection, selectedVerbs, verbCollection)) {
-    const randomVerb = pickRandomVerb(selectedVerbs, verbCollection);
-    const sentencesWithVerbSelected = sentencesCollection.filter(
-      sentence => sentence.verb === randomVerb.infinitive
+    const { randomVerb, sentencesWithVerbSelected } = sentencesWithVerb(
+      sentencesCollection,
+      selectedVerbs,
+      verbCollection
     );
     const randomSentenceWithVerbSelected = pickRandomSentence(
       sentencesWithVerbSelected
