@@ -5,7 +5,7 @@ const { palette, spacing, breakpoints } = theme;
 const color = palette.customPalette;
 
 export const mainContainer = css`
-  width: 90%;
+  width: 81.25%;
   @media (min-width: ${breakpoints.values.xs}px) {
     width: 70%;
   }
@@ -15,8 +15,8 @@ export const mainContainer = css`
 `;
 
 export const title = css`
-  margin-top: ${spacing(4)};
-  font-size: 1.6rem;
+  margin-top: ${spacing(7.75)};
+  font-size: 6.25vw;
   text-align: center;
   @media (min-width: ${breakpoints.values.xs}px) {
     font-size: 1.75rem;
@@ -38,13 +38,17 @@ export const correctSpanStyle = css`
 `;
 
 export const backContainer = css`
-  margin-top: ${spacing(19)};
+  margin-top: ${spacing(5.75)};
   margin-bottom: ${spacing(6)};
   padding: ${spacing(10)} ${spacing(5)} ${spacing(1)};
-  height: 26rem;
+  height: 20rem;
   position: relative;
   background-color: ${color.lightWhite};
   border-radius: 2rem;
+  @media (min-width: ${breakpoints.values.xs}px) {
+    margin-top: ${spacing(16)};
+    height: 25rem;
+  }
 `;
 
 export const backContainerSentence = css`
@@ -61,7 +65,7 @@ export const homeBackContainer = css`
   margin-top: ${spacing(19)};
   margin-bottom: ${spacing(6)};
   padding: ${spacing(10)} ${spacing(5)} ${spacing(1)};
-  min-height: 26rem;
+  min-height: 20rem;
   position: relative;
   padding-bottom: 1.5rem;
   background-color: ${color.lightWhite};
@@ -89,14 +93,15 @@ export const pictureContainer = css`
   left: 50%;
   transform: translate(-50%, -100%);
   background-color: ${color.lightWhite};
-  width: 10rem;
+  width: 7rem;
   padding: 1rem;
   margin: 0 auto;
   border-radius: 2rem;
   -webkit-box-shadow: 2px 3px 23px 5px rgba(140, 140, 140, 0.38);
   box-shadow: 2px 3px 23px 5px rgba(140, 140, 140, 0.38);
   @media (min-width: ${breakpoints.values.xs}px) {
-    width: 12rem;
+    width: 10rem;
+    top: 12%;
   }
 `;
 
@@ -136,7 +141,7 @@ export const inputContainer = css`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-top: ${spacing(4)};
+  padding-top: ${spacing(1)};
   height: 85%;
 `;
 
@@ -188,6 +193,7 @@ export const inputField = css`
     background-color: ${color.lightWhite};
     padding: ${spacing(1)};
     font-size: 1.1rem;
+    height: 2rem;
     &:hover,
     &:active,
     &:focus {
