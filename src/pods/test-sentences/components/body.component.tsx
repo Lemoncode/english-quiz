@@ -268,7 +268,7 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
   const { translation } = sentenceSelected;
   const {
     backContainer,
-    backContainerSentence,
+    TensesAndQuestion,
     mainContainer,
     picture,
     pictureContainer,
@@ -298,9 +298,7 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
       <h1 className={title}>
         {translation.toUpperCase()} ({`${currentQuestion} / ${totalQuestions}`})
       </h1>
-      <div
-        className={!showSentenceResult ? backContainer : backContainerSentence}
-      >
+      <div className={backContainer}>
         <div className={pictureContainer}>
           <img
             className={picture}
@@ -309,21 +307,23 @@ export const BodyComponent: React.FunctionComponent<Props> = props => {
         </div>
         {!showSentenceResult ? (
           <>
-            <div className={verbTensesGroup}>
-              <div className={verbTensesItem}>Present</div>
-              <div className={verbTensesItem}>Past</div>
-              <div className={verbTensesItem}>Participle</div>
+            <div className={TensesAndQuestion}>
+              <div className={verbTensesGroup}>
+                <div className={verbTensesItem}>Present</div>
+                <div className={verbTensesItem}>Past</div>
+                <div className={verbTensesItem}>Participle</div>
+              </div>
+              <QuestionComponent
+                sentenceSelected={sentenceSelected}
+                setRightAnswerValue={setRightAnswerValue}
+                setVerbsForms={setVerbsForms}
+                setShowSetenceResult={setShowSetenceResult}
+                rightAnswerValue={rightAnswerValue}
+                verbForms={verbForms}
+                score={score}
+                setScore={setScore}
+              />
             </div>
-            <QuestionComponent
-              sentenceSelected={sentenceSelected}
-              setRightAnswerValue={setRightAnswerValue}
-              setVerbsForms={setVerbsForms}
-              setShowSetenceResult={setShowSetenceResult}
-              rightAnswerValue={rightAnswerValue}
-              verbForms={verbForms}
-              score={score}
-              setScore={setScore}
-            />
           </>
         ) : (
           <ResultComponent
