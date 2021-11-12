@@ -71,7 +71,7 @@ export const FinalScoreComponent: React.FC<Props> = props => {
 
   return (
     <div className={mainContainer}>
-      <div className={`${backContainer} ${resultClass()}`}>
+      <div className={`${resultClass()} ${backContainer}`}>
         <div className={pictureContainer}>
           <img
             className={picture}

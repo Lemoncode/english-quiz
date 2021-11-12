@@ -38,24 +38,23 @@ export const correctSpanStyle = css`
 `;
 
 export const backContainer = css`
-  margin-top: ${spacing(5.75)};
+  flex-wrap: wrap;
+  margin-top: ${spacing(19)};
   margin-bottom: ${spacing(6)};
-  padding: ${spacing(10)} ${spacing(5)} ${spacing(1)};
-  height: 20rem;
+  padding: ${spacing(10)} ${spacing(5)} ${spacing(5)} ${spacing(5)};
+  min-height: 25rem;
+  height: auto;
   position: relative;
   background-color: ${color.lightWhite};
   border-radius: 2rem;
-  @media (min-width: ${breakpoints.values.xs}px) {
-    margin-top: ${spacing(16)};
-    height: 25rem;
-  }
 `;
 
 export const backContainerSentence = css`
+  flex-wrap: wrap;
   margin-top: ${spacing(19)};
   margin-bottom: ${spacing(6)};
-  padding: ${spacing(10)} ${spacing(5)} ${spacing(1)};
-  height: 32rem;
+  padding: ${spacing(10)} ${spacing(5)} ${spacing(5)} ${spacing(5)};
+  height: auto;
   position: relative;
   background-color: ${color.lightWhite};
   border-radius: 2rem;
@@ -152,16 +151,18 @@ export const buttonGroupContainer = css`
   padding-top: ${spacing(2)};
 `;
 
+export const TensesAndQuestion = css`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const verbTensesGroup = css`
   display: flex;
-  width: 103%;
-  justify-content: center;
-  padding-top: ${spacing(4)};
+  justify-content: space-around;
 `;
 
 export const verbTensesItem = css`
   font-weight: 700;
-  padding: 0 ${spacing(2)};
 `;
 
 export const rightTenseSelected = css`
@@ -170,7 +171,7 @@ export const rightTenseSelected = css`
   color: #8acc26;
   font-weight: bold;
   font-size: 1.3rem;
-  padding-top: .5rem;
+  padding-top: 0.5rem;
   margin-top: -1.5rem;
   margin-bottom: 1rem;
 `;
