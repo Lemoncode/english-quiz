@@ -17,7 +17,8 @@
     "prettier": "prettier {config,src}/**/*{.js,.jsx,.ts,.tsx}",
     "prettier:fix": "npm run prettier -- --fix",
     "lint": "eslint src --ext .ts,.tsx",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git"
@@ -76,13 +77,13 @@
     "eslint-plugin-react": "^7.16.0",
     "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
-    "husky": "^6.0.0",
+    "husky": "^7.0.0",
     "jest": "^24.9.0",
     "lint-staged": "^9.5.0",
     "mini-css-extract-plugin": "^0.8.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^1.19.1",
-    "pretty-quick": "^2.0.2",
+    "prettier": "^2.4.1",
+    "pretty-quick": "^3.1.2",
     "react-test-renderer": "^16.12.0",
     "rimraf": "^3.0.0",
     "style-loader": "^1.0.1",
@@ -94,10 +95,5 @@
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
     "webpack-merge": "^4.2.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
   }
 }
