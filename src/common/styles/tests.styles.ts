@@ -5,9 +5,9 @@ const { palette, spacing, breakpoints } = theme;
 const color = palette.customPalette;
 
 export const mainContainer = css`
-  width: 81.25%;
+  width: 90%;
   @media (min-width: ${breakpoints.values.xs}px) {
-    width: 70%;
+    width: 80%;
   }
   @media (min-width: ${breakpoints.values.sm}px) {
     max-width: 24rem;
@@ -38,15 +38,22 @@ export const correctSpanStyle = css`
 `;
 
 export const backContainer = css`
+  display: flex;
   flex-wrap: wrap;
   margin-top: ${spacing(19)};
   margin-bottom: ${spacing(6)};
-  padding: ${spacing(10)} ${spacing(5)} ${spacing(5)} ${spacing(5)};
+  padding: ${spacing(10)} ${spacing(2)} ${spacing(5)} ${spacing(2)};
   min-height: 25rem;
   height: auto;
   position: relative;
   background-color: ${color.lightWhite};
   border-radius: 2rem;
+  @media (min-width: ${breakpoints.values.xs}px) {
+    & > * {
+      flex: 100%;
+    }
+    padding: ${spacing(10)} ${spacing(5)} ${spacing(5)} ${spacing(5)};
+  }
 `;
 
 export const backContainerSentence = css`
@@ -142,13 +149,27 @@ export const inputContainer = css`
   justify-content: space-between;
   padding-top: ${spacing(1)};
   height: 85%;
+  width: 100%;
 `;
 
 export const buttonGroupContainer = css`
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-wrap: wrap;
   padding-top: ${spacing(2)};
+  justify-content: center;
+  & div:first-of-type {
+    width: 100%;
+  }
+  & button {
+    padding-left: 0;
+    padding-right: 0;
+    flex: 0 33.333%;
+    text-align: center;
+    font-size: 12px;
+    @media (min-width: ${breakpoints.values.sm}px) {
+      font-size: 0.9375rem;
+    }
+  }
 `;
 
 export const TensesAndQuestion = css`
@@ -158,11 +179,22 @@ export const TensesAndQuestion = css`
 
 export const verbTensesGroup = css`
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  margin-top: 15px;
+  @media (min-width: ${breakpoints.values.xs}px) {
+    margin-top: 0;
+  }
 `;
 
 export const verbTensesItem = css`
   font-weight: 700;
+  flex: 0 33.333%;
+  font-size: 12px;
+  @media (min-width: ${breakpoints.values.sm}px) {
+    font-size: 0.875rem;
+  }
 `;
 
 export const rightTenseSelected = css`
