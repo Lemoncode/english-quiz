@@ -43,6 +43,7 @@ export const backContainer = css`
   margin-top: ${spacing(19)};
   margin-bottom: ${spacing(6)};
   padding: ${spacing(10)} ${spacing(2)} ${spacing(5)} ${spacing(2)};
+  justify-content: center;
   min-height: 25rem;
   height: auto;
   position: relative;
