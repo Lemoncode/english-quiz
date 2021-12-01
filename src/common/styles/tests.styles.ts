@@ -40,7 +40,7 @@ export const correctSpanStyle = css`
 export const backContainer = css`
   display: flex;
   flex-wrap: wrap;
-  margin-top: ${spacing(19)};
+  margin-top: ${spacing(8)};
   margin-bottom: ${spacing(6)};
   padding: ${spacing(10)} ${spacing(2)} ${spacing(5)} ${spacing(2)};
   justify-content: center;
@@ -54,6 +54,7 @@ export const backContainer = css`
       flex: 100%;
     }
     padding: ${spacing(10)} ${spacing(5)} ${spacing(5)} ${spacing(5)};
+    margin-top: ${spacing(19)};
   }
 `;
 
