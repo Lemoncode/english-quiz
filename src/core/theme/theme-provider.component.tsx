@@ -1,10 +1,9 @@
 import * as React from 'react';
-import ThemeProvider from '@material-ui/styles/ThemeProvider';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import StylesProvider from '@material-ui/styles/StylesProvider';
+import { ThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import { theme } from './theme';
 
-export const ThemeProviderComponent = props => {
+export const ThemeProviderComponent = (props) => {
   const { children } = props;
 
   return (

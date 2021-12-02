@@ -27,7 +27,7 @@ export const defaultFullVerbs = [
     infinitive: 'beat',
     past: 'beat',
     participle: 'beaten',
-    translation: 'golpear',
+    translation: 'golpear / ganar a alguien',
   },
   {
     infinitive: 'become',
@@ -345,7 +345,7 @@ export const defaultFullVerbs = [
     infinitive: 'hit',
     past: 'hit',
     participle: 'hit',
-    translation: 'golpear',
+    translation: 'pegar',
   },
   {
     infinitive: 'hold',
