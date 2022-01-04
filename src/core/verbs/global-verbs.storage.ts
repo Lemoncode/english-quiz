@@ -387,7 +387,7 @@ export const defaultFullVerbs = [
     infinitive: 'lead',
     past: 'led',
     participle: 'led',
-    translation: 'llevar',
+    translation: 'dirigir',
   },
   {
     infinitive: 'lean',
