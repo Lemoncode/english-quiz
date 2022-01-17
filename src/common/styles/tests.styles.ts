@@ -82,7 +82,6 @@ export const homeBackContainer = css`
 export const headerHome = css`
   padding: ${spacing(1)} ${spacing(1.5)};
   display: flex;
-  // flex-direction: row;
   align-content: center;
   justify-content: space-between;
   align-items: center;
