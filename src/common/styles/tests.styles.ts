@@ -72,12 +72,36 @@ export const backContainerSentence = css`
 export const homeBackContainer = css`
   margin-top: ${spacing(19)};
   margin-bottom: ${spacing(6)};
-  padding: ${spacing(10)} ${spacing(5)} ${spacing(1)};
+  padding: ${spacing(0)} ${spacing(0)} ${spacing(1)};
   min-height: 20rem;
   position: relative;
   padding-bottom: 1.5rem;
   background-color: ${color.lightWhite};
-  border-radius: 2rem;
+`;
+
+export const headerHome = css`
+  padding: ${spacing(1)} ${spacing(1.5)};
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const menuImageHome = css`
+  max-height: 1.5rem;
+  padding-left: ${spacing(1)};
+`;
+
+export const logoImage = css`
+  width: 5.5rem;
+  height: auto;
+`;
+
+export const headerMenuHome = css`
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const backgroundResult1 = css`
