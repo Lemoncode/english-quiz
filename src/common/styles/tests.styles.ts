@@ -104,6 +104,16 @@ export const headerMenuHome = css`
   align-items: center;
 `;
 
+export const modalDialogTitle = css`
+  display: flex;
+  justify-content: center;
+  color: rgb(37, 51, 108);
+`;
+export const modalDialogContent = css`
+  width: 296px;
+  height: 530px;
+`;
+
 export const backgroundResult1 = css`
   background-color: #9bde7e;
 `;
