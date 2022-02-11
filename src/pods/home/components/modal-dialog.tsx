@@ -25,25 +25,7 @@ export const ModalDialog: React.FC<Props> = (props) => {
       <DialogTitle className={modalDialogTitle} id="dialog-title">
         {'Choose your verbs'}
       </DialogTitle>
-      <DialogContent className={modalDialogContent}>
-        <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
-      </DialogContent>
+      <DialogContent className={modalDialogContent}></DialogContent>
     </Dialog>
   );
 };
