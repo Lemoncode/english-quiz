@@ -11,12 +11,6 @@ export const HomeHeader = () => {
     setOpen(!open);
   };
 
-  const body = (
-    <div>
-      <h2>Text in a modal</h2>
-      <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-    </div>
-  );
   return (
     <div className={headerHome}>
       <img

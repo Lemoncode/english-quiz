@@ -110,7 +110,7 @@ export const modalDialogTitle = css`
 `;
 export const modalDialogContent = css`
   width: 24rem;
-  height: 530px;
+  height: max-content;
 `;
 
 export const backgroundResult1 = css`
