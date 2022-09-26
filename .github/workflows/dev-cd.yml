@@ -1,10 +1,8 @@
 name: Development CD Workflow
 
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - develop
+  repository_dispatch:
+    types: [update-route53]
 
 jobs:
   cd:
