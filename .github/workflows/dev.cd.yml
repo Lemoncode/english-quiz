@@ -31,5 +31,8 @@ jobs:
           REPOSITORY=${{secrets.DEV_DISPATCH_REPOSITORY}}
 
           sudo cp ~/dispatch-update-route53.sh /var/lib/cloud/scripts/per-boot/dispatch-update-route53.sh
+          sudo chmod 744 /var/lib/cloud/scripts/per-boot/dispatch-update-route53.sh
+          sudo rm ~/dispatch-update-route53.sh
+          exit
           "
 
