@@ -18,7 +18,6 @@ jobs:
           aws-access-key-id: ${{ secrets.DEV_AWS_DEPLOY_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.DEV_AWS_DEPLOY_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.DEV_AWS_REGION }}
-      - name: IP
-        run: |
-          PUBLIC_IP=$(aws ec2 describe-instances --instance-ids ${{secrets.DEV_AWS_EC2_INSTANCE_ID}} --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
-          echo $PUBLIC_IP
+      - name: Get IP
+        run: PUBLIC_IP=$(aws ec2 describe-instances --instance-ids ${{secrets.DEV_AWS_EC2_INSTANCE_ID}} --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
+      - run: echo $PUBLIC_IP
