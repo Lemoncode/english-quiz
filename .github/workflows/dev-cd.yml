@@ -22,6 +22,5 @@ jobs:
         run: |
           PUBLIC_IP=$(aws ec2 describe-instances --instance-ids ${{secrets.DEV_AWS_EC2_INSTANCE_ID}} --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
           echo "PUBLIC_IP=$PUBLIC_IP" >> $GITHUB_ENV
-      - run: echo $PUBLIC_IP
-      # - name: Update Route53 Record
-      #   run: aws route53 change-resource-record-sets --hosted-zone-id ${{secrets.AWS_HOSTED_ZONE_ID}} --change-batch '{"Changes":[{"Action":"UPSERT","ResourceRecordSet":{"Name":"'${{secrets.DEV_AWS_DOMAIN_RECORD_NAME}}'","Type":"A","TTL":300,"ResourceRecords":[{"Value":"'$PUBLIC_IP'"}]}}]}'
+      - name: Update Route53 Record
+        run: aws route53 change-resource-record-sets --hosted-zone-id ${{secrets.AWS_HOSTED_ZONE_ID}} --change-batch '{"Changes":[{"Action":"UPSERT","ResourceRecordSet":{"Name":"'${{secrets.DEV_AWS_DOMAIN_RECORD_NAME}}'","Type":"A","TTL":300,"ResourceRecords":[{"Value":"'$PUBLIC_IP'"}]}}]}'
