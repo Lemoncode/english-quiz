@@ -23,14 +23,13 @@ jobs:
           sudo chmod 600 private-key
           PUBLIC_IP=$(aws ec2 describe-instances --instance-ids ${{secrets.DEV_AWS_EC2_INSTANCE_ID}} --query 'Reservations[*].Instances[*].PublicIpAddress' --output text)
           scp -o StrictHostKeyChecking=no -i private-key ./dispatch-update-route53.sh ${{secrets.SSH_USER}}@$PUBLIC_IP:~/dispatch-update-route53.sh
-          ssh -o StrictHostKeyChecking=no -i private-key ${{secrets.SSH_USER}}@$PUBLIC_IP '
+          ssh -o StrictHostKeyChecking=no -i private-key ${{secrets.SSH_USER}}@$PUBLIC_IP "$i"
 
           sudo cp ~/dispatch-update-route53.sh /var/lib/cloud/scripts/per-boot/dispatch-update-route53.sh
           sudo rm ~/dispatch-update-route53.sh
           sudo chmod 744 /var/lib/cloud/scripts/per-boot/dispatch-update-route53.sh
 
-          sed -i -e \'s|${EVENT}|\'"${{secrets.DEV_DISPATCH_EVENT}}"\'|g; s|${GITHUB_TOKEN}|\'"${{secrets.DEV_DISPATCH_TOKEN}}"\'|g; s|${ORGANIZATION}|\'"${{secrets.DEV_DISPATCH_ORGANIZATION}}"\'|g; s|${REPOSITORY}|\'"${{secrets.DEV_DISPATCH_REPOSITORY}}"\'|g\' /var/lib/cloud/scripts/per-boot/dispatch-update-route53.sh
+          sed -i -e 's|${EVENT}|'"${{secrets.DEV_DISPATCH_EVENT}}"'|g; s|${GITHUB_TOKEN}|'"${{secrets.DEV_DISPATCH_TOKEN}}"'|g; s|${ORGANIZATION}|'"${{secrets.DEV_DISPATCH_ORGANIZATION}}"'|g; s|${REPOSITORY}|'"${{secrets.DEV_DISPATCH_REPOSITORY}}"'|g' /var/lib/cloud/scripts/per-boot/dispatch-update-route53.sh
 
           exit
-          '
 
