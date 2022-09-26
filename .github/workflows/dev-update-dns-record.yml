@@ -2,7 +2,7 @@ name: Development Update DNS Record
 
 on:
   repository_dispatch:
-    types: [update-dns-record]
+    types: [dev-update-dns-record]
 
 jobs:
   dev-update-dns-record:
