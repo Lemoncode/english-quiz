@@ -25,14 +25,12 @@ jobs:
           scp -o StrictHostKeyChecking=no -i private-key ./dispatch-update-route53.sh ${{secrets.SSH_USER}}@$PUBLIC_IP:~/dispatch-update-route53.sh
           ssh -o StrictHostKeyChecking=no -i private-key ${{secrets.SSH_USER}}@$PUBLIC_IP '
 
-          sudo -E su export EVENT=${{secrets.DEV_DISPATCH_EVENT}}
-          sudo -E su export GITHUB_TOKEN=${{secrets.DEV_DISPATCH_TOKEN}}
-          sudo -E su export ORGANIZATION=${{secrets.DEV_DISPATCH_ORGANIZATION}}
-          sudo -E su export REPOSITORY=${{secrets.DEV_DISPATCH_REPOSITORY}}
-
           sudo cp ~/dispatch-update-route53.sh /var/lib/cloud/scripts/per-boot/dispatch-update-route53.sh
-          sudo chmod 744 /var/lib/cloud/scripts/per-boot/dispatch-update-route53.sh
           sudo rm ~/dispatch-update-route53.sh
+          sudo chmod 744 /var/lib/cloud/scripts/per-boot/dispatch-update-route53.sh
+
+          sed -i -e 's|${EVENT}|'"${{secrets.DEV_DISPATCH_EVENT}}"'|g; s|${GITHUB_TOKEN}|'"${{secrets.DEV_DISPATCH_TOKEN}}"'|g; s|${ORGANIZATION}|'"${{secrets.DEV_DISPATCH_ORGANIZATION}}"'|g; s|${REPOSITORY}|'"${{secrets.DEV_DISPATCH_REPOSITORY}}"'|g' /var/lib/cloud/scripts/per-boot/dispatch-update-route53.sh
+
           exit
           '
 
