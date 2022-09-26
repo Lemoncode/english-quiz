@@ -1,4 +1,4 @@
-name: Continuous Deployment Workflow
+name: Development CD Workflow
 
 on:
   workflow_dispatch:
