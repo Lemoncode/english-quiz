@@ -19,4 +19,4 @@ jobs:
       AWS_EC2_INSTANCE_ID: ${{secrets.DEV_AWS_EC2_INSTANCE_ID}}
       SSH_KEY: ${{secrets.SSH_KEY}}
       SSH_USER: ${{secrets.SSH_USER}}
-      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      TOKEN_TO_DISPATCH_EVENT: ${{secrets.TOKEN_TO_DISPATCH_EVENT}}
