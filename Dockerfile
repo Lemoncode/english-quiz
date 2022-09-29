@@ -12,7 +12,6 @@ RUN npm run build
 FROM base AS release
 ENV STATIC_FILES_PATH=./public
 ENV NODE_ENV=development
-EXPOSE 80
 ENV PORT=80
 COPY --from=build-front /usr/app/dist $STATIC_FILES_PATH
 COPY ./server/package.json ./
