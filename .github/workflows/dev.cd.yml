@@ -25,7 +25,7 @@ jobs:
       - name: Build docker image
         run: docker build -t ${{env.IMAGE_NAME}} .
       - name: Push docker image
-        run: docker push ${{env.IMAGE_NAME}} .
+        run: docker push ${{secrets.AWS_DOCKER_REGISTRY}}/${{env.IMAGE_NAME}} .
 
   deploy:
     needs: [build-image]
