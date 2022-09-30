@@ -38,5 +38,7 @@ jobs:
       AWS_REGION: ${{secrets.AWS_REGION}}
       AWS_EC2_INSTANCE_ID: ${{secrets.DEV_AWS_EC2_INSTANCE_ID}}
       DOCKER_IMAGE_NAME: ${{secrets.AWS_DOCKER_REGISTRY}}/english-quiz:dev
+      DOCKER_RUN_PARAMS: '-p 8080 \
+        -e PORT=${{secrets.TO_REMOVE}}'
       SSH_KEY: ${{secrets.SSH_KEY}}
       SSH_USER: ${{secrets.SSH_USER}}
