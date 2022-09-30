@@ -41,7 +41,7 @@ jobs:
       AWS_REGION: ${{secrets.DEV_AWS_REGION}}
       AWS_EC2_INSTANCE_ID: ${{secrets.DEV_AWS_EC2_INSTANCE_ID}}
       AWS_DOCKER_REGISTRY: ${{secrets.AWS_DOCKER_REGISTRY}}
-      DOCKER_IMAGE_NAME: ${{env.IMAGE_NAME}}
+      DOCKER_IMAGE_NAME: ${{secrets.AWS_DOCKER_REGISTRY}}/english-quiz:dev
       SSH_KEY: ${{secrets.SSH_KEY}}
       SSH_USER: ${{secrets.SSH_USER}}
       TOKEN_TO_DISPATCH_EVENT: ${{secrets.TOKEN_TO_DISPATCH_EVENT}}
