@@ -6,7 +6,7 @@ on:
 
 jobs:
   dev-update-dns-record:
-    uses: lemoncode/actions/.github/workflows/aws-ec2-to-route53-public-ip.yml@develop
+    uses: lemoncode/actions/.github/workflows/aws/update-route53-record-with-ec2-public-ip.yml@develop
     secrets:
       AWS_DEPLOY_ACCESS_KEY_ID: ${{secrets.DEV_AWS_DEPLOY_ACCESS_KEY_ID}}
       AWS_DEPLOY_SECRET_ACCESS_KEY: ${{secrets.DEV_AWS_DEPLOY_SECRET_ACCESS_KEY}}
