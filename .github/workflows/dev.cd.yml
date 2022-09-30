@@ -34,7 +34,7 @@ jobs:
       dispatch-event: dev-update-dns-record
       organization: lemoncode
       repository: english-quiz
-      dockerImage: ${{env.IMAGE_NAME}}
+      dockerImage: english-quiz:dev
       dockerRunParams: '-p 80:80'
     secrets:
       AWS_DEPLOY_ACCESS_KEY_ID: ${{secrets.DEV_AWS_DEPLOY_ACCESS_KEY_ID}}
