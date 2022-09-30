@@ -28,3 +28,15 @@ jobs:
       AWS_EC2_INSTANCE_ID: ${{secrets.DEV_AWS_EC2_INSTANCE_ID}}
       SSH_KEY: ${{secrets.SSH_KEY}}
       SSH_USER: ${{secrets.SSH_USER}}
+
+  configure-https:
+    uses: lemoncode/actions/.github/workflows/aws-ec2-configure-https.yml@develop
+    secrets:
+      AWS_DEPLOY_ACCESS_KEY_ID: ${{secrets.AWS_DEPLOY_ACCESS_KEY_ID}}
+      AWS_DEPLOY_SECRET_ACCESS_KEY: ${{secrets.AWS_DEPLOY_SECRET_ACCESS_KEY}}
+      AWS_REGION: ${{secrets.AWS_REGION}}
+      AWS_EC2_INSTANCE_ID: ${{secrets.DEV_AWS_EC2_INSTANCE_ID}}
+      SSH_KEY: ${{secrets.SSH_KEY}}
+      SSH_USER: ${{secrets.SSH_USER}}
+      DOMAIN_RECORD_NAME: ${{secrets.DEV_AWS_DOMAIN_RECORD_NAME}}
+      EMAIL: ${{secrets.CERT_EMAIL}}
