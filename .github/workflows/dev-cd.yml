@@ -35,6 +35,7 @@ jobs:
       AWS_DEPLOY_SECRET_ACCESS_KEY: ${{secrets.AWS_DEPLOY_SECRET_ACCESS_KEY}}
       AWS_REGION: ${{secrets.AWS_REGION}}
       AWS_EC2_INSTANCE_ID: ${{secrets.DEV_AWS_EC2_INSTANCE_ID}}
+      AWS_DOCKER_REGISTRY: ${{secrets.AWS_DOCKER_REGISTRY}}
       DOCKER_IMAGE_NAME: ${{secrets.AWS_DOCKER_REGISTRY}}/english-quiz:dev
       DOCKER_RUN_PARAMS: '-p 127.0.0.1:3000:3000'
       SSH_KEY: ${{secrets.SSH_KEY}}
