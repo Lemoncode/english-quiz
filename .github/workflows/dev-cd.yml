@@ -2,9 +2,9 @@ name: Development CD
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - develop
+  # push:
+  #   branches:
+  #     - develop
 env:
   IMAGE_NAME: ${{secrets.AWS_DOCKER_REGISTRY}}/english-quiz:dev
 
