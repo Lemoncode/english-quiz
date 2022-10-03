@@ -1,4 +1,4 @@
-name: Development CD
+name: Https
 
 on:
   workflow_dispatch:
