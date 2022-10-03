@@ -6,7 +6,7 @@ on:
     branches:
       - develop
 env:
-  IMAGE_NAME: ${{secrets.AWS_DOCKER_REGISTRY}}/english-quiz:dev-${GITHUB_RUN_ID}-${GITHUB_SHA}-${GITHUB_RUN_ATTEMPT}
+  IMAGE_NAME: ${{secrets.AWS_DOCKER_REGISTRY}}/english-quiz:dev
 
 jobs:
   build-image:
@@ -35,7 +35,7 @@ jobs:
       AWS_DEPLOY_SECRET_ACCESS_KEY: ${{secrets.AWS_DEPLOY_SECRET_ACCESS_KEY}}
       AWS_REGION: ${{secrets.AWS_REGION}}
       AWS_EC2_INSTANCE_ID: ${{secrets.DEV_AWS_EC2_INSTANCE_ID}}
-      DOCKER_IMAGE_NAME: ${{secrets.AWS_DOCKER_REGISTRY}}/english-quiz:dev-${GITHUB_RUN_ID}-${GITHUB_SHA}-${GITHUB_RUN_ATTEMPT}
+      DOCKER_IMAGE_NAME: ${{secrets.AWS_DOCKER_REGISTRY}}/english-quiz:dev
       DOCKER_RUN_PARAMS: '-p 127.0.0.1:3000:3000'
       SSH_KEY: ${{secrets.SSH_KEY}}
       SSH_USER: ${{secrets.SSH_USER}}
