@@ -30,7 +30,7 @@ jobs:
 
   deploy:
     needs: [build-image]
-    uses: lemoncode/actions/.github/workflows/aws-ec2-docker-deploy.yml@develop
+    uses: lemoncode/actions/.github/workflows/aws-ec2-docker-deploy.yml@main
     secrets:
       AWS_DEPLOY_ACCESS_KEY_ID: ${{secrets.AWS_DEPLOY_ACCESS_KEY_ID}}
       AWS_DEPLOY_SECRET_ACCESS_KEY: ${{secrets.AWS_DEPLOY_SECRET_ACCESS_KEY}}
@@ -44,7 +44,7 @@ jobs:
 
   configure-https:
     needs: [deploy]
-    uses: lemoncode/actions/.github/workflows/aws-ec2-configure-https.yml@develop
+    uses: lemoncode/actions/.github/workflows/aws-ec2-configure-https.yml@main
     with:
       dockerExposedPort: 3002
     secrets:
