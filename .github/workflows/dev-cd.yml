@@ -6,53 +6,38 @@ on:
     branches:
       - develop
 env:
-  IMAGE_NAME: ${{secrets.AWS_DOCKER_REGISTRY}}/english-quiz:dev-${GITHUB_SHA}-${GITHUB_RUN_ATTEMPT}
+  IMAGE_NAME: ghcr.io/lemoncode/english-quiz:dev-${{github.sha}}-${{github.run_attempt}}
+
+permissions:
+  contents: 'read'
+  packages: 'write'
 
 jobs:
-  build-image:
+  deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: 'Development'
+      url: https://dev-english-quiz.azurewebsites.net
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: AWS login
-        uses: aws-actions/configure-aws-credentials@v1
+
+      - name: Log in to GitHub container registry
+        uses: docker/login-action@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_DEPLOY_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_DEPLOY_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
-      - name: Login to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v1
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build and push docker image
         run: |
           docker build \
-          -t ${{env.IMAGE_NAME}} .
+          -t ${{env.IMAGE_NAME}} -f azure.Dockerfile .
           docker push ${{env.IMAGE_NAME}}
 
-  deploy:
-    needs: [build-image]
-    uses: lemoncode/actions/.github/workflows/aws-ec2-docker-deploy.yml@main
-    secrets:
-      AWS_DEPLOY_ACCESS_KEY_ID: ${{secrets.AWS_DEPLOY_ACCESS_KEY_ID}}
-      AWS_DEPLOY_SECRET_ACCESS_KEY: ${{secrets.AWS_DEPLOY_SECRET_ACCESS_KEY}}
-      AWS_REGION: ${{secrets.AWS_REGION}}
-      AWS_EC2_INSTANCE_ID: ${{secrets.DEV_AWS_EC2_INSTANCE_ID}}
-      AWS_DOCKER_REGISTRY: ${{secrets.AWS_DOCKER_REGISTRY}}
-      DOCKER_IMAGE_NAME: ${{secrets.AWS_DOCKER_REGISTRY}}/english-quiz:dev-${GITHUB_SHA}-${GITHUB_RUN_ATTEMPT}
-      DOCKER_RUN_PARAMS: '-p 3002:3000'
-      SSH_KEY: ${{secrets.SSH_KEY}}
-      SSH_USER: ${{secrets.SSH_USER}}
-
-  configure-https:
-    needs: [deploy]
-    uses: lemoncode/actions/.github/workflows/aws-ec2-configure-https.yml@main
-    with:
-      dockerExposedPort: 3002
-    secrets:
-      AWS_DEPLOY_ACCESS_KEY_ID: ${{secrets.AWS_DEPLOY_ACCESS_KEY_ID}}
-      AWS_DEPLOY_SECRET_ACCESS_KEY: ${{secrets.AWS_DEPLOY_SECRET_ACCESS_KEY}}
-      AWS_REGION: ${{secrets.AWS_REGION}}
-      AWS_EC2_INSTANCE_ID: ${{secrets.DEV_AWS_EC2_INSTANCE_ID}}
-      SSH_KEY: ${{secrets.SSH_KEY}}
-      SSH_USER: ${{secrets.SSH_USER}}
-      DOMAIN_RECORD_NAME: ${{secrets.DEV_AWS_DOMAIN_RECORD_NAME}}
-      EMAIL: ${{secrets.CERT_EMAIL}}
+      - name: Deploy to Azure
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ secrets.DEV_AZURE_APP_NAME }}
+          publish-profile: ${{ secrets.DEV_AZURE_PUBLISH_PROFILE }}
+          images: ${{env.IMAGE_NAME}}
