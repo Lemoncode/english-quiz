@@ -12,7 +12,7 @@ RUN npm run build
 FROM base AS release
 ENV STATIC_FILES_PATH=./public
 ENV NODE_ENV=production
-ENV INTERNAL_PORT=3000
+ENV INTERNAL_PORT=$PORT
 COPY --from=build-front /usr/app/dist $STATIC_FILES_PATH
 COPY ./server/package.json ./
 COPY ./server/index.js ./
