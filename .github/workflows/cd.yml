@@ -1,6 +1,7 @@
-name: Continuous Deployment Workflow
+name: Production CD
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -12,6 +13,9 @@ env:
 jobs:
   cd:
     runs-on: ubuntu-latest
+    environment:
+      name: 'Production'
+      url: https://englishquiz.fun
     steps:
       - uses: actions/checkout@v2
 
