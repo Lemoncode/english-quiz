@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: 'Production'
-      url: https://englishquiz.fun
+      url: https://englishquiz.info
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
